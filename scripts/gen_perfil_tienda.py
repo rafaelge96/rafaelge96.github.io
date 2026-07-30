@@ -105,19 +105,21 @@ def header() -> None:
     d = ImageDraw.Draw(img)
     cx, cy = W // 2, H // 2
 
-    # UltraLight y con aire entre letras: a este tamano es lo que separa un
-    # titular cuidado de un texto puesto ahi.
-    tam = 190
-    tracking = 4.0
-    f = fuente(tam, indice=5)
+    # Light y no UltraLight: Play recorta la cabecera a una banda de ~2.6:1
+    # y en un movil de 1080 px la frase acaba midiendo unos 30 px de alto.
+    # A ese tamano el UltraLight se lava y pesa menos que el nombre que la
+    # propia tienda pinta en negrita justo debajo.
+    tam = 250
+    tracking = 5.0
+    f = fuente(tam, indice=7)
     # 0.52 y no mas: Play recorta la cabecera y a un 64% del ancho la frase
     # ya rozaba los bordes.
-    while ancho_espaciado(d, FRASE, f, tracking) > W * 0.52 and tam > 70:
+    while ancho_espaciado(d, FRASE, f, tracking) > W * 0.56 and tam > 70:
         tam -= 4
-        f = fuente(tam, indice=5)
+        f = fuente(tam, indice=7)
 
     # El punto va aparte y en oro: es el mismo remate que la "R." del icono.
-    punto = fuente(tam, indice=0)
+    punto = fuente(tam, indice=1)
     ancho = ancho_espaciado(d, FRASE, f, tracking) + d.textlength(".", font=punto)
 
     # El bloque va del filete a la linea base: se centra ese conjunto, no
