@@ -2,19 +2,19 @@
 """Genera los recursos del perfil de desarrollador de Google Play.
 
 Salidas (play-assets/):
-    header-4096x2304.png   cabecera de la pagina de desarrollador
+    header-4096x2304.jpg   cabecera de la pagina de desarrollador
     developer-icon-512.png icono del perfil
 
 App Store no tiene cabecera de desarrollador personalizable: Apple genera esas
 paginas automaticamente, asi que esto solo aplica a Play.
 
-La cabecera NO lleva texto a proposito: Play superpone el nombre y el icono del
-desarrollador encima, y cualquier titular propio acaba duplicando o chocando con
-lo que pinta la tienda. El concepto es un solo trazo de luz, que nace de la
-mecanica de ESTELA abstraida hasta ser una firma.
+La cabecera lleva una sola frase, deliberadamente ajena al catalogo: las apps
+van y vienen y el perfil no deberia envejecer con ellas. Todo lo demas es
+espacio en blanco, que es lo que hace que una pagina de tienda parezca
+cuidada.
 
-La mitad izquierda se deja deliberadamente tranquila y oscura: es donde Play
-suele colocar el nombre, y ahi necesita contraste.
+Fondo claro y grano muy fino: en plano queda barato, y el grano es lo que
+da sensacion de papel impreso en vez de PNG.
 
 Uso: python3 scripts/gen_perfil_tienda.py   (desde la raiz del repo)
 """
@@ -32,6 +32,12 @@ OUT = ROOT / "play-assets"
 TINTA = (20, 23, 26)
 ORO = (201, 162, 39)
 BLANCO = (255, 255, 255)
+HUESO = (240, 234, 222)   # fondo del icono: no es blanco puro a proposito,
+                          # sobre el blanco de la tienda el icono debe leerse
+PAPEL_A = (255, 253, 250)
+PAPEL_B = (246, 241, 232)
+
+FRASE = "Las cosas bien hechas se notan"
 
 W, H = 4096, 2304
 
@@ -51,135 +57,137 @@ def bezier(p0, p1, p2, p3, t: float):
     return x, y
 
 
-def fondo() -> Image.Image:
-    """Tinta con un halo calido muy tenue detras de donde acaba el trazo."""
-    img = Image.new("RGB", (W, H), TINTA)
-
-    # Muchos pasos con caida suave: con pocos circulos grandes el desenfoque no
-    # llega a disolverlos y quedan anillos concentricos visibles.
-    halo = Image.new("RGBA", (W, H), (0, 0, 0, 0))
-    d = ImageDraw.Draw(halo)
-    cx, cy = int(W * 0.73), int(H * 0.28)
-    pasos = 60
-    for i in range(pasos, 0, -1):
-        t = i / pasos
-        r = int(1600 * t)
-        a = int(26 * (1 - t) ** 2)
-        if a > 0:
-            d.ellipse([cx - r, cy - r, cx + r, cy + r], fill=(*ORO, a))
-    halo = halo.filter(ImageFilter.GaussianBlur(220))
-
-    return Image.alpha_composite(img.convert("RGBA"), halo)
+def fuente(tam: int, indice: int = 0):
+    """Indices de HelveticaNeue.ttc: 0=Regular, 1=Bold, 2=Italic, 7=Light."""
+    for ruta, i in (("/System/Library/Fonts/HelveticaNeue.ttc", indice),
+                    ("/System/Library/Fonts/Helvetica.ttc", 0)):
+        try:
+            return ImageFont.truetype(ruta, tam, index=i)
+        except Exception:
+            continue
+    return ImageFont.load_default()
 
 
-def estrellas(img: Image.Image) -> Image.Image:
-    """Polvo de estrellas escaso: da profundidad sin convertirlo en un poster
-    espacial, que es justo el lenguaje del que se viene."""
-    import random
+def papel(w: int, h: int) -> Image.Image:
+    """Blanco calido con degradado suave y grano fino.
 
-    capa = Image.new("RGBA", (W, H), (0, 0, 0, 0))
-    d = ImageDraw.Draw(capa)
-    rng = random.Random(30072026)
-    for _ in range(190):
-        x, y = rng.uniform(0, W), rng.uniform(0, H)
-        r = rng.uniform(1.5, 4.5)
-        a = rng.randint(18, 70)
-        d.ellipse([x - r, y - r, x + r, y + r], fill=(255, 255, 255, a))
-    return Image.alpha_composite(img, capa)
+    El degradado se dibuja pequeno y se escala: pintar 9,4 millones de
+    pixeles uno a uno en Python tarda una eternidad y el resultado es el
+    mismo. El grano es lo que evita que parezca un PNG plano.
+    """
+    chico = Image.new("RGB", (64, 64))
+    d = ImageDraw.Draw(chico)
+    for y in range(64):
+        d.line([(0, y), (63, y)], fill=mezcla(PAPEL_A, PAPEL_B, y / 63))
+    img = chico.resize((w, h), Image.BICUBIC)
+
+    grano = Image.effect_noise((w, h), 22).convert("L")
+    return Image.blend(img, Image.merge("RGB", (grano, grano, grano)), 0.028)
 
 
-def trazo() -> tuple[Image.Image, tuple[float, float]]:
-    """El gesto: de fino y apagado abajo a la izquierda, a grueso y blanco
-    arriba a la derecha."""
-    capa = Image.new("RGBA", (W, H), (0, 0, 0, 0))
-    d = ImageDraw.Draw(capa)
+def ancho_espaciado(d, texto: str, font, tracking: float) -> float:
+    return sum(d.textlength(c, font=font) for c in texto) + tracking * (len(texto) - 1)
 
-    p0 = (-0.05 * W, 0.88 * H)
-    p1 = (0.28 * W, 0.88 * H)
-    p2 = (0.55 * W, 0.44 * H)
-    p3 = (0.76 * W, 0.27 * H)
 
-    pasos = 2600
-    for i in range(pasos):
-        t = i / (pasos - 1)
-        x, y = bezier(p0, p1, p2, p3, t)
-        # El grosor crece de forma no lineal: casi nada al principio, cuerpo
-        # al final. Asi el ojo entra por la cola y termina en la cabeza.
-        r = lerp(5.0, 46.0, t**1.7)
-        if t < 0.55:
-            color = mezcla((120, 92, 26), ORO, t / 0.55)
-        else:
-            color = mezcla(ORO, BLANCO, (t - 0.55) / 0.45)
-        a = int(lerp(70, 255, t**0.6))
-        d.ellipse([x - r, y - r, x + r, y + r], fill=(*color, a))
+def escribe_espaciado(d, x: float, y: float, texto: str, font, fill, tracking: float) -> float:
+    """PIL no sabe de tracking, asi que hay que ir letra a letra.
 
-    cabeza = bezier(p0, p1, p2, p3, 1.0)
-    return capa, cabeza
+    Devuelve la x donde termina, para poder encadenar el punto en oro.
+    """
+    for c in texto:
+        d.text((x, y), c, font=font, fill=fill, anchor="ls")
+        x += d.textlength(c, font=font) + tracking
+    return x - tracking
 
 
 def header() -> None:
-    img = estrellas(fondo())
+    img = papel(W, H)
+    d = ImageDraw.Draw(img)
+    cx, cy = W // 2, H // 2
 
-    capa, (hx, hy) = trazo()
+    # UltraLight y con aire entre letras: a este tamano es lo que separa un
+    # titular cuidado de un texto puesto ahi.
+    tam = 190
+    tracking = 4.0
+    f = fuente(tam, indice=5)
+    # 0.52 y no mas: Play recorta la cabecera y a un 64% del ancho la frase
+    # ya rozaba los bordes.
+    while ancho_espaciado(d, FRASE, f, tracking) > W * 0.52 and tam > 70:
+        tam -= 4
+        f = fuente(tam, indice=5)
 
-    # Resplandor: la misma forma desenfocada dos veces, una amplia y otra
-    # cerrada, para que el trazo parezca emitir luz en vez de estar pintado.
-    img = Image.alpha_composite(img, capa.filter(ImageFilter.GaussianBlur(120)))
-    img = Image.alpha_composite(img, capa.filter(ImageFilter.GaussianBlur(38)))
-    img = Image.alpha_composite(img, capa)
+    # El punto va aparte y en oro: es el mismo remate que la "R." del icono.
+    punto = fuente(tam, indice=0)
+    ancho = ancho_espaciado(d, FRASE, f, tracking) + d.textlength(".", font=punto)
 
-    # Nucleo blanco de la cabeza, por encima de todo.
-    nucleo = Image.new("RGBA", (W, H), (0, 0, 0, 0))
-    dn = ImageDraw.Draw(nucleo)
-    pasos = 40
-    for i in range(pasos, 0, -1):
-        t = i / pasos
-        r = 165 * t
-        a = int(255 * (1 - t) ** 1.6)
-        if a > 0:
-            dn.ellipse([hx - r, hy - r, hx + r, hy + r], fill=(*BLANCO, a))
-    dn.ellipse([hx - 32, hy - 32, hx + 32, hy + 32], fill=(*BLANCO, 255))
-    img = Image.alpha_composite(img, nucleo.filter(ImageFilter.GaussianBlur(10)))
+    # El bloque va del filete a la linea base: se centra ese conjunto, no
+    # el texto suelto, o queda opticamente alto.
+    base = cy + tam * 0.75
+    x = escribe_espaciado(d, cx - ancho / 2, base, FRASE, f, TINTA, tracking)
+    d.text((x + tracking, base), ".", font=punto, fill=ORO, anchor="ls")
+
+    # Filete de oro sobre la frase.
+    ancho_filete = tam * 0.95
+    grosor = max(4, tam // 34)
+    y_filete = base - tam * 1.55
+    d.rectangle([cx - ancho_filete / 2, y_filete,
+                 cx + ancho_filete / 2, y_filete + grosor], fill=ORO)
 
     OUT.mkdir(parents=True, exist_ok=True)
-    destino = OUT / "header-4096x2304.png"
-    img.convert("RGB").save(destino, optimize=True)
-    print(f"  ✓ {destino.relative_to(ROOT)}  ({W}x{H})")
+    # JPEG y no PNG: el grano es ruido puro y en PNG se va a 5,6 MB, muy por
+    # encima del limite de 1 MB de Play. Play acepta JPEG para la cabecera.
+    destino = OUT / "header-4096x2304.jpg"
+    img.save(destino, quality=90, subsampling=0, optimize=True, progressive=True)
+    kb = destino.stat().st_size / 1024
+    print(f"  ✓ {destino.relative_to(ROOT)}  ({W}x{H}, {kb:.0f} KB)")
+    if kb > 1024:
+        raise SystemExit("la cabecera pasa de 1 MB, Play la rechazara")
 
 
-def monograma(lado: int) -> Image.Image:
-    """La 'R' dorada sobre tinta del icon.svg del sitio, redibujada.
+def monograma(lado: int, redondeado: bool = False) -> Image.Image:
+    """La "R." de la marca, en tinta sobre hueso.
 
-    El icono si lleva marca: es la identidad, y Play lo muestra pequeño y
-    recortado en circulo junto al nombre.
+    Play recorta el icono en circulo, asi que por defecto va a sangre y sin
+    alfa. El fondo no es blanco puro a proposito: sobre el blanco de la
+    tienda, un icono blanco desaparece.
     """
-    ss = 4  # supermuestreo, para que la esquina redondeada quede limpia
-    img = Image.new("RGBA", (lado * ss, lado * ss), (0, 0, 0, 0))
+    ss = 4  # supermuestreo
+    L = lado * ss
+    img = Image.new("RGBA", (L, L), (0, 0, 0, 0))
     d = ImageDraw.Draw(img)
-    radio = int(lado * ss * 116 / 512)
-    d.rounded_rectangle([0, 0, lado * ss - 1, lado * ss - 1], radius=radio, fill=(*TINTA, 255))
+    if redondeado:
+        d.rounded_rectangle([0, 0, L - 1, L - 1], radius=int(L * 116 / 512), fill=(*HUESO, 255))
+    else:
+        d.rectangle([0, 0, L - 1, L - 1], fill=(*HUESO, 255))
 
-    # Los indices de HelveticaNeue.ttc son 0=Regular, 1=Bold, 2=Italic.
-    try:
-        f = ImageFont.truetype("/System/Library/Fonts/HelveticaNeue.ttc",
-                               int(lado * ss * 290 / 512), index=1)
-    except Exception:
-        f = ImageFont.load_default()
-    d.text((lado * ss * 252 / 512, lado * ss * 352 / 512), "R",
-           font=f, fill=(*ORO, 255), anchor="ms")
+    f = fuente(int(L * 0.52), indice=0)
+    caja = d.textbbox((0, 0), "R", font=f, anchor="ls")
+    ancho_r = caja[2] - caja[0]
+    alto_r = caja[1]  # negativo: del baseline hacia arriba
 
-    r = int(lado * ss * 26 / 512)
-    cx, cy = lado * ss * 386 / 512, lado * ss * 326 / 512
-    d.ellipse([cx - r, cy - r, cx + r, cy + r], fill=(*BLANCO, 255))
+    radio = L * 0.043
+    hueco = L * 0.030
+    total = ancho_r + hueco + radio * 2
+    x0 = (L - total) / 2
+    base = (L - alto_r) / 2
+
+    d.text((x0 - caja[0], base), "R", font=f, fill=(*TINTA, 255), anchor="ls")
+    cxp = x0 + ancho_r + hueco + radio
+    d.ellipse([cxp - radio, base - radio * 2, cxp + radio, base], fill=(*ORO, 255))
 
     return img.resize((lado, lado), Image.LANCZOS)
 
 
 def icono() -> None:
     OUT.mkdir(parents=True, exist_ok=True)
+
     destino = OUT / "developer-icon-512.png"
-    monograma(512).save(destino, optimize=True)
-    print(f"  ✓ {destino.relative_to(ROOT)}  (512x512)")
+    monograma(512).convert("RGB").save(destino, optimize=True)
+    print(f"  ✓ {destino.relative_to(ROOT)}  (512x512, sin alfa)")
+
+    alterno = OUT / "developer-icon-512-redondeado.png"
+    monograma(512, redondeado=True).save(alterno, optimize=True)
+    print(f"  ✓ {alterno.relative_to(ROOT)}  (512x512, con alfa)")
 
 
 if __name__ == "__main__":
