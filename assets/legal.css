@@ -1,0 +1,109 @@
+/* Estilos de las páginas legales de las apps (privacidad y eliminación de
+   cuenta). Mismos tokens que index.html: tinta sobre blanco cálido, azul
+   profundo de acento y el oro solo como detalle. */
+
+:root {
+  --bg: #ffffff;
+  --surface: #fcfbf8;
+  --text: #14171a;
+  --muted: #6e6a63;
+  --line: #ece8e0;
+  --line-strong: #d8d1c4;
+  --accent: #12506e;
+  --gold: #c9a227;
+  --max: 760px;
+}
+
+* { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.62;
+  -webkit-font-smoothing: antialiased;
+}
+
+.site-header {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.back {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.back:hover { color: var(--text); }
+
+.doc {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 8px 24px 96px;
+}
+
+.doc h1 {
+  font-size: 34px;
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  margin: 24px 0 4px;
+}
+
+.doc .updated {
+  color: var(--muted);
+  font-size: 14px;
+  margin: 0 0 32px;
+}
+
+.doc h2 {
+  font-size: 20px;
+  font-weight: 500;
+  margin: 36px 0 8px;
+}
+
+.doc p, .doc li { color: var(--text); }
+
+.doc ul { padding-left: 22px; }
+
+.doc li { margin: 4px 0; }
+
+.doc a { color: var(--accent); }
+
+/* Resumen destacado de la cabecera: lo que la mayoría de la gente lee. */
+.doc .note {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--gold);
+  border-radius: 12px;
+  padding: 14px 18px;
+  font-size: 15px;
+  color: var(--muted);
+}
+
+.doc .note strong { color: var(--text); }
+
+.doc hr {
+  border: 0;
+  border-top: 1px solid var(--line);
+  margin: 40px 0 24px;
+}
+
+.doc footer {
+  color: var(--muted);
+  font-size: 14px;
+}
+
+@media (max-width: 520px) {
+  .doc h1 { font-size: 28px; }
+  .site-header, .doc { padding-left: 18px; padding-right: 18px; }
+}
