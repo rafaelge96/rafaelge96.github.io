@@ -356,6 +356,42 @@ section { padding: 84px 0 0; }
 /* ---------------------------------------------------------------- productos */
 .app { gap: 12px; }
 .app > img { width: 46px; height: 46px; border-radius: 12px; flex: none; }
+/* El icono abre la documentacion legal de la app. El boton es transparente
+   para que la tarjeta se vea igual; ojo, `.app > img` es selector de hijo
+   directo y al envolverlo deja de aplicar, de ahi que se repita aqui. */
+.app > .icono-legal {
+  padding: 0; border: 0; background: none; font: inherit;
+  line-height: 0; flex: none; border-radius: 12px; cursor: pointer;
+}
+.app > .icono-legal > img { width: 46px; height: 46px; border-radius: 12px; display: block; }
+.app > .icono-legal:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+dialog.selector-legal {
+  border: 1px solid var(--line-strong); border-radius: 18px; padding: 0;
+  max-width: 360px; width: calc(100% - 40px);
+  background: var(--bg); color: var(--text);
+}
+dialog.selector-legal::backdrop { background: rgba(20, 23, 26, 0.45); }
+.selector-legal .cab {
+  display: flex; align-items: center; gap: 14px;
+  padding: 20px 22px 16px; border-bottom: 1px solid var(--line);
+}
+.selector-legal .cab img { width: 40px; height: 40px; border-radius: 10px; }
+.selector-legal h3 { margin: 0; font-size: 15.5px; font-weight: 600; }
+.selector-legal .ops { padding: 8px; }
+.selector-legal .ops a {
+  display: block; padding: 13px 15px; border-radius: 11px;
+  color: var(--text); text-decoration: none; font-size: 14.5px;
+}
+.selector-legal .ops a:hover, .selector-legal .ops a:focus-visible {
+  background: var(--surface); color: var(--accent);
+}
+.selector-legal .cerrar {
+  display: block; width: calc(100% - 16px); margin: 0 8px 10px; padding: 11px;
+  border: 0; border-radius: 11px; background: none; font: inherit;
+  font-size: 13.5px; color: var(--muted); cursor: pointer;
+}
+.selector-legal .cerrar:hover { color: var(--text); background: var(--surface); }
 .app h3 { font-size: 16.5px; font-weight: 600; }
 .app p { margin: 5px 0 0; font-size: 13.5px; color: var(--muted); }
 .app > div { display: flex; flex-direction: column; align-items: center; height: 100%; width: 100%; }
@@ -848,7 +884,10 @@ details.more ul { margin: 0; padding-left: 18px; color: var(--muted); font-size:
 
     <div class="rail" id="rail-productos" tabindex="0" role="group" aria-label="Productos propios">
       <div class="card app reveal">
-        <img src="assets/apps/oremus.svg" alt="" />
+        <button class="icono-legal" type="button" data-legal="oremus"
+                aria-label="Oremus: documentación legal" title="Documentación legal de Oremus">
+          <img src="assets/apps/oremus.svg" alt="" />
+        </button>
         <div>
           <h3>Oremus</h3>
           <p>Rosario, Biblia y oraciones diarias. Funciona entero sin conexión.</p>
@@ -859,7 +898,10 @@ details.more ul { margin: 0; padding-left: 18px; color: var(--muted); font-size:
         </div>
       </div>
       <div class="card app reveal">
-        <img src="assets/apps/constitucion.png" alt="" />
+        <button class="icono-legal" type="button" data-legal="constitucion"
+                aria-label="La Constitución: documentación legal" title="Documentación legal de La Constitución">
+          <img src="assets/apps/constitucion.png" alt="" />
+        </button>
         <div>
           <h3>La Constitución</h3>
           <p>Estudia la Constitución Española con tests y explicaciones asistidas por IA.</p>
@@ -869,7 +911,10 @@ details.more ul { margin: 0; padding-left: 18px; color: var(--muted); font-size:
         </div>
       </div>
       <div class="card app reveal">
-        <img src="assets/apps/auxiliar-administrativo.png" alt="" />
+        <button class="icono-legal" type="button" data-legal="auxiliar-administrativo"
+                aria-label="Auxiliar Administrativo: documentación legal" title="Documentación legal de Auxiliar Administrativo">
+          <img src="assets/apps/auxiliar-administrativo.png" alt="" />
+        </button>
         <div>
           <h3>Auxiliar Administrativo</h3>
           <p>Preparación de oposiciones de la AGE: temario, tests y simulacros.</p>
@@ -879,7 +924,10 @@ details.more ul { margin: 0; padding-left: 18px; color: var(--muted); font-size:
         </div>
       </div>
       <div class="card app reveal">
-        <img src="assets/apps/administrativo-estado.png" alt="" />
+        <button class="icono-legal" type="button" data-legal="administrativo-estado"
+                aria-label="Administrativo del Estado: documentación legal" title="Documentación legal de Administrativo del Estado">
+          <img src="assets/apps/administrativo-estado.png" alt="" />
+        </button>
         <div>
           <h3>Administrativo del Estado</h3>
           <p>Oposición C1 completa, con simulacros y seguimiento del progreso.</p>
@@ -1177,6 +1225,15 @@ details.more ul { margin: 0; padding-left: 18px; color: var(--muted); font-size:
       <span><a href="https://play.google.com/store/apps/dev?id=5325744295595162550" style="color:var(--accent)">Mis apps en Google Play</a> · <a href="https://apps.apple.com/es/developer/rafael-gonzalez-escobar/id6787262347" style="color:var(--accent)">Mis apps en la App Store</a></span>
       <span><a href="apps/" style="color:var(--accent)">Privacidad de las apps</a></span>
     </footer>
+
+    <dialog class="selector-legal" id="selector-legal" aria-labelledby="sl-titulo">
+      <div class="cab">
+        <img id="sl-icono" src="" alt="" />
+        <h3 id="sl-titulo"></h3>
+      </div>
+      <div class="ops" id="sl-ops"></div>
+      <button class="cerrar" id="sl-cerrar" type="button">Cerrar</button>
+    </dialog>
   </section>
 
 </main>
@@ -1309,6 +1366,80 @@ details.more ul { margin: 0; padding-left: 18px; color: var(--muted); font-size:
 })();
 
 document.getElementById('year').textContent = new Date().getFullYear();
+
+/* Documentacion legal desde el icono de cada app: si solo hay un documento
+   navega directo, y si hay varios pregunta con un modal. */
+(function () {
+  var DOCS = {
+    'oremus': [
+      { texto: 'Política de privacidad', href: 'apps/oremus/privacidad.html' }
+    ],
+    'constitucion': [
+      { texto: 'Política de privacidad', href: 'apps/constitucion/privacidad.html' },
+      { texto: 'Eliminar tu cuenta', href: 'apps/constitucion/eliminar-cuenta.html' }
+    ],
+    'auxiliar-administrativo': [
+      { texto: 'Política de privacidad', href: 'apps/auxiliar-administrativo/privacidad.html' },
+      { texto: 'Eliminar tu cuenta', href: 'apps/auxiliar-administrativo/eliminar-cuenta.html' }
+    ],
+    'administrativo-estado': [
+      { texto: 'Política de privacidad', href: 'apps/administrativo-estado/privacidad.html' },
+      { texto: 'Eliminar tu cuenta', href: 'apps/administrativo-estado/eliminar-cuenta.html' }
+    ]
+  };
+
+  var dialogo = document.getElementById('selector-legal');
+  if (!dialogo) return;
+  var ultimoFoco = null;
+
+  Array.prototype.forEach.call(document.querySelectorAll('.icono-legal'), function (boton) {
+    var docs = DOCS[boton.dataset.legal];
+    if (!docs) return;
+
+    if (docs.length > 1) boton.setAttribute('aria-haspopup', 'dialog');
+
+    boton.addEventListener('click', function () {
+      if (docs.length === 1) {
+        location.href = docs[0].href;
+        return;
+      }
+
+      ultimoFoco = boton;
+      var tarjeta = boton.closest('.card');
+      document.getElementById('sl-icono').src = boton.querySelector('img').src;
+      document.getElementById('sl-titulo').textContent = tarjeta.querySelector('h3').textContent;
+
+      var caja = document.getElementById('sl-ops');
+      caja.textContent = '';
+      docs.forEach(function (doc) {
+        var a = document.createElement('a');
+        a.href = doc.href;
+        a.textContent = doc.texto;
+        caja.appendChild(a);
+      });
+
+      dialogo.showModal();
+      caja.querySelector('a').focus();
+    });
+  });
+
+  document.getElementById('sl-cerrar').addEventListener('click', function () {
+    dialogo.close();
+  });
+
+  // El <dialog> ocupa toda la ventana, asi que para "clic fuera" hay que
+  // comparar el punto pulsado con su caja, no mirar el objetivo del evento.
+  dialogo.addEventListener('click', function (e) {
+    var r = dialogo.getBoundingClientRect();
+    var dentro = e.clientX >= r.left && e.clientX <= r.right &&
+                 e.clientY >= r.top && e.clientY <= r.bottom;
+    if (!dentro) dialogo.close();
+  });
+
+  dialogo.addEventListener('close', function () {
+    if (ultimoFoco) ultimoFoco.focus();
+  });
+})();
 </script>
 </body>
 </html>
