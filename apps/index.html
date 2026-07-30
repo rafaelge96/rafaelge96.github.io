@@ -9,16 +9,121 @@
 <link rel="apple-touch-icon" sizes="180x180" href="../assets/apple-touch-icon.png" />
 <link rel="stylesheet" href="../assets/legal.css" />
 <style>
-  .apps { list-style: none; padding: 0; margin: 32px 0 0; }
-  .apps li {
-    border-top: 1px solid var(--line);
-    padding: 18px 0;
+  .rejilla {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(132px, 1fr));
+    gap: 28px 20px;
+    margin: 40px 0 0;
+    padding: 0;
+    list-style: none;
   }
-  .apps li:last-child { border-bottom: 1px solid var(--line); }
-  .apps h2 { font-size: 17px; margin: 0 0 4px; }
-  .apps .enlaces { font-size: 15px; color: var(--muted); }
-  .apps .enlaces a { color: var(--accent); }
-  .apps .sep { color: var(--line-strong); padding: 0 8px; }
+
+  .app {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    padding: 14px 8px;
+    border: 0;
+    border-radius: 16px;
+    background: none;
+    font: inherit;
+    color: var(--text);
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background 0.18s ease, transform 0.18s ease;
+  }
+
+  /* Las apps con un solo documento son <a> y las demas <button>: sin esto,
+     legal.css pinta de azul el nombre solo de las primeras. */
+  .doc .app, .doc .app:hover { color: var(--text); }
+
+  .app:hover, .app:focus-visible {
+    background: var(--surface);
+    transform: translateY(-2px);
+  }
+
+  .app:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  .app img {
+    width: 84px;
+    height: 84px;
+    border-radius: 20px;
+    border: 1px solid var(--line);
+    background: #fff;
+  }
+
+  .app .nombre { font-size: 14px; line-height: 1.35; }
+
+  .app .cuantas { font-size: 12px; color: var(--muted); }
+
+  /* Modal de seleccion, solo para las apps con mas de un documento. */
+  dialog.selector {
+    border: 1px solid var(--line-strong);
+    border-radius: 18px;
+    padding: 0;
+    max-width: 380px;
+    width: calc(100% - 40px);
+    background: var(--bg);
+    color: var(--text);
+  }
+
+  dialog.selector::backdrop { background: rgba(20, 23, 26, 0.45); }
+
+  .selector .cabecera {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 22px 24px 18px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .selector .cabecera img {
+    width: 44px; height: 44px;
+    border-radius: 11px;
+    border: 1px solid var(--line);
+  }
+
+  .selector h2 { font-size: 16px; font-weight: 500; margin: 0; }
+
+  .selector .opciones { padding: 10px; }
+
+  .selector .opciones a {
+    display: block;
+    padding: 14px 16px;
+    border-radius: 12px;
+    color: var(--text);
+    text-decoration: none;
+    font-size: 15px;
+  }
+
+  .selector .opciones a:hover, .selector .opciones a:focus-visible {
+    background: var(--surface);
+    color: var(--accent);
+  }
+
+  .selector .cerrar {
+    display: block;
+    width: calc(100% - 20px);
+    margin: 0 10px 12px;
+    padding: 12px;
+    border: 0;
+    border-radius: 12px;
+    background: none;
+    font: inherit;
+    font-size: 14px;
+    color: var(--muted);
+    cursor: pointer;
+  }
+
+  .selector .cerrar:hover { color: var(--text); background: var(--surface); }
+
+  @media (max-width: 420px) {
+    .rejilla { grid-template-columns: repeat(auto-fit, minmax(108px, 1fr)); gap: 20px 12px; }
+    .app img { width: 68px; height: 68px; border-radius: 16px; }
+  }
 </style>
 </head>
 <body>
@@ -28,7 +133,7 @@
 
 <article class="doc">
   <h1>Documentación legal</h1>
-  <p class="updated">Políticas de privacidad y eliminación de cuenta de mis aplicaciones</p>
+  <p class="updated">Pulsa sobre una app para ver sus documentos</p>
 
   <p class="note">
     Ninguna de mis aplicaciones necesita que crees una cuenta para funcionar, y todas guardan
@@ -36,40 +141,7 @@
     datos se tratan y con quién se comparten.
   </p>
 
-  <ul class="apps">
-    <li>
-      <h2>ESTELA</h2>
-      <p class="enlaces"><a href="estela/privacidad.html">Política de privacidad</a></p>
-    </li>
-    <li>
-      <h2>Oremus — Rosario y Biblia</h2>
-      <p class="enlaces"><a href="oremus/privacidad.html">Política de privacidad</a></p>
-    </li>
-    <li>
-      <h2>La Constitución Española</h2>
-      <p class="enlaces">
-        <a href="constitucion/privacidad.html">Política de privacidad</a>
-        <span class="sep">·</span>
-        <a href="constitucion/eliminar-cuenta.html">Eliminar tu cuenta</a>
-      </p>
-    </li>
-    <li>
-      <h2>Auxiliar Administrativo del Estado</h2>
-      <p class="enlaces">
-        <a href="auxiliar-administrativo/privacidad.html">Política de privacidad</a>
-        <span class="sep">·</span>
-        <a href="auxiliar-administrativo/eliminar-cuenta.html">Eliminar tu cuenta</a>
-      </p>
-    </li>
-    <li>
-      <h2>Administrativo del Estado</h2>
-      <p class="enlaces">
-        <a href="administrativo-estado/privacidad.html">Política de privacidad</a>
-        <span class="sep">·</span>
-        <a href="administrativo-estado/eliminar-cuenta.html">Eliminar tu cuenta</a>
-      </p>
-    </li>
-  </ul>
+  <ul class="rejilla" id="rejilla"></ul>
 
   <hr />
   <footer>
@@ -77,5 +149,124 @@
     <a href="mailto:caelyn.tech@hotmail.com">caelyn.tech@hotmail.com</a>
   </footer>
 </article>
+
+<dialog class="selector" id="selector" aria-labelledby="sel-titulo">
+  <div class="cabecera">
+    <img id="sel-icono" src="" alt="" />
+    <h2 id="sel-titulo"></h2>
+  </div>
+  <div class="opciones" id="sel-opciones"></div>
+  <button class="cerrar" id="sel-cerrar" type="button">Cerrar</button>
+</dialog>
+
+<script>
+(function () {
+  var APPS = [
+    { slug: 'estela', nombre: 'ESTELA', icono: 'estela.png', docs: [
+      { texto: 'Política de privacidad', href: 'estela/privacidad.html' }
+    ] },
+    { slug: 'oremus', nombre: 'Oremus', icono: 'oremus.png', docs: [
+      { texto: 'Política de privacidad', href: 'oremus/privacidad.html' }
+    ] },
+    { slug: 'constitucion', nombre: 'La Constitución Española', icono: 'constitucion.png', docs: [
+      { texto: 'Política de privacidad', href: 'constitucion/privacidad.html' },
+      { texto: 'Eliminar tu cuenta', href: 'constitucion/eliminar-cuenta.html' }
+    ] },
+    { slug: 'auxiliar-administrativo', nombre: 'Auxiliar Administrativo', icono: 'auxiliar-administrativo.png', docs: [
+      { texto: 'Política de privacidad', href: 'auxiliar-administrativo/privacidad.html' },
+      { texto: 'Eliminar tu cuenta', href: 'auxiliar-administrativo/eliminar-cuenta.html' }
+    ] },
+    { slug: 'administrativo-estado', nombre: 'Administrativo del Estado', icono: 'administrativo-estado.png', docs: [
+      { texto: 'Política de privacidad', href: 'administrativo-estado/privacidad.html' },
+      { texto: 'Eliminar tu cuenta', href: 'administrativo-estado/eliminar-cuenta.html' }
+    ] }
+  ];
+
+  var ICONOS = '../assets/apps/';
+  var rejilla = document.getElementById('rejilla');
+  var dialogo = document.getElementById('selector');
+  var ultimoFoco = null;
+
+  function pintarIcono(app) {
+    var img = document.createElement('img');
+    img.src = ICONOS + app.icono;
+    img.alt = '';
+    return img;
+  }
+
+  APPS.forEach(function (app) {
+    var li = document.createElement('li');
+    var unico = app.docs.length === 1;
+
+    // Con un solo documento el icono es un enlace normal y va directo; con
+    // varios hace falta preguntar, asi que es un boton que abre el modal.
+    var nodo = document.createElement(unico ? 'a' : 'button');
+    nodo.className = 'app';
+    // El icono es decorativo y el nombre va en <span>, asi que sin esto el
+    // control se anuncia sin nombre en un lector de pantalla.
+    nodo.setAttribute('aria-label', unico
+      ? app.nombre + ': política de privacidad'
+      : app.nombre + ': ver documentos legales');
+    if (unico) {
+      nodo.href = app.docs[0].href;
+    } else {
+      nodo.type = 'button';
+      nodo.setAttribute('aria-haspopup', 'dialog');
+      nodo.addEventListener('click', function () { abrir(app, nodo); });
+    }
+
+    nodo.appendChild(pintarIcono(app));
+
+    var nombre = document.createElement('span');
+    nombre.className = 'nombre';
+    nombre.textContent = app.nombre;
+    nodo.appendChild(nombre);
+
+    var cuantas = document.createElement('span');
+    cuantas.className = 'cuantas';
+    cuantas.textContent = unico ? 'Privacidad' : app.docs.length + ' documentos';
+    nodo.appendChild(cuantas);
+
+    li.appendChild(nodo);
+    rejilla.appendChild(li);
+  });
+
+  function abrir(app, origen) {
+    ultimoFoco = origen;
+    document.getElementById('sel-icono').src = ICONOS + app.icono;
+    document.getElementById('sel-titulo').textContent = app.nombre;
+
+    var caja = document.getElementById('sel-opciones');
+    caja.textContent = '';
+    app.docs.forEach(function (doc) {
+      var a = document.createElement('a');
+      a.href = doc.href;
+      a.textContent = doc.texto;
+      caja.appendChild(a);
+    });
+
+    dialogo.showModal();
+    caja.querySelector('a').focus();
+  }
+
+  document.getElementById('sel-cerrar').addEventListener('click', function () {
+    dialogo.close();
+  });
+
+  // Clic en el fondo: el propio <dialog> ocupa todo, asi que hay que mirar si
+  // el punto pulsado cae fuera de su caja.
+  dialogo.addEventListener('click', function (e) {
+    var r = dialogo.getBoundingClientRect();
+    var dentro = e.clientX >= r.left && e.clientX <= r.right &&
+                 e.clientY >= r.top && e.clientY <= r.bottom;
+    if (!dentro) dialogo.close();
+  });
+
+  // Escape ya lo gestiona <dialog>; solo hay que devolver el foco.
+  dialogo.addEventListener('close', function () {
+    if (ultimoFoco) ultimoFoco.focus();
+  });
+})();
+</script>
 </body>
 </html>
