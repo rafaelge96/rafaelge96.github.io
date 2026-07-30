@@ -1,0 +1,41 @@
+TEXTO PROMOCIONAL DEL PERFIL DE DESARROLLADOR
+Play Console → Configuración → Página de desarrollador → Descripción
+Límite: 500 caracteres por idioma.
+
+Nada de esto afirma nada verificable sobre las apps (ni datos, ni cuentas,
+ni funcionamiento), a proposito: ESTELA sirve anuncios con AdMob y las apps
+de oposiciones tienen login opcional, asi que cualquier promesa de ese tipo
+en el perfil seria una Misleading Claim.
+
+
+─────────────────────────────────────────────────────────────────────
+RECOMENDADO · ESPAÑOL
+─────────────────────────────────────────────────────────────────────
+
+Diseño y programo cada app yo mismo, de la primera idea al último detalle.
+Prefiero hacer pocas cosas y hacerlas despacio: interfaces que se entienden
+solas, sin ruido y sin pasos de más.
+
+Porque las cosas bien hechas se notan.
+
+
+─────────────────────────────────────────────────────────────────────
+RECOMENDADO · INGLÉS
+─────────────────────────────────────────────────────────────────────
+
+I design and build every app myself, from the first idea to the last
+detail. I would rather make few things and make them slowly: interfaces
+that explain themselves, with no noise and no extra steps.
+
+Because good work shows.
+
+
+─────────────────────────────────────────────────────────────────────
+ALTERNATIVA CORTA (más cerca de lo que tenías)
+─────────────────────────────────────────────────────────────────────
+
+ES:  Apps sencillas, cuidadas hasta el último detalle, hechas para
+     acompañarte en el día a día.
+
+EN:  Simple apps, carefully crafted down to the last detail, made to
+     accompany you in your everyday life.
