@@ -6,7 +6,7 @@ Publicado con GitHub Pages en <https://rafaelge96.github.io>.
 ## Cómo está hecho
 
 - Un solo `index.html` con el CSS y el JS en línea: **sin dependencias, sin build, sin frameworks**.
-- Tipografía del sistema y paleta propia (azul noche + cian) con variables CSS.
+- Tipografía del sistema y paleta propia (blanco + azul pizarra, la misma del CV) con variables CSS.
 - Animaciones con `IntersectionObserver` y respeto por `prefers-reduced-motion`.
 - Diagrama de arquitectura en SVG inline, con `aria-label` descriptivo.
 - SEO: metadatos Open Graph, `sitemap.xml`, `robots.txt` y datos estructurados JSON-LD (`Person`).
