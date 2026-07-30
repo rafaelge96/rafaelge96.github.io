@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="192" height="192" viewBox="0 0 1024 1024"><rect width="1024" height="1024" rx="229" fill="#F9F5F0"/><g transform="translate(512 512) scale(1.24) translate(-512 -511)">
+    <defs>
+      <linearGradient id="oro" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#EACD7C"/>
+        <stop offset="0.5" stop-color="#D4A845"/>
+        <stop offset="1" stop-color="#B08420"/>
+      </linearGradient>
+    </defs>
+    <!-- Arco ojival sencillo; los pilares mueren tras la primera capa del libro -->
+    <path fill="none" stroke="url(#oro)" stroke-width="26" stroke-linejoin="miter"
+          d="M 348 742 L 348 470 C 348 330 424 234 512 196 C 600 234 676 330 676 470 L 676 742"/>
+    <!-- Cruz -->
+    <g fill="url(#oro)">
+      <rect x="494" y="238" width="36" height="152" rx="3"/>
+      <rect x="450" y="284" width="124" height="34" rx="3"/>
+    </g>
+    <!-- Libro abierto: 3 capas de paginas en abanico por lado (tras las manos) -->
+    <g fill="url(#oro)">
+      <path d="M 508 742 C 420 710 330 700 258 702 L 250 714 C 330 722 430 758 508 806 Z"/>
+      <path d="M 508 792 C 405 756 300 748 222 752 L 214 766 C 300 776 420 812 508 852 Z"/>
+      <path d="M 508 838 C 392 802 274 796 190 802 L 182 818 C 280 828 415 864 512 894 Z"/>
+      <path d="M 516 742 C 604 710 694 700 766 702 L 774 714 C 694 722 594 758 516 806 Z"/>
+      <path d="M 516 792 C 619 756 724 748 802 752 L 810 766 C 724 776 604 812 516 852 Z"/>
+      <path d="M 516 838 C 632 802 750 796 834 802 L 842 818 C 744 828 609 864 512 894 Z"/>
+    </g>
+    <!-- Manos en oracion (delante del libro): rendija fina, puntas redondeadas -->
+    <g fill="url(#oro)">
+      <!-- mano izquierda -->
+      <path d="M 505 448
+               C 504 441 500 438 495 440
+               C 486 445 477 464 471 494
+               C 461 538 458 582 461 620
+               C 463 654 457 684 442 706
+               C 430 722 414 734 400 742
+               L 394 748
+               C 444 758 490 742 508 720
+               L 512 716 L 512 620
+               C 511 616 510 613 509 610
+               C 507 556 505 494 505 448 Z"/>
+      <!-- mano derecha (espejo) -->
+      <path d="M 519 448
+               C 520 441 524 438 529 440
+               C 538 445 547 464 553 494
+               C 563 538 566 582 563 620
+               C 561 654 567 684 582 706
+               C 594 722 610 734 624 742
+               L 630 748
+               C 580 758 534 742 516 720
+               L 512 716 L 512 620
+               C 513 616 514 613 515 610
+               C 517 556 519 494 519 448 Z"/>
+    </g>
+    </g></svg>

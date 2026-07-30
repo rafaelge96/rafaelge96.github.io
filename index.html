@@ -1,0 +1,1278 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Rafael González Escobar — Senior Software Engineer</title>
+<meta name="description" content="Senior Software Engineer especializado en Android, Kotlin Multiplatform, Jetpack Compose y SwiftUI. Apps con millones de usuarios en banca, energía, educación pública y gran consumo, y productos propios publicados en Google Play." />
+<meta name="author" content="Rafael González Escobar" />
+<link rel="canonical" href="https://rafaelge96.github.io/" />
+<meta name="theme-color" content="#0a1626" />
+
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://rafaelge96.github.io/" />
+<meta property="og:title" content="Rafael González Escobar — Senior Software Engineer" />
+<meta property="og:description" content="Android · Kotlin Multiplatform · Jetpack Compose · SwiftUI. Apps con millones de usuarios en banca, energía y administración pública, y productos propios en Google Play." />
+<meta property="og:image" content="https://rafaelge96.github.io/assets/og.png" />
+<meta property="og:locale" content="es_ES" />
+<meta name="twitter:card" content="summary_large_image" />
+
+<link rel="icon" type="image/svg+xml" href="icon.svg" />
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Rafael González Escobar",
+  "jobTitle": "Senior Software Engineer — Mobile Development & AI Productivity",
+  "url": "https://rafaelge96.github.io/",
+  "email": "mailto:rafaelge96@hotmail.com",
+  "address": { "@type": "PostalAddress", "addressLocality": "Córdoba", "addressCountry": "ES" },
+  "worksFor": { "@type": "Organization", "name": "NTT DATA Europe" },
+  "sameAs": [
+    "https://github.com/rafaelge96",
+    "https://www.linkedin.com/in/rafaelgonzalezescobar",
+    "https://play.google.com/store/apps/dev?id=5325744295595162550"
+  ],
+  "knowsAbout": ["Android", "Kotlin", "Kotlin Multiplatform", "Jetpack Compose", "SwiftUI",
+                 "Clean Architecture", "MVVM", "Firebase", "CI/CD"]
+}
+</script>
+
+<style>
+/* ---------------------------------------------------------------- tokens */
+:root {
+  --bg: #0a1626;
+  --surface: #11202f;
+  --surface-2: #12283a;
+  --text: #eaf6f8;
+  --muted: #8aa0ad;
+  --line: rgba(160, 200, 220, 0.14);
+  --line-strong: rgba(160, 200, 220, 0.28);
+  --accent: #3fd0e0;
+  --accent-soft: rgba(63, 208, 224, 0.1);
+  --max: 1080px;
+  --r: 18px;
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; scroll-padding-top: 92px; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+a { color: inherit; text-decoration: none; }
+img { max-width: 100%; -webkit-user-drag: none; user-select: none; -webkit-user-select: none; }
+h1, h2, h3 { line-height: 1.15; margin: 0; letter-spacing: -0.02em; }
+
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 6px; }
+
+.skip {
+  position: absolute; left: -9999px; top: 8px; z-index: 100;
+  background: var(--surface); color: var(--text);
+  padding: 10px 16px; border-radius: 999px; border: 1px solid var(--line-strong);
+}
+.skip:focus { left: 16px; }
+
+/* ---------------------------------------------------------------- cielo */
+.sky { position: fixed; inset: 0; overflow: hidden; pointer-events: none; z-index: 0; }
+.stars { position: absolute; inset: -60px; }
+.stars i { position: absolute; border-radius: 50%; background: #cfeef3; animation: twinkle 4.5s ease-in-out infinite; }
+@keyframes twinkle { 0%, 100% { filter: brightness(0.65); } 50% { filter: brightness(1.7); } }
+
+.shooting {
+  position: absolute; top: 14%; left: -12%; width: 140px; height: 2px; border-radius: 2px;
+  background: linear-gradient(90deg, transparent, #cfeef3); opacity: 0;
+  animation: shoot 14s linear infinite 4s;
+}
+@keyframes shoot {
+  0% { transform: translate(0, 0) rotate(16deg); opacity: 0; }
+  2% { opacity: 0.9; }
+  8% { transform: translate(124vw, 36vh) rotate(16deg); opacity: 0; }
+  100% { transform: translate(124vw, 36vh) rotate(16deg); opacity: 0; }
+}
+
+.horizon-glow {
+  position: absolute; left: 50%; bottom: -34vh; transform: translateX(-50%);
+  width: 160vw; height: 66vh;
+  background: radial-gradient(ellipse 50% 50% at 50% 50%, rgba(63, 208, 224, 0.14), transparent 65%);
+}
+
+/* ---------------------------------------------------------------- header */
+.site-header {
+  position: sticky; top: 0; z-index: 20;
+  backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+  background: rgba(10, 22, 38, 0.72);
+  border-bottom: 0.5px solid var(--line);
+}
+.header-in {
+  max-width: var(--max); margin: 0 auto; padding: 13px 24px;
+  display: flex; align-items: center; gap: 20px;
+}
+.brand { display: flex; align-items: center; gap: 11px; font-weight: 600; letter-spacing: 0.02em; }
+.brand svg { width: 26px; height: 26px; flex: none; }
+.brand small {
+  font-size: 10px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--accent); border: 1px solid rgba(63, 208, 224, 0.35);
+  border-radius: 999px; padding: 3px 9px;
+}
+
+.nav { margin-left: auto; display: flex; align-items: center; gap: 4px; }
+.nav a {
+  font-size: 14px; color: var(--muted); padding: 8px 12px; border-radius: 999px;
+  transition: color 0.2s, background 0.2s;
+}
+.nav a:hover { color: var(--text); background: rgba(160, 200, 220, 0.07); }
+.nav a[aria-current="true"] { color: var(--accent); background: var(--accent-soft); }
+.nav .cv { color: var(--bg); background: var(--accent); font-weight: 600; padding: 8px 16px; margin-left: 8px; }
+.nav .cv:hover { color: var(--bg); background: #63dced; }
+
+/* ---------------------------------------------------------------- layout */
+main { position: relative; z-index: 1; }
+.wrap { max-width: var(--max); margin: 0 auto; padding: 0 24px; }
+section { padding: 84px 0 0; }
+.sec-head { max-width: 660px; margin-bottom: 34px; }
+.eyebrow {
+  font-size: 11px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--accent); margin: 0 0 12px;
+}
+.sec-head h2 { font-size: clamp(28px, 4.2vw, 40px); font-weight: 600; }
+.sec-head p { color: var(--muted); margin: 14px 0 0; font-size: 17px; }
+
+/* ---------------------------------------------------------------- hero */
+.hero { padding: clamp(56px, 9vw, 104px) 0 clamp(40px, 6vw, 64px); text-align: center; }
+.hero .eyebrow { font-size: 12px; letter-spacing: 0.24em; }
+.hero h1 {
+  font-size: clamp(38px, 7.4vw, 76px); font-weight: 700; letter-spacing: -0.035em;
+  max-width: 15ch; margin: 0 auto;
+  background: linear-gradient(180deg, #ffffff 20%, #9fd9e3 115%);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; color: transparent;
+}
+.hero .lead { color: var(--muted); font-size: clamp(16px, 2vw, 19px); max-width: 58ch; margin: 26px auto 0; }
+.hero .lead b { color: var(--text); font-weight: 600; }
+
+.ctas { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin-top: 34px; }
+.btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 13px 26px; border-radius: 999px; font-size: 15px; font-weight: 600;
+  border: 1px solid transparent; transition: transform 0.2s, background 0.2s, border-color 0.2s;
+}
+.btn-primary { background: var(--accent); color: var(--bg); }
+.btn-primary:hover { background: #63dced; transform: translateY(-2px); }
+.btn-ghost { border-color: var(--line-strong); color: var(--text); }
+.btn-ghost:hover { border-color: var(--accent); background: var(--accent-soft); transform: translateY(-2px); }
+
+.facts {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px;
+  margin: 56px auto 0; max-width: 860px;
+  background: var(--line); border: 1px solid var(--line); border-radius: var(--r); overflow: hidden;
+}
+.facts div { background: rgba(17, 32, 47, 0.72); padding: 22px 16px; }
+.facts b { display: block; font-size: clamp(21px, 2.8vw, 28px); font-weight: 700; letter-spacing: -0.02em; }
+.facts span { font-size: 13px; color: var(--muted); }
+
+/* ---------------------------------------------------------------- ticker */
+.ticker {
+  margin-top: 72px; padding: 15px 0; overflow: hidden;
+  border-top: 0.5px solid var(--line); border-bottom: 0.5px solid var(--line);
+  background: rgba(10, 22, 38, 0.5);
+  mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+}
+.ticker-track { display: flex; width: max-content; animation: slide 34s linear infinite; }
+.ticker-half { display: flex; align-items: center; gap: 34px; padding-right: 34px; }
+.ticker span {
+  font-size: 13px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase;
+  color: rgba(234, 246, 248, 0.72); white-space: nowrap;
+}
+.ticker b { color: var(--accent); }
+@keyframes slide { to { transform: translateX(-50%); } }
+
+/* ---------------------------------------------------------------- tarjetas */
+.grid { display: grid; gap: 18px; }
+
+/* filas horizontales con scroll y anclaje */
+.rail {
+  display: flex; gap: var(--gap); overflow-x: auto; overscroll-behavior-x: contain;
+  --gap: 18px; --por-vista: 4;
+  scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch;
+  width: 100vw; max-width: 100vw;
+  --inset: max(24px, calc((100vw - var(--max)) / 2 + 24px));
+  margin: -6px calc(50% - 50vw) 0;
+  padding: 6px var(--inset) 18px;
+  scroll-padding-left: var(--inset);
+  scrollbar-width: thin; scrollbar-color: rgba(63, 208, 224, 0.45) transparent;
+  --fade: 6%;
+  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 var(--fade), #000 calc(100% - var(--fade)), transparent 100%);
+          mask-image: linear-gradient(90deg, transparent 0, #000 var(--fade), #000 calc(100% - var(--fade)), transparent 100%);
+}
+/* el desvanecido solo en el lado que aún tiene contenido */
+.rail.at-start {
+  -webkit-mask-image: linear-gradient(90deg, #000 0, #000 calc(100% - var(--fade)), transparent 100%);
+          mask-image: linear-gradient(90deg, #000 0, #000 calc(100% - var(--fade)), transparent 100%);
+}
+.rail.at-end {
+  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 var(--fade), #000 100%);
+          mask-image: linear-gradient(90deg, transparent 0, #000 var(--fade), #000 100%);
+}
+.rail.at-start.at-end { -webkit-mask-image: none; mask-image: none; }
+/* el ancho se calcula para que entren --por-vista tarjetas justas en la columna de
+   contenido, asi la fila queda con el mismo margen a izquierda y a derecha */
+.rail > * {
+  scroll-snap-align: start;
+  flex: 0 0 calc((min(100vw, var(--max)) - 48px - (var(--por-vista) - 1) * var(--gap)) / var(--por-vista));
+}
+.rail::-webkit-scrollbar { height: 8px; }
+.rail::-webkit-scrollbar-track { background: rgba(160, 200, 220, 0.07); border-radius: 999px; }
+.rail::-webkit-scrollbar-thumb { background: rgba(63, 208, 224, 0.4); border-radius: 999px; }
+.rail::-webkit-scrollbar-thumb:hover { background: rgba(63, 208, 224, 0.65); }
+
+.rail--certs { --por-vista: 5; }
+
+.cert-card {
+  padding: 18px; display: flex; flex-direction: column; align-items: center;
+  justify-content: flex-start; text-align: center; gap: 10px;
+}
+.cert-logo {
+  width: 30px; height: 30px; border-radius: 8px; object-fit: contain;
+  background: rgba(234, 246, 248, 0.07); padding: 4px; flex: none;
+}
+.cert-card .meta { margin-top: auto; padding-top: 8px; }
+.cert-card .titulo { font-size: 14px; font-weight: 600; line-height: 1.35; }
+.cert-card .meta {
+  font-size: 10.5px; font-weight: 700; letter-spacing: 0.13em;
+  text-transform: uppercase; color: var(--accent);
+}
+
+.sub-head {
+  display: flex; align-items: center; justify-content: space-between; gap: 18px;
+  margin: 34px 0 14px;
+}
+.sub-head h3 { font-size: 20px; font-weight: 600; }
+
+.rail-nav { display: flex; justify-content: flex-end; gap: 8px; margin: -12px 0 14px; }
+.rail-btn {
+  width: 38px; height: 38px; border-radius: 50%; cursor: pointer;
+  background: rgba(160, 200, 220, 0.05); border: 1px solid var(--line-strong);
+  color: var(--text); font-size: 17px; line-height: 1;
+  display: inline-flex; align-items: center; justify-content: center;
+  transition: background 0.2s, border-color 0.2s, opacity 0.2s;
+}
+.rail-btn:hover:not(:disabled) { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
+.rail-btn:disabled { opacity: 0.3; cursor: default; }
+.grid-2 { grid-template-columns: repeat(2, 1fr); }
+.grid-3 { grid-template-columns: repeat(3, 1fr); }
+
+.card {
+  position: relative; overflow: hidden;
+  background: linear-gradient(160deg, var(--surface-2), var(--surface));
+  border: 1px solid var(--line); border-radius: var(--r); padding: 26px;
+  transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s;
+}
+.card::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: radial-gradient(60% 60% at 90% 0%, rgba(63, 208, 224, 0.14), transparent 70%);
+}
+.card:hover {
+  transform: translateY(-4px); border-color: rgba(63, 208, 224, 0.4);
+  box-shadow: 0 18px 42px -22px rgba(0, 0, 0, 0.9);
+}
+.card > * { position: relative; z-index: 1; }
+
+/* ---------------------------------------------------------------- casos */
+.case, .app { display: flex; flex-direction: column; align-items: center; text-align: center; }
+
+/* cabecera apilada: etiqueta arriba en su propia linea, luego icono, nombre y empresa */
+.case-top { display: flex; flex-direction: column; align-items: center; gap: 10px; width: 100%; }
+.case-top .sector { order: 1; margin: 0; }
+.case-top img { order: 2; }
+.case-top > div:not(.sector) { order: 3; }
+.badges { justify-content: center; }
+
+/* el texto descriptivo, justificado */
+.case h3, .app p { text-align: justify; text-justify: inter-word; hyphens: auto; }
+.case-org { font-size: 12.5px; color: var(--muted); }
+
+.badges { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 14px; }
+.badges a { display: inline-flex; transition: transform 0.2s, opacity 0.2s; }
+.badges a:hover { transform: translateY(-2px); opacity: 0.85; }
+.badge { height: 32px; width: auto; display: block; }
+.case-top img { width: 40px; height: 40px; border-radius: 10px; flex: none; }
+.case-top .who { font-size: 19px; font-weight: 600; }
+.case-top .sector {
+  font-size: 10px; font-weight: 600; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--accent);
+  border: 1px solid rgba(63, 208, 224, 0.3); border-radius: 999px; padding: 3px 9px; white-space: nowrap;
+}
+.case, .app { padding: 20px; }
+.case h3 { font-size: 15px; font-weight: 600; margin: 14px 0 auto; }
+.case dl { margin: 16px 0 0; display: grid; gap: 11px; }
+.case dt {
+  font-size: 10.5px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--accent); margin-bottom: 2px;
+}
+.case dd { margin: 0; font-size: 14.5px; color: var(--muted); }
+.case dd b { color: var(--text); font-weight: 600; }
+
+.chips { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 18px; }
+.chip {
+  font-size: 12px; font-weight: 500; color: var(--accent);
+  background: var(--accent-soft); border: 1px solid rgba(63, 208, 224, 0.28);
+  border-radius: 999px; padding: 5px 12px;
+}
+.chip-plain { color: var(--muted); background: rgba(160, 200, 220, 0.05); border-color: var(--line); }
+
+.card-link {
+  display: inline-flex; align-items: center; gap: 6px; margin-top: 18px;
+  font-size: 14px; font-weight: 600; color: var(--accent);
+}
+.card-link::after { content: "→"; transition: transform 0.2s; }
+.card:hover .card-link::after { transform: translateX(4px); }
+
+/* ---------------------------------------------------------------- productos */
+.app { gap: 12px; }
+.app > img { width: 46px; height: 46px; border-radius: 12px; flex: none; }
+.app h3 { font-size: 16.5px; font-weight: 600; }
+.app p { margin: 5px 0 0; font-size: 13.5px; color: var(--muted); }
+.app > div { display: flex; flex-direction: column; align-items: center; height: 100%; width: 100%; }
+.app .badges { margin-top: auto; padding-top: 14px; }
+
+/* ---------------------------------------------------------------- arquitectura */
+.arch { background: rgba(17, 32, 47, 0.6); border: 1px solid var(--line); border-radius: var(--r); padding: 28px; }
+.arch svg { width: 100%; height: auto; display: block; }
+.principles { margin-top: 18px; }
+.principles .card { padding: 22px; }
+.principles h3 { font-size: 16px; font-weight: 600; margin-bottom: 8px; }
+.principles p { margin: 0; font-size: 14.5px; color: var(--muted); }
+.principles .num {
+  font-size: 12px; font-weight: 700; color: var(--accent); letter-spacing: 0.1em;
+  display: block; margin-bottom: 10px;
+}
+
+/* ---------------------------------------------------------------- stack */
+.stack-row {
+  display: grid; grid-template-columns: 180px 1fr; gap: 18px; align-items: start;
+  padding: 20px 0; border-top: 1px solid var(--line);
+}
+.stack-row:first-child { border-top: 0; }
+.stack-row h3 { font-size: 14px; font-weight: 600; color: var(--muted); padding-top: 4px; }
+
+/* ---------------------------------------------------------------- trayectoria */
+.timeline { position: relative; padding-left: 30px; }
+.timeline::before {
+  content: ""; position: absolute; left: 7px; top: 8px; bottom: 8px; width: 1.5px;
+  background: linear-gradient(180deg, var(--accent), rgba(63, 208, 224, 0.05));
+}
+.job { position: relative; padding: 0 0 30px; }
+.job::before {
+  content: ""; position: absolute; left: -30px; top: 8px; width: 15px; height: 15px;
+  border-radius: 50%; background: var(--bg); border: 2px solid var(--accent);
+}
+.job.dim::before { border-color: var(--line-strong); }
+.job .when {
+  font-size: 12.5px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent);
+}
+.job.dim .when { color: var(--muted); }
+.job h3 { font-size: 18px; font-weight: 600; margin: 6px 0 2px; }
+.job .org { font-size: 14px; color: var(--text); font-weight: 500; }
+.job p { margin: 9px 0 0; font-size: 14.5px; color: var(--muted); }
+
+.roles { margin: 12px 0 4px; display: grid; gap: 6px; }
+.roles div { display: flex; flex-wrap: wrap; gap: 10px; align-items: baseline; font-size: 14.5px; }
+.roles b { font-weight: 600; }
+.roles span { color: var(--muted); font-size: 13px; }
+
+.cert-group {
+  font-size: 10.5px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--accent); margin: 14px 0 6px;
+}
+.cert-group:first-child { margin-top: 0; }
+.card ul { margin: 0; padding-left: 18px; color: var(--muted); font-size: 14px; }
+
+details.more {
+  margin-top: 4px; border: 1px solid var(--line); border-radius: var(--r);
+  background: rgba(17, 32, 47, 0.5); padding: 0 22px;
+}
+details.more summary {
+  cursor: pointer; padding: 18px 0; font-size: 15px; font-weight: 600; list-style: none;
+  display: flex; align-items: center; gap: 10px;
+}
+details.more summary::-webkit-details-marker { display: none; }
+details.more summary::before { content: "+"; color: var(--accent); font-size: 19px; line-height: 1; }
+details.more[open] summary::before { content: "−"; }
+details.more .inner { padding: 0 0 22px; display: grid; gap: 16px; grid-template-columns: 1fr 1fr; }
+details.more h4 { margin: 0 0 6px; font-size: 14px; font-weight: 600; }
+details.more ul { margin: 0; padding-left: 18px; color: var(--muted); font-size: 14px; }
+
+/* ---------------------------------------------------------------- contacto */
+.contact {
+  margin-top: 20px; text-align: center;
+  background: linear-gradient(160deg, var(--surface-2), var(--surface));
+  border: 1px solid var(--line); border-radius: 26px; padding: clamp(34px, 6vw, 60px) 26px;
+}
+.contact h2 { font-size: clamp(26px, 4vw, 38px); font-weight: 600; }
+.contact p { color: var(--muted); max-width: 46ch; margin: 14px auto 0; }
+
+.site-footer {
+  margin-top: 88px; padding: 30px 0 46px; border-top: 0.5px solid var(--line);
+  font-size: 13px; color: var(--muted);
+  display: flex; flex-wrap: wrap; gap: 12px; justify-content: space-between;
+}
+
+/* ---------------------------------------------------------------- reveal */
+.reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.reveal.in { opacity: 1; transform: none; }
+
+/* ---------------------------------------------------------------- responsive */
+@media (hover: none) { .rail-nav { display: none; } }
+
+@media (max-width: 1100px) { .rail { --por-vista: 3; } .rail--certs { --por-vista: 4; } }
+@media (max-width: 820px)  { .rail { --por-vista: 2; } .rail--certs { --por-vista: 3; } }
+
+@media (max-width: 900px) {
+  .grid-2, .grid-3, details.more .inner { grid-template-columns: 1fr; }
+  .facts { grid-template-columns: repeat(2, 1fr); }
+  .stack-row { grid-template-columns: 1fr; gap: 10px; }
+  .nav a:not(.cv) { display: none; }
+}
+@media (max-width: 560px) {
+  .rail { --por-vista: 1.15; }
+  .rail--certs { --por-vista: 1.7; }
+  section { padding-top: 64px; }
+  .case-top .sector { display: none; }
+  .site-footer { justify-content: center; text-align: center; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  .reveal { opacity: 1; transform: none; }
+}
+
+@media print {
+  .sky, .site-header, .ticker { display: none; }
+  body { background: #fff; color: #000; }
+  .card, .contact, .arch { border-color: #ccc; background: #fff; }
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Saltar al contenido</a>
+
+<div class="sky" aria-hidden="true">
+  <div class="stars" id="stars"></div>
+  <div class="shooting"></div>
+  <div class="horizon-glow"></div>
+</div>
+
+<header class="site-header">
+  <div class="header-in">
+    <a class="brand" href="#main" aria-label="Inicio">
+      <svg viewBox="0 0 512 512" aria-hidden="true">
+        <rect width="512" height="512" rx="116" fill="#0f2740"/>
+        <text x="252" y="352" text-anchor="middle" font-family="inherit" font-size="290"
+              font-weight="600" letter-spacing="-8" fill="#3fd0e0">R</text>
+        <circle cx="386" cy="326" r="26" fill="#eaf6f8"/>
+      </svg>
+      Rafael González <small>Dev</small>
+    </a>
+    <nav class="nav" aria-label="Secciones">
+      <a href="#sobre">Sobre mí</a>
+      <a href="#skills">Skills</a>
+      <a href="#proyectos">Proyectos</a>
+      <a href="#experiencia">Experiencia</a>
+      <a href="#contacto">Contacto</a>
+      <a class="cv" href="assets/cv_rafael_gonzalez_escobar.pdf">CV</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ============================================================ hero -->
+  <section class="hero wrap">
+    <p class="eyebrow">Senior Software Engineer · Mobile Development &amp; AI Productivity · Córdoba, España</p>
+    <h1>Escribo el código que millones de personas llevan en el bolsillo.</h1>
+    <p class="lead">
+      <b>Senior Software Engineer</b> en NTT DATA. Construyo aplicaciones Android e iOS para banca, energía,
+      educación pública y gran consumo —proyectos con millones de usuarios— con Kotlin, Kotlin Multiplatform,
+      Compose y SwiftUI. En paralelo diseño y publico <b>mis propios productos</b> en Google Play y la App Store.
+    </p>
+    <div class="ctas">
+      <a class="btn btn-primary" href="#proyectos">Ver proyectos</a>
+      <a class="btn btn-ghost" href="assets/cv_rafael_gonzalez_escobar.pdf">Descargar CV (PDF)</a>
+      <a class="btn btn-ghost" href="#contacto">Hablemos</a>
+    </div>
+    <div class="facts">
+      <div><b>10 años</b><span>en tecnología</span></div>
+      <div><b>+5 años</b><span>apps con millones de usuarios</span></div>
+      <div><b>4 apps</b><span>propias en Google Play y App Store</span></div>
+      <div><b>Android · iOS</b><span>nativo y Kotlin Multiplatform</span></div>
+    </div>
+  </section>
+
+  <div class="ticker" aria-hidden="true">
+    <div class="ticker-track">
+      <div class="ticker-half">
+        <span>CaixaBank</span><b>✦</b><span>Junta de Andalucía</span><b>✦</b><span>Red Eléctrica de España</span><b>✦</b><span>Damm</span><b>✦</b><span>Deloitte</span><b>✦</b><span>NTT DATA</span><b>✦</b><span>Apps propias</span><b>✦</b>
+      </div>
+      <div class="ticker-half">
+        <span>CaixaBank</span><b>✦</b><span>Junta de Andalucía</span><b>✦</b><span>Red Eléctrica de España</span><b>✦</b><span>Damm</span><b>✦</b><span>Deloitte</span><b>✦</b><span>NTT DATA</span><b>✦</b><span>Apps propias</span><b>✦</b>
+      </div>
+    </div>
+  </div>
+  <!-- ============================================================ sobre mi -->
+  <section id="sobre" class="wrap">
+    <div class="sec-head reveal">
+      <p class="eyebrow">Sobre mí</p>
+      <h2>Diez años: de maquetar webs en PHP a apps con millones de usuarios</h2>
+      <p>Empecé en 2016 maquetando webs y bases de datos en PHP, pasé por el backend de Deloitte en PL/SQL y
+         entré en NTT DATA en 2021, donde he crecido de Rising a Senior Software Engineer. En medio, casi tres
+         años de diseño gráfico y contenidos: de ahí me traje el ojo para el detalle visual. Hoy, además de
+         programar, reviso código, hago mentoría, estimo tareas, hablo directamente con el cliente e impulso
+         el uso de herramientas de IA en el equipo.</p>
+    </div>
+
+    <div class="grid grid-2 principles" style="margin-top:0">
+      <div class="card reveal">
+        <span class="num">01</span>
+        <h3>Entender el problema antes de escribir código</h3>
+        <p>La mayoría de los sobrecostes no vienen de la tecnología, vienen de resolver el problema equivocado.
+           Pregunto, aclaro requisitos con el cliente y solo después decido la arquitectura.</p>
+      </div>
+      <div class="card reveal">
+        <span class="num">02</span>
+        <h3>Arquitectura para el que venga después</h3>
+        <p>Clean Architecture, SOLID y módulos con fronteras claras. El objetivo no es la pureza: es que alguien
+           nuevo en el proyecto pueda cambiar algo sin miedo.</p>
+      </div>
+      <div class="card reveal">
+        <span class="num">03</span>
+        <h3>Entregar de forma reproducible</h3>
+        <p>CI/CD, versionado y revisiones de código. Si una release depende de que alguien recuerde un paso
+           manual, la release está rota.</p>
+      </div>
+      <div class="card reveal">
+        <span class="num">04</span>
+        <h3>Ser senior es desbloquear al equipo</h3>
+        <p>Parte de mi trabajo es que el equipo avance: mentoría, revisiones útiles, estimaciones
+           honestas y hablar claro con el cliente.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ stack -->
+  <section id="skills" class="wrap">
+    <div class="sec-head reveal">
+      <p class="eyebrow">Skills</p>
+      <h2>Con qué trabajo</h2>
+      <p>Lo que uso a diario, no una lista de todo lo que he tocado alguna vez.</p>
+    </div>
+
+    <div class="card reveal" style="padding:8px 28px">
+      <div class="stack-row">
+        <h3>Lenguajes</h3>
+        <div class="chips" style="margin:0">
+          <span class="chip">Kotlin</span><span class="chip">Java</span><span class="chip">Swift</span>
+          <span class="chip chip-plain">Python</span><span class="chip chip-plain">SQL · PL/SQL</span>
+        </div>
+      </div>
+      <div class="stack-row">
+        <h3>Interfaz</h3>
+        <div class="chips" style="margin:0">
+          <span class="chip">Jetpack Compose</span><span class="chip">Compose Multiplatform</span>
+          <span class="chip">SwiftUI</span><span class="chip chip-plain">UIKit</span>
+          <span class="chip chip-plain">Android Views</span><span class="chip chip-plain">Material 3</span>
+        </div>
+      </div>
+      <div class="stack-row">
+        <h3>Arquitectura</h3>
+        <div class="chips" style="margin:0">
+          <span class="chip">Kotlin Multiplatform</span><span class="chip">Clean Architecture</span>
+          <span class="chip">MVVM · MVP</span><span class="chip">SOLID</span>
+          <span class="chip chip-plain">Modularización</span><span class="chip chip-plain">Coroutines · Flow</span>
+        </div>
+      </div>
+      <div class="stack-row">
+        <h3>Plataforma y datos</h3>
+        <div class="chips" style="margin:0">
+          <span class="chip">Firebase</span><span class="chip chip-plain">Room · SQLDelight</span>
+          <span class="chip chip-plain">Ktor</span><span class="chip chip-plain">MySQL</span>
+          <span class="chip chip-plain">IA aplicada (LLMs)</span><span class="chip chip-plain">Compras in-app</span>
+        </div>
+      </div>
+      <div class="stack-row">
+        <h3>IA aplicada</h3>
+        <div class="chips" style="margin:0">
+          <span class="chip">LLMs en producto</span><span class="chip">Agentes y MCP</span>
+          <span class="chip chip-plain">GitHub Copilot</span>
+          <span class="chip chip-plain">IA en el flujo del equipo</span>
+        </div>
+      </div>
+      <div class="stack-row">
+        <h3>Calidad y entrega</h3>
+        <div class="chips" style="margin:0">
+          <span class="chip">Testing</span><span class="chip">CI/CD</span><span class="chip">Git</span>
+          <span class="chip chip-plain">Gradle</span><span class="chip chip-plain">Play Console</span>
+          <span class="chip chip-plain">App Store Connect</span>
+        </div>
+      </div>
+      <div class="stack-row">
+        <h3>Equipo</h3>
+        <div class="chips" style="margin:0">
+          <span class="chip">Liderazgo técnico</span><span class="chip">Mentoría</span>
+          <span class="chip">Estimación y planificación</span><span class="chip chip-plain">Scrum</span>
+          <span class="chip chip-plain">Interlocución con cliente</span>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ============================================================ arquitectura -->
+  <section id="arquitectura" class="wrap" style="padding-top:44px">
+    <div class="sec-head reveal">
+      <p class="eyebrow">Skills · arquitectura</p>
+      <h2>Una base compartida, dos interfaces nativas</h2>
+      <p>Así estructuro mis productos multiplataforma: la lógica vive una sola vez y cada plataforma se queda
+         con lo que de verdad la hace nativa.</p>
+    </div>
+
+    <div class="arch reveal">
+      <svg viewBox="0 0 980 400" role="img" aria-label="Diagrama de arquitectura: interfaces nativas en Jetpack Compose para Android y SwiftUI para iOS sobre un módulo compartido en Kotlin Multiplatform con capas de presentación, dominio y datos, apoyado en Firebase, servicios de IA y compras in-app.">
+        <defs>
+          <linearGradient id="lay" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#12283a"/><stop offset="1" stop-color="#11202f"/>
+          </linearGradient>
+        </defs>
+
+        <rect x="40" y="20" width="380" height="76" rx="14" fill="url(#lay)" stroke="rgba(63,208,224,0.4)"/>
+        <text x="230" y="52" text-anchor="middle" fill="#eaf6f8" font-size="17" font-weight="600">Android · Jetpack Compose</text>
+        <text x="230" y="76" text-anchor="middle" fill="#8aa0ad" font-size="13">UI declarativa, Material 3, navegación</text>
+
+        <rect x="560" y="20" width="380" height="76" rx="14" fill="url(#lay)" stroke="rgba(63,208,224,0.4)"/>
+        <text x="750" y="52" text-anchor="middle" fill="#eaf6f8" font-size="17" font-weight="600">iOS · SwiftUI</text>
+        <text x="750" y="76" text-anchor="middle" fill="#8aa0ad" font-size="13">UI nativa, convenciones de Apple</text>
+
+        <path d="M230 96 L230 130" stroke="#3fd0e0" stroke-width="2" stroke-dasharray="5 5"/>
+        <path d="M750 96 L750 130" stroke="#3fd0e0" stroke-width="2" stroke-dasharray="5 5"/>
+
+        <rect x="40" y="130" width="900" height="176" rx="16" fill="rgba(63,208,224,0.05)" stroke="rgba(63,208,224,0.35)"/>
+        <text x="64" y="158" fill="#3fd0e0" font-size="12" font-weight="700" letter-spacing="2">MÓDULO COMPARTIDO · KOTLIN MULTIPLATFORM</text>
+
+        <rect x="64" y="176" width="272" height="52" rx="11" fill="url(#lay)" stroke="rgba(160,200,220,0.2)"/>
+        <text x="200" y="199" text-anchor="middle" fill="#eaf6f8" font-size="15" font-weight="600">Presentación</text>
+        <text x="200" y="218" text-anchor="middle" fill="#8aa0ad" font-size="12">ViewModels · estado · Flow</text>
+
+        <rect x="354" y="176" width="272" height="52" rx="11" fill="url(#lay)" stroke="rgba(160,200,220,0.2)"/>
+        <text x="490" y="199" text-anchor="middle" fill="#eaf6f8" font-size="15" font-weight="600">Dominio</text>
+        <text x="490" y="218" text-anchor="middle" fill="#8aa0ad" font-size="12">casos de uso · reglas puras</text>
+
+        <rect x="644" y="176" width="272" height="52" rx="11" fill="url(#lay)" stroke="rgba(160,200,220,0.2)"/>
+        <text x="780" y="199" text-anchor="middle" fill="#eaf6f8" font-size="15" font-weight="600">Datos</text>
+        <text x="780" y="218" text-anchor="middle" fill="#8aa0ad" font-size="12">repositorios · SQLDelight · Ktor</text>
+
+        <text x="64" y="262" fill="#8aa0ad" font-size="13">Coroutines · Flow · inyección de dependencias · tests de dominio compartidos</text>
+        <text x="64" y="286" fill="#8aa0ad" font-size="13">expect / actual solo donde la plataforma manda: almacenamiento, notificaciones, compras</text>
+
+        <path d="M490 306 L490 330" stroke="rgba(160,200,220,0.4)" stroke-width="2"/>
+
+        <rect x="40" y="330" width="286" height="52" rx="11" fill="url(#lay)" stroke="rgba(160,200,220,0.16)"/>
+        <text x="183" y="362" text-anchor="middle" fill="#eaf6f8" font-size="14">Firebase · analítica y remote config</text>
+
+        <rect x="347" y="330" width="286" height="52" rx="11" fill="url(#lay)" stroke="rgba(160,200,220,0.16)"/>
+        <text x="490" y="362" text-anchor="middle" fill="#eaf6f8" font-size="14">Servicios de IA · contenido y tutoría</text>
+
+        <rect x="654" y="330" width="286" height="52" rx="11" fill="url(#lay)" stroke="rgba(160,200,220,0.16)"/>
+        <text x="797" y="362" text-anchor="middle" fill="#eaf6f8" font-size="14">Compras in-app · suscripciones</text>
+      </svg>
+    </div>
+  </section>
+
+  <!-- ============================================================ proyectos -->
+  <section id="proyectos" class="wrap">
+    <div class="sec-head reveal">
+      <p class="eyebrow">Proyectos · clientes</p>
+      <h2>Productos reales, en producción, con usuarios de verdad</h2>
+      <p>Trabajo de extremo a extremo: requisitos, arquitectura, desarrollo, despliegue y vida en producción.
+         Estos son los proyectos donde más he aportado.</p>
+    </div>
+
+    <div class="rail-nav">
+      <button class="rail-btn" type="button" data-rail="rail-clientes" data-dir="-1" aria-label="Proyectos anteriores">&#8249;</button>
+      <button class="rail-btn" type="button" data-rail="rail-clientes" data-dir="1" aria-label="Proyectos siguientes">&#8250;</button>
+    </div>
+
+    <div class="rail" id="rail-clientes" tabindex="0" role="group" aria-label="Proyectos de cliente">
+
+      <article class="card case reveal">
+        <div class="case-top">
+          <img src="proyectos/android/ic_cadenaser.png" alt="" />
+          <div>
+            <div class="who">Cadena SER Radio</div>
+            <div class="case-org">Prisa Radio</div>
+          </div>
+          <div class="sector">Medios</div>
+        </div>
+        <h3>La radio de la SER en el móvil: directo, podcasts y programas a la carta.</h3>
+        <div class="badges">
+          <a href="https://play.google.com/store/apps/details?id=com.prisaradio.replicapp.cadenaser&amp;hl=es" aria-label="Cadena SER Radio en Google Play"><img class="badge" src="assets/badges/google-play.png" alt="Disponible en Google Play"/></a>
+        </div>
+      </article>
+      <article class="card case reveal">
+        <div class="case-top">
+          <img src="proyectos/android/ic_iseneca.png" alt="" />
+          <div>
+            <div class="who">iSéneca</div>
+            <div class="case-org">Junta de Andalucía</div>
+          </div>
+          <div class="sector">Educación</div>
+        </div>
+        <h3>La herramienta diaria del profesorado: alumnado, calificaciones y gestión del centro.</h3>
+        <div class="badges">
+          <a href="https://play.google.com/store/apps/details?id=es.juntadeandalucia.ced.senecadroid&amp;hl=es" aria-label="iSéneca en Google Play"><img class="badge" src="assets/badges/google-play.png" alt="Disponible en Google Play"/></a>
+        </div>
+      </article>
+      <article class="card case reveal">
+        <div class="case-top">
+          <img src="proyectos/android/ic_ipasen.png" alt="" />
+          <div>
+            <div class="who">iPasen</div>
+            <div class="case-org">Junta de Andalucía</div>
+          </div>
+          <div class="sector">Educación</div>
+        </div>
+        <h3>Familias y alumnado de Andalucía: notas, faltas y comunicación con el centro, en el móvil.</h3>
+        <div class="badges">
+          <a href="https://play.google.com/store/apps/details?id=juntadeandalucia.ced.pasen&amp;hl=es" aria-label="iPasen en Google Play"><img class="badge" src="assets/badges/google-play.png" alt="Disponible en Google Play"/></a>
+        </div>
+      </article>
+      <article class="card case reveal">
+        <div class="case-top">
+          <img src="proyectos/android/ic_caixabank.png" alt="" />
+          <div>
+            <div class="who">CaixaBankNow</div>
+            <div class="case-org">CaixaBank, S.A.</div>
+          </div>
+          <div class="sector">Banca</div>
+        </div>
+        <h3>App de banca para millones de clientes, con el listón de seguridad y estabilidad más alto.</h3>
+        <div class="badges">
+          <a href="https://play.google.com/store/apps/details?id=es.lacaixa.mobile.android.newwapicon&amp;hl=es" aria-label="CaixaBankNow en Google Play"><img class="badge" src="assets/badges/google-play.png" alt="Disponible en Google Play"/></a>
+        </div>
+      </article>
+      <article class="card case reveal">
+        <div class="case-top">
+          <img src="proyectos/android/ic_dammbar.png" alt="" />
+          <div>
+            <div class="who">Bar Manager</div>
+            <div class="case-org">Sociedad Anónima Damm</div>
+          </div>
+          <div class="sector">Gran consumo</div>
+        </div>
+        <h3>App de hostelería para la red de bares de una marca nacional.</h3>
+        <div class="badges">
+          <a href="https://play.google.com/store/apps/details?id=com.damm.dammbars&amp;hl=es" aria-label="Bar Manager en Google Play"><img class="badge" src="assets/badges/google-play.png" alt="Disponible en Google Play"/></a>
+        </div>
+      </article>
+      <article class="card case reveal">
+        <div class="case-top">
+          <img src="proyectos/android/ic_redos.png" alt="" />
+          <div>
+            <div class="who">redOS</div>
+            <div class="case-org">Red Eléctrica de España</div>
+          </div>
+          <div class="sector">Energía</div>
+        </div>
+        <h3>Herramienta móvil para el operador del sistema eléctrico nacional.</h3>
+        <div class="badges">
+          <a href="https://play.google.com/store/apps/details?id=es.asseco.ree&amp;hl=es" aria-label="redOS en Google Play"><img class="badge" src="assets/badges/google-play.png" alt="Disponible en Google Play"/></a>
+        </div>
+      </article>
+    </div>
+  </section>
+  <!-- ============================================================ productos -->
+  <section id="productos" class="wrap" style="padding-top:44px">
+    <div class="sec-head reveal">
+      <p class="eyebrow">Proyectos · producto propio</p>
+      <h2>Lo que construyo cuando el product owner soy yo</h2>
+      <p>Ciclo completo y en solitario: idea, diseño, arquitectura, IA, monetización, ASO, privacidad y
+         cumplimiento de políticas en Play Console y App Store Connect.</p>
+    </div>
+
+    <div class="rail-nav">
+      <button class="rail-btn" type="button" data-rail="rail-productos" data-dir="-1" aria-label="Productos anteriores">&#8249;</button>
+      <button class="rail-btn" type="button" data-rail="rail-productos" data-dir="1" aria-label="Productos siguientes">&#8250;</button>
+    </div>
+
+    <div class="rail" id="rail-productos" tabindex="0" role="group" aria-label="Productos propios">
+      <div class="card app reveal">
+        <img src="assets/apps/oremus.svg" alt="" />
+        <div>
+          <h3>Oremus</h3>
+          <p>Rosario, Biblia y oraciones diarias. Funciona entero sin conexión.</p>
+          <div class="badges">
+            <a href="https://play.google.com/store/apps/details?id=com.rafaelge.oremus" aria-label="Oremus en Google Play"><img class="badge" src="assets/badges/google-play.png" alt="Disponible en Google Play"/></a>
+            <a href="https://apps.apple.com/es/app/oremus-rosario-y-biblia/id6787262195" aria-label="Oremus en la App Store"><img class="badge" src="assets/badges/app-store.svg" alt="Descárgalo en el App Store"/></a>
+          </div>
+        </div>
+      </div>
+      <div class="card app reveal">
+        <img src="assets/apps/constitucion.png" alt="" />
+        <div>
+          <h3>La Constitución</h3>
+          <p>Estudia la Constitución Española con tests y explicaciones asistidas por IA.</p>
+          <div class="badges">
+            <a href="https://play.google.com/store/apps/details?id=com.rafaelge.laconstitucion" aria-label="La Constitución en Google Play"><img class="badge" src="assets/badges/google-play.png" alt="Disponible en Google Play"/></a>
+          </div>
+        </div>
+      </div>
+      <div class="card app reveal">
+        <img src="assets/apps/auxiliar-administrativo.png" alt="" />
+        <div>
+          <h3>Auxiliar Administrativo</h3>
+          <p>Preparación de oposiciones de la AGE: temario, tests y simulacros.</p>
+          <div class="badges">
+            <a href="https://play.google.com/store/apps/details?id=com.rafaelge.auxadministrativo" aria-label="Auxiliar Administrativo en Google Play"><img class="badge" src="assets/badges/google-play.png" alt="Disponible en Google Play"/></a>
+          </div>
+        </div>
+      </div>
+      <div class="card app reveal">
+        <img src="assets/apps/administrativo-estado.png" alt="" />
+        <div>
+          <h3>Administrativo del Estado</h3>
+          <p>Oposición C1 completa, con simulacros y seguimiento del progreso.</p>
+          <div class="badges">
+            <a href="https://play.google.com/store/apps/details?id=com.rafaelge.administrativoestado" aria-label="Administrativo del Estado en Google Play"><img class="badge" src="assets/badges/google-play.png" alt="Disponible en Google Play"/></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ============================================================ experiencia -->
+  <section id="experiencia" class="wrap">
+    <div class="sec-head reveal">
+      <p class="eyebrow">Experiencia</p>
+      <h2>De desarrollador junior a Senior Software Engineer</h2>
+      <p>Cinco años y tres meses en NTT DATA con progresión interna:
+         Rising Software Engineer → Software Engineer → Senior Software Engineer.</p>
+    </div>
+
+    <div class="timeline reveal">
+      <div class="job">
+        <div class="when">Mayo 2021 — Actualidad</div>
+        <h3>NTT DATA Europe &amp; Latam</h3>
+        <div class="org">Jornada completa · En remoto</div>
+        <div class="roles">
+          <div><b>Senior Software Engineer</b><span>ene. 2025 — actualidad</span></div>
+          <div><b>Software Engineer</b><span>jun. 2023 — ene. 2025</span></div>
+          <div><b>Rising Software Engineer</b><span>may. 2021 — jun. 2023</span></div>
+        </div>
+        <p>Desarrollo y mantenimiento de apps móviles nativas de extremo a extremo —requisitos, arquitectura,
+           desarrollo, despliegue y producción— con <b>MVVM, MVP y Clean Architecture</b>, principios SOLID y
+           buenas prácticas. Además: estimación de tareas, comunicación con cliente, gestión de costes y
+           facturación, mentoría a juniors y nuevas incorporaciones, y liderazgo técnico y coordinación del
+           equipo. Entornos <b>Scrum</b> y Waterfall.</p>
+        <p>También impulso el uso de <b>herramientas de IA</b> en el día a día del equipo para análisis,
+           documentación, resolución de incidencias y desarrollo.</p>
+      </div>
+      <div class="job dim">
+        <div class="when">Enero — Mayo 2021</div>
+        <h3>Junior Delivery Analyst</h3>
+        <div class="org">Deloitte España · Sevilla</div>
+        <p>Análisis, desarrollo y mantenimiento del sistema de respaldo de operaciones en la capa backend
+           (<b>PL/SQL, DB2</b>), resolviendo incidencias para garantizar la estabilidad del servicio.</p>
+      </div>
+      <div class="job dim">
+        <div class="when">Junio 2018 — Enero 2021</div>
+        <h3>Community Manager &amp; Creador de contenidos</h3>
+        <div class="org">Profesional independiente</div>
+        <p>Rediseño y gestión de sitio web, SEO on-page, estrategia y análisis en redes sociales, diseño
+           gráfico y contenido audiovisual, y traducción y localización de contenidos. De aquí viene parte
+           del ojo para el detalle visual y el producto.</p>
+      </div>
+      <div class="job dim">
+        <div class="when">Marzo — Junio 2018</div>
+        <h3>Junior Web Developer</h3>
+        <div class="org">El Primero de la Lista S.L. · Córdoba</div>
+        <p>Maquetación web, bases de datos en <b>MySQL y PL/SQL</b>, aplicaciones en <b>PHP</b> y un primer
+           proyecto móvil híbrido con <b>Ionic</b> para proyectos nacionales.</p>
+      </div>
+      <div class="job dim">
+        <div class="when">Marzo — Mayo 2016</div>
+        <h3>Junior Web Developer</h3>
+        <div class="org">PuntoJS Estudio Creativo · Palma del Río</div>
+        <p>Maquetación en Prestashop y WordPress, bases de datos MySQL y PL/SQL, y desarrollo web en PHP.
+           El principio de todo.</p>
+      </div>
+    </div>
+
+    <div class="card reveal">
+      <h3 style="font-size:16px;font-weight:600">Formación</h3>
+      <ul style="margin:12px 0 0;padding-left:18px;color:var(--muted);font-size:14.5px">
+        <li><b style="color:var(--text)">Técnico Superior en Desarrollo de Aplicaciones Multiplataforma</b>
+            — I.E.S. Antonio Gala, 2016–2018 · nota media 9,2</li>
+        <li><b style="color:var(--text)">Técnico en Sistemas Microinformáticos y Redes</b>
+            — I.E.S. Antonio Gala, 2014–2016 · nota media 9,8</li>
+        <li><b style="color:var(--text)">Graduado en Educación Secundaria Obligatoria</b>
+            — I.E.S. Antonio Gala, 2008–2013</li>
+        <li>Español nativo · Inglés profesional</li>
+      </ul>
+    </div>
+
+    <div class="sub-head">
+      <h3>Certificaciones</h3>
+      <div class="rail-nav" style="margin:0">
+        <button class="rail-btn" type="button" data-rail="rail-certs" data-dir="-1" aria-label="Certificaciones anteriores">&#8249;</button>
+        <button class="rail-btn" type="button" data-rail="rail-certs" data-dir="1" aria-label="Certificaciones siguientes">&#8250;</button>
+      </div>
+    </div>
+
+    <div class="rail rail--certs" id="rail-certs" tabindex="0" role="group" aria-label="Certificaciones">
+      <div class="card cert-card reveal">
+        <img class="cert-logo" src="assets/logos/ccii.png" alt="CCII" />
+        <div class="titulo">Competencias Digitales Profesionales</div>
+        <div class="meta">CCII · 2026</div>
+      </div>
+      <div class="card cert-card reveal">
+        <img class="cert-logo" src="assets/logos/anthropic.png" alt="Anthropic" />
+        <div class="titulo">Claude 101</div>
+        <div class="meta">Anthropic · 2026</div>
+      </div>
+      <div class="card cert-card reveal">
+        <img class="cert-logo" src="assets/logos/anthropic.png" alt="Anthropic" />
+        <div class="titulo">Claude Code 101</div>
+        <div class="meta">Anthropic · 2026</div>
+      </div>
+      <div class="card cert-card reveal">
+        <img class="cert-logo" src="assets/logos/anthropic.png" alt="Anthropic" />
+        <div class="titulo">Claude Code in Action</div>
+        <div class="meta">Anthropic · 2026</div>
+      </div>
+      <div class="card cert-card reveal">
+        <img class="cert-logo" src="assets/logos/anthropic.png" alt="Anthropic" />
+        <div class="titulo">Building with the Claude API</div>
+        <div class="meta">Anthropic · 2026</div>
+      </div>
+      <div class="card cert-card reveal">
+        <img class="cert-logo" src="assets/logos/anthropic.png" alt="Anthropic" />
+        <div class="titulo">Introduction to Model Context Protocol</div>
+        <div class="meta">Anthropic · 2026</div>
+      </div>
+      <div class="card cert-card reveal">
+        <img class="cert-logo" src="assets/logos/anthropic.png" alt="Anthropic" />
+        <div class="titulo">Model Context Protocol: Advanced Topics</div>
+        <div class="meta">Anthropic · 2026</div>
+      </div>
+      <div class="card cert-card reveal">
+        <img class="cert-logo" src="assets/logos/anthropic.png" alt="Anthropic" />
+        <div class="titulo">Introduction to subagents</div>
+        <div class="meta">Anthropic · 2026</div>
+      </div>
+      <div class="card cert-card reveal">
+        <img class="cert-logo" src="assets/logos/anthropic.png" alt="Anthropic" />
+        <div class="titulo">Introduction to agent skills</div>
+        <div class="meta">Anthropic · 2026</div>
+      </div>
+      <div class="card cert-card reveal">
+        <img class="cert-logo" src="assets/logos/anthropic.png" alt="Anthropic" />
+        <div class="titulo">Introduction to Claude Cowork</div>
+        <div class="meta">Anthropic · 2026</div>
+      </div>
+      <div class="card cert-card reveal">
+        <img class="cert-logo" src="assets/logos/anthropic.png" alt="Anthropic" />
+        <div class="titulo">Claude with Amazon Bedrock</div>
+        <div class="meta">Anthropic · 2026</div>
+      </div>
+      <div class="card cert-card reveal">
+        <img class="cert-logo" src="assets/logos/anthropic.png" alt="Anthropic" />
+        <div class="titulo">Claude with Google Cloud's Vertex AI</div>
+        <div class="meta">Anthropic · 2026</div>
+      </div>
+      <div class="card cert-card reveal">
+        <img class="cert-logo" src="assets/logos/anthropic.png" alt="Anthropic" />
+        <div class="titulo">AI Fluency: Framework &amp; Foundations</div>
+        <div class="meta">Anthropic · 2026</div>
+      </div>
+      <div class="card cert-card reveal">
+        <img class="cert-logo" src="assets/logos/anthropic.png" alt="Anthropic" />
+        <div class="titulo">AI Capabilities and Limitations</div>
+        <div class="meta">Anthropic · 2026</div>
+      </div>
+      <div class="card cert-card reveal">
+        <img class="cert-logo" src="assets/logos/anthropic.png" alt="Anthropic" />
+        <div class="titulo">Teaching AI Fluency</div>
+        <div class="meta">Anthropic · 2026</div>
+      </div>
+      <div class="card cert-card reveal">
+        <img class="cert-logo" src="assets/logos/anthropic.png" alt="Anthropic" />
+        <div class="titulo">AI Fluency for educators</div>
+        <div class="meta">Anthropic · 2026</div>
+      </div>
+      <div class="card cert-card reveal">
+        <img class="cert-logo" src="assets/logos/anthropic.png" alt="Anthropic" />
+        <div class="titulo">AI Fluency for nonprofits</div>
+        <div class="meta">Anthropic · 2026</div>
+      </div>
+      <div class="card cert-card reveal">
+        <img class="cert-logo" src="assets/logos/anthropic.png" alt="Anthropic" />
+        <div class="titulo">AI Fluency for students</div>
+        <div class="meta">Anthropic · 2026</div>
+      </div>
+      <div class="card cert-card reveal">
+        <img class="cert-logo" src="assets/logos/anthropic.png" alt="Anthropic" />
+        <div class="titulo">AI Fluency for Small Businesses</div>
+        <div class="meta">Anthropic · 2026</div>
+      </div>
+      <div class="card cert-card reveal">
+        <img class="cert-logo" src="assets/logos/aws.png" alt="AWS" />
+        <div class="titulo">Planning a Generative AI Project</div>
+        <div class="meta">AWS · 2026</div>
+      </div>
+      <div class="card cert-card reveal">
+        <img class="cert-logo" src="assets/logos/columbia.png" alt="Columbia+" />
+        <div class="titulo">Learning AI Through Visualization</div>
+        <div class="meta">Columbia+ · 2025</div>
+      </div>
+      <div class="card cert-card reveal">
+        <img class="cert-logo" src="assets/logos/nttdata.png" alt="NTT DATA" />
+        <div class="titulo">GenAI Academy: Yellow Belt Level 2 for Developers</div>
+        <div class="meta">NTT DATA · 2025</div>
+      </div>
+      <div class="card cert-card reveal">
+        <img class="cert-logo" src="assets/logos/nttdata.png" alt="NTT DATA" />
+        <div class="titulo">GenAI Academy: Yellow Belt Level 1</div>
+        <div class="meta">NTT DATA · 2025</div>
+      </div>
+      <div class="card cert-card reveal">
+        <img class="cert-logo" src="assets/logos/nttdata.png" alt="NTT DATA" />
+        <div class="titulo">GenAI Academy: White Belt</div>
+        <div class="meta">NTT DATA · 2025</div>
+      </div>
+      <div class="card cert-card reveal">
+        <img class="cert-logo" src="assets/logos/udemy.png" alt="Udemy" />
+        <div class="titulo">Desarrollo de apps para iOS con SwiftUI y UIKit</div>
+        <div class="meta">Udemy · 2022</div>
+      </div>
+      <div class="card cert-card reveal">
+        <img class="cert-logo" src="assets/logos/udemy.png" alt="Udemy" />
+        <div class="titulo">Jetpack Compose Crash Course for Android with Kotlin</div>
+        <div class="meta">Udemy · 2022</div>
+      </div>
+      <div class="card cert-card reveal">
+        <img class="cert-logo" src="assets/logos/udemy.png" alt="Udemy" />
+        <div class="titulo">Curso de Android 11 con Kotlin: intensivo y práctico</div>
+        <div class="meta">Udemy · 2022</div>
+      </div>
+      <div class="card cert-card reveal">
+        <img class="cert-logo" src="assets/logos/udemy.png" alt="Udemy" />
+        <div class="titulo">Análisis de datos y gráficos con Python: Pandas y Matplotlib</div>
+        <div class="meta">Udemy · 2021</div>
+      </div>
+      <div class="card cert-card reveal">
+        <img class="cert-logo" src="assets/logos/udemy.png" alt="Udemy" />
+        <div class="titulo">Universidad Java: de cero a experto</div>
+        <div class="meta">Udemy · 2021</div>
+      </div>
+      <div class="card cert-card reveal">
+        <img class="cert-logo" src="assets/logos/udemy.png" alt="Udemy" />
+        <div class="titulo">Angular y Spring 5: creando web app full stack</div>
+        <div class="meta">Udemy · 2021</div>
+      </div>
+      <div class="card cert-card reveal">
+        <img class="cert-logo" src="assets/logos/udemy.png" alt="Udemy" />
+        <div class="titulo">Máster en PHP, SQL, POO, MVC, Laravel, Symfony y WordPress</div>
+        <div class="meta">Udemy · 2020</div>
+      </div>
+      <div class="card cert-card reveal">
+        <img class="cert-logo" src="assets/logos/apple.png" alt="Apple" />
+        <div class="titulo">Apple Teacher Swift Playgrounds</div>
+        <div class="meta">Apple · 2019</div>
+      </div>
+      <div class="card cert-card reveal">
+        <img class="cert-logo" src="assets/logos/udemy.png" alt="Udemy" />
+        <div class="titulo">Desarrollo de aplicaciones con iOS 12, Swift 5 y Xcode 10</div>
+        <div class="meta">Udemy · 2019</div>
+      </div>
+      <div class="card cert-card reveal">
+        <img class="cert-logo" src="assets/logos/udemy.png" alt="Udemy" />
+        <div class="titulo">Curso completo de iOS 11 y Swift: de cero a experto</div>
+        <div class="meta">Udemy · 2019</div>
+      </div>
+      <div class="card cert-card reveal">
+        <img class="cert-logo" src="assets/logos/aulafacil.png" alt="AulaFacil" />
+        <div class="titulo">Administración de Empresas</div>
+        <div class="meta">AulaFacil · 2015</div>
+      </div>
+      <div class="card cert-card reveal">
+        <img class="cert-logo" src="assets/logos/aulafacil.png" alt="AulaFacil" />
+        <div class="titulo">Liderazgo</div>
+        <div class="meta">AulaFacil · 2015</div>
+      </div>
+      <div class="card cert-card reveal">
+        <img class="cert-logo" src="assets/logos/aulafacil.png" alt="AulaFacil" />
+        <div class="titulo">Preparación física y planificación en el fútbol</div>
+        <div class="meta">AulaFacil · 2015</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ contacto -->
+  <section id="contacto" class="wrap">
+    <div class="contact reveal">
+      <p class="eyebrow">Contacto</p>
+      <h2>¿Hablamos?</h2>
+      <p>Disponible para colaboraciones, consultoría móvil y nuevos retos. Escribe y te contesto.</p>
+      <div class="ctas">
+        <a class="btn btn-primary" href="mailto:rafaelge96@hotmail.com">rafaelge96@hotmail.com</a>
+        <a class="btn btn-ghost" href="https://www.linkedin.com/in/rafaelgonzalezescobar">LinkedIn</a>
+        <a class="btn btn-ghost" href="https://github.com/rafaelge96">GitHub</a>
+        <a class="btn btn-ghost" href="assets/cv_rafael_gonzalez_escobar.pdf">CV (PDF)</a>
+      </div>
+    </div>
+
+    <footer class="site-footer">
+      <span>© <span id="year">2026</span> Rafael González Escobar · Córdoba, España</span>
+      <span><a href="https://play.google.com/store/apps/dev?id=5325744295595162550" style="color:var(--accent)">Mis apps en Google Play</a> · <a href="https://apps.apple.com/es/developer/rafael-gonzalez-escobar/id6787262347" style="color:var(--accent)">Mis apps en la App Store</a></span>
+    </footer>
+  </section>
+
+</main>
+
+<script>
+/* estrellas del fondo */
+(function () {
+  var host = document.getElementById('stars');
+  if (!host || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var frag = document.createDocumentFragment();
+  for (var i = 0; i < 90; i++) {
+    var s = document.createElement('i');
+    var size = Math.random() < 0.82 ? 1.4 : 2.4;
+    s.style.width = s.style.height = size + 'px';
+    s.style.left = (Math.random() * 100).toFixed(2) + '%';
+    s.style.top = (Math.random() * 100).toFixed(2) + '%';
+    s.style.opacity = (0.25 + Math.random() * 0.5).toFixed(2);
+    s.style.animationDelay = (Math.random() * 4.5).toFixed(2) + 's';
+    frag.appendChild(s);
+  }
+  host.appendChild(frag);
+})();
+
+/* aparición al hacer scroll */
+(function () {
+  var items = document.querySelectorAll('.reveal');
+  if (!('IntersectionObserver' in window)) {
+    Array.prototype.forEach.call(items, function (el) { el.classList.add('in'); });
+    return;
+  }
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, { rootMargin: '0px 0px -10% 0px', threshold: 0.05 });
+  Array.prototype.forEach.call(items, function (el, i) {
+    el.style.transitionDelay = (Math.min(i % 4, 3) * 70) + 'ms';
+    io.observe(el);
+  });
+})();
+
+/* sección activa en el menú */
+(function () {
+  var links = Array.prototype.slice.call(document.querySelectorAll('.nav a[href^="#"]'));
+  var sections = links.map(function (a) { return document.querySelector(a.getAttribute('href')); });
+  if (!('IntersectionObserver' in window)) return;
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (!e.isIntersecting) return;
+      var i = sections.indexOf(e.target);
+      links.forEach(function (a, j) {
+        if (j === i) { a.setAttribute('aria-current', 'true'); } else { a.removeAttribute('aria-current'); }
+      });
+    });
+  }, { rootMargin: '-45% 0px -50% 0px' });
+  sections.forEach(function (s) { if (s) io.observe(s); });
+})();
+
+/* filas horizontales: flechas y estado de los botones */
+(function () {
+  var rails = document.querySelectorAll('.rail');
+  function pad(rail) { return parseFloat(getComputedStyle(rail).paddingLeft) || 0; }
+  var lento = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* Animacion propia: 'scroll-behavior: smooth' y scrollBy({behavior}) los cancela
+     scroll-snap-type: mandatory, asi que el desplazamiento se interpola a mano.
+     El anclaje se suelta durante el trayecto y se restaura al terminar. */
+  function animar(rail, to) {
+    var desde = rail.scrollLeft, dur = 420, ini = null;
+    if (lento || Math.abs(to - desde) < 2) { rail.scrollLeft = to; sync(rail); return; }
+    cancelAnimationFrame(rail._raf);
+    clearTimeout(rail._fin);
+    rail.style.scrollSnapType = 'none';
+    function fin() {
+      cancelAnimationFrame(rail._raf);
+      rail.scrollLeft = to;                       // asegura el destino exacto
+      rail.style.scrollSnapType = '';
+      sync(rail);
+    }
+    function paso(t) {
+      if (ini === null) ini = t;
+      var k = Math.min(1, (t - ini) / dur);
+      var e = k < 0.5 ? 2 * k * k : 1 - Math.pow(-2 * k + 2, 2) / 2;
+      rail.scrollLeft = desde + (to - desde) * e;
+      sync(rail);                                 // el evento scroll no siempre llega
+      if (k < 1) rail._raf = requestAnimationFrame(paso); else fin();
+    }
+    rail._raf = requestAnimationFrame(paso);
+    rail._fin = setTimeout(fin, dur + 200);        // red de seguridad si no hay frames
+  }
+  function destino(rail, dir) {
+    var ref = rail.getBoundingClientRect().left;
+    var cards = rail.children;
+    var i, d;
+    if (dir > 0) {
+      for (i = 0; i < cards.length; i++) {
+        d = cards[i].getBoundingClientRect().left - ref;
+        if (d > 8) return rail.scrollLeft + d - pad(rail);
+      }
+      return rail.scrollWidth;
+    }
+    for (i = cards.length - 1; i >= 0; i--) {
+      d = cards[i].getBoundingClientRect().left - ref;
+      if (d < -8) return Math.max(0, rail.scrollLeft + d - pad(rail));
+    }
+    return 0;
+  }
+  var TOL = 10;                       // el carril tiene 4px de padding: nunca llega a 0 exacto
+  function sync(rail) {
+    var max = rail.scrollWidth - rail.clientWidth - TOL;
+    var enInicio = rail.scrollLeft <= TOL, enFinal = rail.scrollLeft >= max;
+    rail.classList.toggle('at-start', enInicio);
+    rail.classList.toggle('at-end', enFinal);
+    document.querySelectorAll('[data-rail="' + rail.id + '"]').forEach(function (b) {
+      b.disabled = b.dataset.dir === '-1' ? enInicio : enFinal;
+    });
+  }
+  document.querySelectorAll('.rail-btn').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var rail = document.getElementById(btn.dataset.rail);
+      animar(rail, destino(rail, Number(btn.dataset.dir)));
+    });
+  });
+  rails.forEach(function (rail) {
+    rail.addEventListener('scroll', function () { sync(rail); }, { passive: true });
+    window.addEventListener('resize', function () { sync(rail); });
+    sync(rail);
+  });
+})();
+
+document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
