@@ -1,10 +1,1 @@
-# app-ads.txt — IAB Tech Lab
-#
-# Autoriza a Google AdMob a vender inventario publicitario de mis apps.
-# AdMob lo busca en la raiz del dominio que figura como sitio web del
-# desarrollador en la ficha de Play, que es este.
-#
-# Sin este fichero el relleno de anuncios es limitado: muchos compradores
-# no pujan por inventario no verificado.
-
 google.com, pub-8331740601728637, DIRECT, f08c47fec0942fa0
