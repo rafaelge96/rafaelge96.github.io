@@ -585,7 +585,7 @@ details.more ul { margin: 0; padding-left: 18px; color: var(--muted); font-size:
     <div class="facts">
       <div><b>10 años</b><span>en tecnología</span></div>
       <div><b>+5 años</b><span>apps con millones de usuarios</span></div>
-      <div><b>4 apps</b><span>propias en Google Play y App Store</span></div>
+      <div><b>Apps propias</b><span>en Google Play y App Store</span></div>
       <div><b>Android · iOS</b><span>nativo y Kotlin Multiplatform</span></div>
     </div>
   </section>
@@ -883,6 +883,19 @@ details.more ul { margin: 0; padding-left: 18px; color: var(--muted); font-size:
     </div>
 
     <div class="rail" id="rail-productos" tabindex="0" role="group" aria-label="Productos propios">
+      <div class="card app reveal">
+        <button class="icono-legal" type="button" data-legal="estela"
+                aria-label="ESTELA: documentación legal" title="Documentación legal de ESTELA">
+          <img src="assets/apps/estela.png" alt="" />
+        </button>
+        <div>
+          <h3>ESTELA</h3>
+          <p>Arcade espacial: pilotas un cometa y tu propia estela te mata. Partidas cortas, reflejos y ritmo.</p>
+          <div class="badges">
+            <a href="https://play.google.com/store/apps/details?id=com.rafaelge.estela" aria-label="ESTELA en Google Play"><img class="badge" src="assets/badges/google-play.png" alt="Disponible en Google Play"/></a>
+          </div>
+        </div>
+      </div>
       <div class="card app reveal">
         <button class="icono-legal" type="button" data-legal="oremus"
                 aria-label="Oremus: documentación legal" title="Documentación legal de Oremus">
@@ -1371,6 +1384,9 @@ document.getElementById('year').textContent = new Date().getFullYear();
    navega directo, y si hay varios pregunta con un modal. */
 (function () {
   var DOCS = {
+    'estela': [
+      { texto: 'Política de privacidad', href: 'apps/estela/privacidad.html' }
+    ],
     'oremus': [
       { texto: 'Política de privacidad', href: 'apps/oremus/privacidad.html' }
     ],
