@@ -271,6 +271,24 @@ section { padding: 84px 0 0; }
   font-size: 10.5px; font-weight: 700; letter-spacing: 0.13em;
   text-transform: uppercase; color: var(--accent);
 }
+.cert-card[href]:hover .titulo { color: var(--accent); }
+
+/* insignias hexagonales de OpenAI Partner University */
+.oai-badges { display: flex; flex-wrap: wrap; gap: 10px 26px; align-items: flex-start; }
+.oai-badge { width: 150px; text-align: center; padding: 4px 0 2px; }
+.oai-badge img {
+  display: block; width: 112px; height: auto; margin: 0 auto;
+  filter: drop-shadow(0 8px 18px rgba(201, 162, 39, 0.22));
+  transition: transform 0.25s, filter 0.25s;
+}
+.oai-badge:hover img { transform: translateY(-4px) scale(1.03); filter: drop-shadow(0 14px 26px rgba(201, 162, 39, 0.4)); }
+.oai-badge b { display: block; margin-top: 11px; font-size: 14px; font-weight: 600; }
+.oai-badge small {
+  display: block; font-size: 10.5px; font-weight: 700; letter-spacing: 0.13em;
+  text-transform: uppercase; color: var(--muted);
+}
+.oai-nota { margin: 16px 0 0; font-size: 13.5px; color: var(--muted); max-width: 620px; }
+@media (max-width: 560px) { .oai-badges { gap: 8px 14px; justify-content: center; } .oai-badge { width: 108px; } .oai-badge img { width: 88px; } }
 
 .sub-head {
   display: flex; align-items: center; justify-content: space-between; gap: 18px;
@@ -998,6 +1016,31 @@ details.more ul { margin: 0; padding-left: 18px; color: var(--muted); font-size:
     </div>
 
     <div class="sub-head">
+      <h3>Insignias de nivel experto</h3>
+    </div>
+
+    <div class="oai-badges reveal">
+      <div class="oai-badge">
+        <img src="assets/badges/openai-chatgpt-expert.png" alt="Insignia ChatGPT Expert de OpenAI, nivel Core Knowledge" width="320" height="344" loading="lazy" />
+        <b>ChatGPT Expert</b>
+        <small>Core Knowledge</small>
+      </div>
+
+      <div class="oai-badge">
+        <img src="assets/badges/openai-codex-expert.png" alt="Insignia Codex Expert de OpenAI, nivel Core Knowledge" width="320" height="344" loading="lazy" />
+        <b>Codex Expert</b>
+        <small>Core Knowledge</small>
+      </div>
+
+      <div class="oai-badge">
+        <img src="assets/badges/openai-api-expert.png" alt="Insignia API Expert de OpenAI, nivel Core Knowledge" width="320" height="344" loading="lazy" />
+        <b>API Expert</b>
+        <small>Core Knowledge</small>
+      </div>
+    </div>
+    <p class="oai-nota">Programa <strong>OpenAI Partner University</strong>: nueve certificaciones oficiales obtenidas en 2026 y vigentes hasta 2027, más tres insignias de nivel experto en ChatGPT, Codex y la API.</p>
+
+    <div class="sub-head">
       <h3>Certificaciones</h3>
       <div class="rail-nav" style="margin:0">
         <button class="rail-btn" type="button" data-rail="rail-certs" data-dir="-1" aria-label="Certificaciones anteriores">&#8249;</button>
@@ -1006,6 +1049,51 @@ details.more ul { margin: 0; padding-left: 18px; color: var(--muted); font-size:
     </div>
 
     <div class="rail rail--certs" id="rail-certs" tabindex="0" role="group" aria-label="Certificaciones">
+      <a class="card cert-card reveal" href="assets/certs/openai-foundational-knowledge.pdf" target="_blank" rel="noopener">
+        <img class="cert-logo" src="assets/logos/openai.png" alt="OpenAI" />
+        <div class="titulo">OpenAI Foundational Knowledge</div>
+        <div class="meta">OpenAI · 2026</div>
+      </a>
+      <a class="card cert-card reveal" href="assets/certs/openai-ai-technical-practitioner.pdf" target="_blank" rel="noopener">
+        <img class="cert-logo" src="assets/logos/openai.png" alt="OpenAI" />
+        <div class="titulo">AI Technical Practitioner</div>
+        <div class="meta">OpenAI · 2026</div>
+      </a>
+      <a class="card cert-card reveal" href="assets/certs/openai-chatgpt-solutions-practitioner.pdf" target="_blank" rel="noopener">
+        <img class="cert-logo" src="assets/logos/openai.png" alt="OpenAI" />
+        <div class="titulo">ChatGPT Solutions Practitioner</div>
+        <div class="meta">OpenAI · 2026</div>
+      </a>
+      <a class="card cert-card reveal" href="assets/certs/openai-chatgpt-deployment-practitioner.pdf" target="_blank" rel="noopener">
+        <img class="cert-logo" src="assets/logos/openai.png" alt="OpenAI" />
+        <div class="titulo">ChatGPT Deployment Practitioner</div>
+        <div class="meta">OpenAI · 2026</div>
+      </a>
+      <a class="card cert-card reveal" href="assets/certs/openai-codex-solutions-practitioner.pdf" target="_blank" rel="noopener">
+        <img class="cert-logo" src="assets/logos/openai.png" alt="OpenAI" />
+        <div class="titulo">Codex Solutions Practitioner</div>
+        <div class="meta">OpenAI · 2026</div>
+      </a>
+      <a class="card cert-card reveal" href="assets/certs/openai-codex-deployment-practitioner.pdf" target="_blank" rel="noopener">
+        <img class="cert-logo" src="assets/logos/openai.png" alt="OpenAI" />
+        <div class="titulo">Codex Deployment Practitioner</div>
+        <div class="meta">OpenAI · 2026</div>
+      </a>
+      <a class="card cert-card reveal" href="assets/certs/openai-api-deployment-practitioner.pdf" target="_blank" rel="noopener">
+        <img class="cert-logo" src="assets/logos/openai.png" alt="OpenAI" />
+        <div class="titulo">API Deployment Practitioner</div>
+        <div class="meta">OpenAI · 2026</div>
+      </a>
+      <a class="card cert-card reveal" href="assets/certs/openai-consultative-solutions-practitioner.pdf" target="_blank" rel="noopener">
+        <img class="cert-logo" src="assets/logos/openai.png" alt="OpenAI" />
+        <div class="titulo">OpenAI Consultative Solutions Practitioner</div>
+        <div class="meta">OpenAI · 2026</div>
+      </a>
+      <a class="card cert-card reveal" href="assets/certs/openai-cyber-practitioner.pdf" target="_blank" rel="noopener">
+        <img class="cert-logo" src="assets/logos/openai.png" alt="OpenAI" />
+        <div class="titulo">OpenAI Cyber Practitioner</div>
+        <div class="meta">OpenAI · 2026</div>
+      </a>
       <div class="card cert-card reveal">
         <img class="cert-logo" src="assets/logos/ccii.png" alt="CCII" />
         <div class="titulo">Competencias Digitales Profesionales</div>
