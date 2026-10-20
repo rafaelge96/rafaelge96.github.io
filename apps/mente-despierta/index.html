@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Mente Despierta — Juegos para la mente, con letra grande</title>
+<meta name="description" content="Sopa de letras, parejas, refranes, cuentas y ordena las letras: tres juegos al día para mantener la mente activa, con letra grande y niveles sin fin." />
+<meta property="og:title" content="Mente Despierta — Juegos para la mente" />
+<meta property="og:description" content="Tres juegos al día para mantener la mente activa, con letra grande." />
+<meta property="og:image" content="https://rafaelge96.github.io/assets/apps/mente-despierta/01-hoy.jpg" />
+<link rel="icon" type="image/png" href="../../assets/apps/mente-despierta.png" />
+<link rel="apple-touch-icon" href="../../assets/apps/mente-despierta.png" />
+<style>
+  :root {
+    --indigo: #3f33c0;
+    --violeta: #7b3fb8;
+    --alba: #d9532a;
+    --oro: #ffd25e;
+    --crema: #fff4e8;
+    --tinta: #181a2e;
+    --suave: #4a4d63;
+    --linea: #e6e1f2;
+    --max: 1040px;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: #fff;
+    color: var(--tinta);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-size: 18px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--indigo); }
+
+  .cielo {
+    background: linear-gradient(180deg, var(--indigo) 0%, var(--violeta) 55%, var(--alba) 100%);
+    color: #fff;
+  }
+  .portada {
+    max-width: var(--max);
+    margin: 0 auto;
+    padding: 56px 24px 72px;
+    display: grid;
+    grid-template-columns: 1.05fr 1fr;
+    gap: 40px;
+    align-items: center;
+  }
+  .marca { display: flex; align-items: center; gap: 16px; margin-bottom: 22px; }
+  .marca img { width: 72px; height: 72px; border-radius: 18px; box-shadow: 0 8px 24px rgba(20, 10, 60, .35); }
+  .marca span { font-weight: 700; font-size: 22px; letter-spacing: .01em; }
+  h1 { font-size: 46px; line-height: 1.1; margin: 0 0 16px; font-weight: 800; letter-spacing: -.01em; }
+  .lema { font-size: 21px; color: var(--crema); margin: 0 0 22px; max-width: 32ch; }
+  .filete { width: 64px; height: 6px; border-radius: 3px; background: var(--oro); margin: 0 0 22px; }
+  .tiendas { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; }
+  .tiendas img { height: 54px; display: block; }
+  .nota { font-size: 15px; color: var(--crema); opacity: .9; margin-top: 14px; }
+
+  .capturas { display: flex; gap: 16px; justify-content: center; }
+  .capturas img {
+    width: 31%;
+    max-width: 210px;
+    border-radius: 22px;
+    box-shadow: 0 16px 40px rgba(20, 10, 60, .4);
+  }
+  .capturas img:nth-child(2) { transform: translateY(-18px); }
+
+  section.bloque { max-width: var(--max); margin: 0 auto; padding: 64px 24px; }
+  h2 { font-size: 32px; line-height: 1.2; margin: 0 0 28px; }
+  .ventajas { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .ventaja {
+    background: #faf8ff;
+    border: 1px solid var(--linea);
+    border-radius: 20px;
+    padding: 22px;
+  }
+  .ventaja b { display: block; font-size: 19px; margin-bottom: 6px; }
+  .ventaja p { margin: 0; color: var(--suave); font-size: 16px; }
+  .juegos { display: flex; flex-wrap: wrap; gap: 10px; margin: 0 0 28px; padding: 0; list-style: none; }
+  .juegos li { padding: 8px 16px; border-radius: 999px; color: #fff; font-weight: 600; font-size: 16px; }
+
+  .aviso { font-size: 15px; color: var(--suave); border-top: 1px solid var(--linea); padding-top: 22px; }
+  footer { background: #faf8ff; border-top: 1px solid var(--linea); }
+  footer div {
+    max-width: var(--max);
+    margin: 0 auto;
+    padding: 28px 24px 40px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 28px;
+    font-size: 15px;
+    color: var(--suave);
+  }
+
+  @media (max-width: 820px) {
+    .portada { grid-template-columns: 1fr; padding-top: 36px; }
+    h1 { font-size: 36px; }
+    .ventajas { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<header class="cielo">
+  <div class="portada">
+    <div>
+      <div class="marca">
+        <img src="../../assets/apps/mente-despierta.png" alt="Icono de Mente Despierta" />
+        <span>Mente Despierta</span>
+      </div>
+      <h1>Tres juegos al día para mantener la mente activa</h1>
+      <div class="filete"></div>
+      <p class="lema">Sopa de letras, parejas, refranes, cuentas y ordena las letras. Con letra grande, sin anuncios y a tu ritmo.</p>
+      <div class="tiendas">
+        <a href="https://play.google.com/store/apps/details?id=com.rafaelge.mentedespierta"><img src="../../assets/badges/google-play.png" alt="Disponible en Google Play" /></a>
+        <a href="https://apps.apple.com/es/app/id6823612463"><img src="../../assets/badges/app-store.svg" alt="Descárgalo en el App Store" /></a>
+      </div>
+      <p class="nota">Para móvil y tablet, en Android, iPhone y iPad.</p>
+    </div>
+    <div class="capturas">
+      <img src="../../assets/apps/mente-despierta/01-hoy.jpg" alt="La sesión de hoy con tres juegos" />
+      <img src="../../assets/apps/mente-despierta/04-sopa.jpg" alt="Sopa de letras con palabras encontradas" />
+      <img src="../../assets/apps/mente-despierta/06-refranes.jpg" alt="Un refrán acertado" />
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="bloque">
+    <h2>Cinco juegos de siempre</h2>
+    <ul class="juegos">
+      <li style="background:#2563eb">Sopa de letras</li>
+      <li style="background:#7c3aed">Parejas</li>
+      <li style="background:#c2570c">Refranes</li>
+      <li style="background:#059669">Cuentas del día</li>
+      <li style="background:#e11d48">Ordena las letras</li>
+    </ul>
+    <div class="ventajas">
+      <div class="ventaja"><b>Una sesión diaria, gratis</b><p>Cada día te esperan tres juegos distintos. La sesión diaria es gratuita siempre.</p></div>
+      <div class="ventaja"><b>Letra tan grande como quieras</b><p>Ocho tamaños de letra, botones grandes y colores claros, en móvil y en tablet.</p></div>
+      <div class="ventaja"><b>Niveles sin fin</b><p>Treinta grados de dificultad que suben despacio y contenido que no se repite.</p></div>
+      <div class="ventaja"><b>Más de 300 refranes</b><p>Completa los refranes de toda la vida y descubre lo que quieren decir.</p></div>
+      <div class="ventaja"><b>Rachas y logros</b><p>Suma días seguidos, celebra cada nivel y consigue logros en Google Play Juegos y Game Center.</p></div>
+      <div class="ventaja"><b>Sin conexión y sin cuenta</b><p>Funciona sin internet y tu progreso se queda en tu dispositivo.</p></div>
+    </div>
+  </section>
+
+  <section class="bloque">
+    <p class="aviso">
+      Mente Despierta es un pasatiempo para ejercitar la atención, la memoria y el lenguaje. No es un
+      producto sanitario ni sustituye el consejo de un profesional de la salud. Premium es una
+      suscripción opcional (mensual o anual) para jugar sin límite de partidas.
+    </p>
+  </section>
+</main>
+
+<footer>
+  <div>
+    <span>© Rafael González Escobar</span>
+    <a href="privacidad.html">Política de privacidad</a>
+    <a href="terminos.html">Condiciones de uso</a>
+    <a href="mailto:caelyn.tech@hotmail.com">Contacto</a>
+  </div>
+</footer>
+</body>
+</html>
