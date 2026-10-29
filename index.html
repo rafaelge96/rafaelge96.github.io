@@ -902,6 +902,20 @@ details.more ul { margin: 0; padding-left: 18px; color: var(--muted); font-size:
 
     <div class="rail" id="rail-productos" tabindex="0" role="group" aria-label="Productos propios">
       <div class="card app reveal">
+        <button class="icono-legal" type="button" data-legal="mente-despierta"
+                aria-label="Mente Despierta: documentación legal" title="Documentación legal de Mente Despierta">
+          <img src="assets/apps/mente-despierta.png" alt="" />
+        </button>
+        <div>
+          <h3>Mente Despierta</h3>
+          <p>Tres juegos al día para mantener la mente activa: sopa de letras, refranes y cuentas, con letra grande.</p>
+          <div class="badges">
+            <a href="https://apps.apple.com/es/app/mente-despierta-letra-grande/id6823612463" aria-label="Mente Despierta en la App Store"><img class="badge" src="assets/badges/app-store.svg" alt="Descárgalo en el App Store"/></a>
+            <a href="https://play.google.com/store/apps/details?id=com.rafaelge.mentedespierta" aria-label="Mente Despierta en Google Play"><img class="badge" src="assets/badges/google-play.png" alt="Disponible en Google Play"/></a>
+          </div>
+        </div>
+      </div>
+      <div class="card app reveal">
         <button class="icono-legal" type="button" data-legal="estela"
                 aria-label="ESTELA: documentación legal" title="Documentación legal de ESTELA">
           <img src="assets/apps/estela.png" alt="" />
@@ -918,11 +932,11 @@ details.more ul { margin: 0; padding-left: 18px; color: var(--muted); font-size:
       <div class="card app reveal">
         <button class="icono-legal" type="button" data-legal="oremus"
                 aria-label="Oremus: documentación legal" title="Documentación legal de Oremus">
-          <img src="assets/apps/oremus.svg" alt="" />
+          <img src="assets/apps/oremus.png" alt="" />
         </button>
         <div>
           <h3>Oremus</h3>
-          <p>Rosario, Biblia y oraciones diarias. Funciona entero sin conexión.</p>
+          <p>Rosario, Biblia, oraciones del día y misas cerca de ti. Lo esencial funciona sin conexión.</p>
           <div class="badges">
             <a href="https://apps.apple.com/es/app/oremus-rosario-y-biblia/id6787262195" aria-label="Oremus en la App Store"><img class="badge" src="assets/badges/app-store.svg" alt="Descárgalo en el App Store"/></a>
             <a href="https://play.google.com/store/apps/details?id=com.rafaelge.oremus" aria-label="Oremus en Google Play"><img class="badge" src="assets/badges/google-play.png" alt="Disponible en Google Play"/></a>
@@ -1457,6 +1471,11 @@ document.getElementById('year').textContent = new Date().getFullYear();
     'merito': [
       { texto: 'Política de privacidad', href: 'apps/merito/privacidad.html' },
       { texto: 'Eliminar tu cuenta', href: 'apps/merito/eliminar-cuenta.html' }
+    ],
+    'mente-despierta': [
+      { texto: 'Política de privacidad', href: 'apps/mente-despierta/privacidad.html' },
+      { texto: 'Términos de uso', href: 'apps/mente-despierta/terminos.html' },
+      { texto: 'Eliminar tus datos', href: 'apps/mente-despierta/eliminar-datos.html' }
     ]
   };
 
