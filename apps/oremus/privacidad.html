@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Política de privacidad — Oremus | Rafael González Escobar</title>
-<meta name="description" content="Política de privacidad de la aplicación Oremus, de Rafael González Escobar. Oremus no recopila datos personales." />
+<meta name="description" content="Política de privacidad de la aplicación Oremus, de Rafael González Escobar. Sin cuenta, todo se queda en tu teléfono; la cuenta y el Muro son opcionales." />
 <link rel="icon" type="image/svg+xml" href="../../icon.svg" />
 <link rel="apple-touch-icon" sizes="180x180" href="../../assets/apple-touch-icon.png" />
 <link rel="stylesheet" href="../../assets/legal.css" />
@@ -16,13 +16,14 @@
 
 <article class="doc">
   <h1>Política de privacidad — Oremus</h1>
-  <p class="updated">Última actualización: <span id="updated">28/10/2026</span></p>
+  <p class="updated">Última actualización: <span id="updated">04/11/2026</span></p>
 
   <p class="note">
-    Oremus respeta plenamente tu privacidad. Funciona <strong>sin conexión</strong> salvo el mapa de lugares sagrados y
-    el Muro de bienhechores, y <strong>no recopila datos personales</strong>: todo lo que guardas vive únicamente en tu
-    dispositivo. La única excepción es <strong>voluntaria</strong>: el nombre o apodo que decidas mostrar en el Muro de
-    bienhechores tras hacer una aportación.
+    Oremus respeta plenamente tu privacidad. Funciona <strong>sin conexión</strong> salvo el mapa de lugares sagrados,
+    el Muro de bienhechores y la cuenta, y <strong>sin cuenta no recopila datos personales</strong>: todo lo que guardas
+    vive únicamente en tu dispositivo. Solo hay dos excepciones, las dos <strong>voluntarias</strong>: la
+    <strong>cuenta</strong>, si decides entrar con Google o con Apple para guardar tu copia en la nube (apartado 6), y el
+    nombre o apodo que decidas mostrar en el Muro de bienhechores tras hacer una aportación (apartado 7).
   </p>
 
   <h2>1. Responsable</h2>
@@ -33,10 +34,11 @@
 
   <h2>2. Qué datos recopilamos</h2>
   <p>
-    Toda tu información —intenciones, diario espiritual, favoritos, racha, ajustes y lo que escribes en la función
-    «Háblale a Dios»— se guarda y se procesa <strong>exclusivamente en tu dispositivo</strong> y no sale de él.
-    Solo salen de tu teléfono los datos del Muro de bienhechores que se explican en el apartado 6, y únicamente si tú
-    lo decides.
+    Sin cuenta, toda tu información —intenciones, diario espiritual, favoritos, velas, racha, días rezados de los
+    caminos, ajustes y lo que escribes en la función «Háblale a Dios»— se guarda y se procesa
+    <strong>exclusivamente en tu dispositivo</strong> y no sale de él. Solo salen de tu teléfono, y únicamente si tú lo
+    decides, los datos de la cuenta (apartado 6) y los del Muro de bienhechores (apartado 7). Lo que escribes en
+    «Háblale a Dios» nunca sale del teléfono, tampoco con cuenta.
   </p>
 
   <h2>3. Sin terceros, sin analítica, sin publicidad</h2>
@@ -58,8 +60,9 @@
     <li>No usamos cookies, identificadores publicitarios ni herramientas de seguimiento.</li>
     <li>No mostramos publicidad.</li>
     <li>Las funciones de la app se ejecutan en el propio dispositivo; no enviamos tu contenido a ningún servidor ni a terceros.</li>
-    <li>No vendemos ni cedemos datos a nadie. El único proveedor que interviene es Google Cloud Firestore, como
-      encargado del tratamiento del Muro de bienhechores (apartado 6).</li>
+    <li>No vendemos ni cedemos datos a nadie. Los únicos proveedores que intervienen son Google (Firebase
+      Authentication y Cloud Firestore), como encargado del tratamiento de la cuenta y del Muro de bienhechores, y Apple
+      o Google como medio para iniciar sesión si tú lo eliges (apartados 6 y 7).</li>
   </ul>
 
   <h2>4. Permisos que puede pedir la app</h2>
@@ -70,16 +73,35 @@
 
   <h2>5. Almacenamiento y copias de seguridad</h2>
   <p>
-    Tus datos se guardan solo en tu teléfono. El <strong>diario espiritual</strong> está además excluido de la
-    copia de seguridad automática en la nube, de modo que tus reflexiones no salen del dispositivo. Al desinstalar
-    Oremus se eliminan automáticamente todos los datos locales.
+    Sin cuenta, tus datos se guardan solo en tu teléfono. El <strong>diario espiritual</strong> está además excluido
+    de la copia de seguridad automática del sistema. Al desinstalar Oremus se eliminan todos los datos locales.
   </p>
 
-  <h2>6. Aportaciones y Muro de bienhechores</h2>
+  <h2 id="cuenta">6. La cuenta (opcional)</h2>
   <p>
-    Oremus es gratuita y no tiene suscripciones. Las velas de la Capilla y las aportaciones de «Apoya Oremus» son
-    compras voluntarias que gestionan Google Play o la App Store: <strong>nosotros no recibimos tus datos de pago</strong>.
-    En tu teléfono solo se guarda cuántas veces has apoyado y tu nivel de bienhechor (vela, cirio o lámpara).
+    En Más › Tu cuenta puedes entrar con <strong>Google</strong> o con <strong>Apple</strong> para guardar una copia en la
+    nube y tenerla en otro móvil. Es opcional: Oremus funciona igual sin cuenta.
+  </p>
+  <ul>
+    <li><strong>Qué se guarda:</strong> el identificador de la cuenta, tu correo electrónico y tu nombre si Google o Apple lo
+      facilitan (con Apple puedes ocultar tu correo), y la copia de tu diario espiritual, intenciones, oraciones
+      favoritas, velas, racha, días rezados de los caminos y nivel de bienhechor.</li>
+    <li><strong>Para qué:</strong> para que puedas recuperar todo eso en otro dispositivo y, si tu correo está en nuestra
+      lista de cortesía, para darte Oremus+ sin coste. No lo usamos para nada más: ni publicidad, ni perfiles, ni envíos.</li>
+    <li><strong>Dónde:</strong> en Firebase Authentication y Cloud Firestore (Google), con la base de datos en la Unión
+      Europea (Madrid). Cada cuenta solo puede leer y escribir su propia copia.</li>
+    <li><strong>Base legal y plazo:</strong> el contrato del servicio que pides al entrar (artículo 6.1.b del RGPD). Se
+      conserva mientras mantengas la cuenta.</li>
+    <li><strong>Eliminar la cuenta:</strong> desde la app, en Tu cuenta › Eliminar la cuenta, se borran al momento la cuenta
+      y su copia en la nube (lo que hay en el teléfono se queda). Con Apple, además se revoca el acceso de Oremus a tu ID de Apple.</li>
+  </ul>
+
+  <h2>7. Compras, Oremus+ y Muro de bienhechores</h2>
+  <p>
+    Lo esencial de Oremus es gratuito. <strong>Oremus+</strong> es una suscripción opcional que abre los caminos guiados
+    (Adviento, Navidad…), y las velas de la Capilla y las aportaciones de «Apoya Oremus» son compras voluntarias. Todo lo
+    cobran Google Play o la App Store: <strong>nosotros no recibimos tus datos de pago</strong>. En tu teléfono solo se
+    guarda si tienes Oremus+, cuántas veces has apoyado y tu nivel de bienhechor (vela, cirio o lámpara).
   </p>
   <ul>
     <li><strong>Contador del mes:</strong> cada aportación suma uno a un contador anónimo del mes
@@ -100,35 +122,42 @@
       correo) u ocultarlo en tu teléfono. Si un nombre es inapropiado, lo retiramos del muro.</li>
   </ul>
 
-  <h2>7. Menores</h2>
+  <h2>8. Menores</h2>
   <p>Oremus es apta para todas las edades. No está dirigida específicamente a menores. Si eres menor de 14 años, no
     escribas tu nombre en el Muro de bienhechores sin permiso de tus padres o tutores.</p>
 
-  <h2>8. Tus derechos</h2>
+  <h2>9. Tus derechos</h2>
   <p>
-    Fuera de tu dispositivo solo tratamos, si tú lo decides, el nombre del Muro de bienhechores. Sobre ese dato puedes
+    Fuera de tu dispositivo solo tratamos, si tú lo decides, los datos de tu cuenta y el nombre del Muro de
+    bienhechores. Sobre ellos puedes
     ejercer tus derechos de acceso, rectificación, supresión, oposición y limitación escribiendo a
     <a href="mailto:rgescobar.studios@gmail.com">rgescobar.studios@gmail.com</a>. Si crees que no hemos atendido bien tu
     petición, puedes reclamar ante la <a href="https://www.aepd.es">Agencia Española de Protección de Datos</a>.
   </p>
 
-  <h2 id="eliminar-datos">9. Cómo eliminar tus datos de Oremus</h2>
+  <h2 id="eliminar-datos">10. Cómo eliminar tus datos de Oremus</h2>
+  <p>
+    <strong>La cuenta y su copia en la nube</strong> se eliminan desde la propia app: Más › Tu cuenta › Eliminar la
+    cuenta. Si ya no tienes la app, escríbenos a
+    <a href="mailto:rgescobar.studios@gmail.com?subject=Eliminar%20mi%20cuenta%20de%20Oremus">rgescobar.studios@gmail.com</a>
+    desde el correo de la cuenta y la borramos en un plazo máximo de 30 días.
+  </p>
   <p>Para que borremos tu nombre del Muro de bienhechores de Oremus:</p>
   <ol>
     <li>Escribe a <a href="mailto:rgescobar.studios@gmail.com?subject=Eliminar%20mi%20nombre%20de%20Oremus">rgescobar.studios@gmail.com</a>
       con el asunto «Eliminar mi nombre de Oremus».</li>
-    <li>Indica el nombre o apodo tal como aparece en el muro (no hace falta nada más: no tienes cuenta ni contraseña).</li>
+    <li>Indica el nombre o apodo tal como aparece en el muro (no hace falta nada más).</li>
     <li>Lo retiramos del muro al momento y borramos el registro en un plazo máximo de 30 días. Te contestamos al
       mismo correo cuando esté hecho.</li>
   </ol>
   <p>
     Se borra todo lo que se guardó con tu nombre: el nombre o apodo, el nivel, la fecha, el idioma y la plataforma. No
-    conservamos ninguna copia. El contador del mes es anónimo (solo un número), así que no contiene datos tuyos. Lo
-    demás (tu diario, tus favoritos, tus notas y tu nivel de bienhechor) está solo en tu teléfono y se borra al
-    desinstalar la app.
+    conservamos ninguna copia. El contador del mes es anónimo (solo un número), así que no contiene datos tuyos. Sin
+    cuenta, lo demás (tu diario, tus favoritos, tus notas y tu nivel de bienhechor) está solo en tu teléfono y se borra
+    al desinstalar la app.
   </p>
 
-  <h2>10. Cambios en esta política</h2>
+  <h2>11. Cambios en esta política</h2>
   <p>Si en el futuro modificamos esta política, publicaremos los cambios en esta misma página y actualizaremos la fecha.</p>
 </article>
 
