@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Mérito — Prepara tus oposiciones</title>
+<meta name="description" content="Mérito reúne en una sola app el temario, los simulacros y la práctica de Auxiliar Administrativo, Administrativo del Estado, Tramitación, Auxilio Judicial, Guardia Civil y Prisiones." />
+<meta property="og:title" content="Mérito — Prepara tus oposiciones" />
+<meta property="og:description" content="Mérito reúne en una sola app el temario, los simulacros y la práctica de Auxiliar Administrativo, Administrativo del Estado, Tramitación, Auxilio Judicial, Guardia Civil y Prisiones." />
+<meta property="og:image" content="https://rafaelge96.github.io/assets/apps/merito/01-oposiciones.jpg" />
+<link rel="icon" type="image/png" href="../../assets/apps/merito.png" />
+<link rel="apple-touch-icon" href="../../assets/apps/merito.png" />
+<style>
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 18px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+  img { max-width: 100%; }
+  .tiendas { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; }
+  .tiendas img { height: 54px; display: block; }
+  .marca { display: flex; align-items: center; gap: 16px; margin-bottom: 22px; }
+  .marca img { width: 72px; height: 72px; border-radius: 18px; }
+  .marca span { font-weight: 700; font-size: 22px; }
+  .filete { width: 64px; height: 6px; border-radius: 3px; margin: 0 0 22px; }
+  h1 { line-height: 1.1; margin: 0 0 16px; }
+  h2 { font-size: 32px; line-height: 1.2; margin: 0 0 28px; }
+  .bloque { max-width: 1040px; margin: 0 auto; padding: 64px 24px; }
+  .ventajas { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .ventaja { border-radius: 20px; padding: 22px; }
+  .ventaja b { display: block; font-size: 19px; margin-bottom: 6px; }
+  .ventaja p { margin: 0; font-size: 16px; }
+  .etiquetas { display: flex; flex-wrap: wrap; gap: 10px; margin: 0 0 28px; padding: 0; list-style: none; }
+  .etiquetas li { padding: 8px 16px; border-radius: 999px; font-weight: 600; font-size: 16px; }
+  .aviso { font-size: 15px; padding-top: 22px; margin-top: 28px; }
+  footer div { max-width: 1040px; margin: 0 auto; padding: 28px 24px 40px; display: flex; flex-wrap: wrap; gap: 10px 28px; font-size: 15px; }
+
+  .portada { max-width: 1040px; margin: 0 auto; padding: 56px 24px 72px; display: grid; grid-template-columns: 1.05fr 1fr; gap: 40px; align-items: center; }
+  .capturas { display: flex; gap: 16px; justify-content: center; }
+  .capturas img { width: 31%; max-width: 210px; border-radius: 22px; }
+  .capturas img:nth-child(2) { transform: translateY(-18px); }
+  @media (max-width: 820px) { .portada { grid-template-columns: 1fr; padding-top: 36px; } h1 { font-size: 36px !important; } .ventajas { grid-template-columns: 1fr; } .nota { } }
+
+  :root { --verde:#0e6b55; --verde2:#0a4f40; --menta:#e3f2ec; --papel:#f6f4ee; --tinta:#16231f; --suave:#4c5b56; --linea:#d8e2dd; --ambar:#c8871b; }
+  body { background:#fff; color:var(--tinta); }
+  a { color:var(--verde); }
+  .cabecera { background:var(--papel); border-bottom:1px solid var(--linea); }
+  .marca img { box-shadow:0 6px 18px rgba(10,79,64,.25); }
+  .marca span { color:var(--verde2); }
+  h1 { font-size:44px; color:var(--verde2); font-weight:800; letter-spacing:-.01em; }
+  .filete { background:var(--ambar); }
+  .lema { font-size:20px; color:var(--suave); margin:0 0 24px; max-width:36ch; }
+  .nota { font-size:15px; color:var(--suave); margin-top:14px; }
+  .capturas img { border-radius:20px; box-shadow:0 14px 34px rgba(10,79,64,.22); border:1px solid var(--linea); }
+  .ventaja { background:#fff; border:1px solid var(--linea); border-left:5px solid var(--verde); border-radius:14px; }
+  .ventaja p { color:var(--suave); }
+  .etiquetas li { background:var(--menta); color:var(--verde2); border-radius:10px; font-weight:700; }
+  .oficial { background:#fff8e6; border:1px solid #ecd9a4; border-radius:14px; padding:18px 22px; font-size:16px; color:#5b4a1c; margin-top:28px; }
+  .aviso { border-top:1px solid var(--linea); color:var(--suave); }
+  footer { background:var(--papel); border-top:1px solid var(--linea); color:var(--suave); }
+
+</style>
+</head>
+<body class="merito">
+<header class="cabecera">
+  <div class="portada">
+    <div class="texto">
+      <div class="marca">
+        <img src="../../assets/apps/merito.png" alt="Icono de Mérito" />
+        <span>Mérito</span>
+      </div>
+      <h1>Todas tus oposiciones, una sola app</h1>
+      <div class="filete"></div>
+      <p class="lema">Temario ordenado, lectura guiada, simulacros como el examen real y cada respuesta explicada con su fuente oficial.</p>
+      <div class="tiendas">
+        <a href="https://play.google.com/store/apps/details?id=com.rafaelge.laconstitucion"><img src="../../assets/badges/google-play.png" alt="Disponible en Google Play" /></a>
+        <a href="https://apps.apple.com/es/app/id6787350425"><img src="../../assets/badges/app-store.svg" alt="Descárgalo en el App Store" /></a>
+      </div>
+      <p class="nota">Para móvil y tablet, en Android, iPhone y iPad. No es una app oficial ni está vinculada a ningún ministerio.</p>
+    </div>
+    <div class="capturas">
+      <img src="../../assets/apps/merito/01-oposiciones.jpg" alt="Selector de oposiciones por ministerio" />
+      <img src="../../assets/apps/merito/02-hoy.jpg" alt="La sesión de hoy con tu nota media y tu racha" />
+      <img src="../../assets/apps/merito/03-explicacion.jpg" alt="Una respuesta acertada con su explicación y fuente" />
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="bloque">
+    <h2>Una app para cada oposición</h2>
+    <ul class="etiquetas">
+
+      <li>Auxiliar Administrativo</li><li>Administrativo del Estado</li><li>Tramitación Procesal</li><li>Auxilio Judicial</li><li>Guardia Civil</li><li>Prisiones</li><li>La Constitución</li>
+    </ul>
+    <div class="ventajas">
+      <div class="ventaja"><b>Sabes qué toca hoy</b><p>Una sesión concreta con su duración, tu nota media y tus días seguidos, sin tener que decidir por dónde empezar.</p></div>
+      <div class="ventaja"><b>Todo el temario, ordenado</b><p>Bloques y temas para leer con calma, con buscador y tu progreso separado en cada oposición.</p></div>
+      <div class="ventaja"><b>Léelo o escúchalo</b><p>Lectura guiada que resalta el texto mientras suena.</p></div>
+      <div class="ventaja"><b>Simulacros como el examen real</b><p>Con el formato, el tiempo y la penalización por fallo de la convocatoria; más práctica por áreas.</p></div>
+      <div class="ventaja"><b>Cada respuesta, explicada</b><p>Y con la fuente oficial citada, para que sepas de dónde sale.</p></div>
+      <div class="ventaja"><b>Tu nota, al momento</b><p>Aciertos, fallos y si estarías apto o no.</p></div>
+    </div>
+    <p class="oficial"><strong>Importante:</strong> Mérito no es una aplicación oficial ni está vinculada a ningún ministerio, organismo público ni órgano de selección. Los contenidos se basan en fuentes públicas, como el BOE y las convocatorias y exámenes oficiales, que se citan en la propia app.</p>
+  </section>
+</main>
+
+<footer>
+  <div>
+    <span>© Rafael González Escobar</span>
+    <a href="privacidad.html">Política de privacidad</a>
+    <a href="terminos.html">Condiciones de uso</a>
+    <a href="eliminar-cuenta.html">Eliminar tu cuenta</a>
+    <a href="mailto:rgescobar.studios@gmail.com">Contacto</a>
+  </div>
+</footer>
+</body>
+</html>
