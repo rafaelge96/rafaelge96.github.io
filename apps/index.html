@@ -36,8 +36,7 @@
     transition: background 0.18s ease, transform 0.18s ease;
   }
 
-  /* Las apps con un solo documento son <a> y las demas <button>: sin esto,
-     legal.css pinta de azul el nombre solo de las primeras. */
+  /* Cada app es un <a>: sin esto legal.css pinta el nombre de azul. */
   .doc .app, .doc .app:hover { color: var(--text); }
 
   .app:hover, .app:focus-visible {
@@ -59,71 +58,6 @@
 
   .app .cuantas { font-size: 12px; color: var(--muted); }
 
-  /* Modal de seleccion, solo para las apps con mas de un documento. */
-  dialog.selector {
-    border: 1px solid var(--line-strong);
-    border-radius: 18px;
-    padding: 0;
-    max-width: 380px;
-    width: calc(100% - 40px);
-    background: var(--bg);
-    color: var(--text);
-  }
-
-  dialog.selector::backdrop { background: rgba(20, 23, 26, 0.45); }
-
-  .selector .cabecera {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    padding: 22px 24px 18px;
-    border-bottom: 1px solid var(--line);
-  }
-
-  .selector .cabecera img {
-    width: 44px; height: 44px;
-    border-radius: 11px;
-    border: 1px solid var(--line);
-  }
-
-  .selector h2 { font-size: 16px; font-weight: 500; margin: 0; }
-
-  .selector .opciones { padding: 10px; }
-
-  .selector .opciones a {
-    display: block;
-    padding: 14px 16px;
-    border-radius: 12px;
-    color: var(--text);
-    text-decoration: none;
-    font-size: 15px;
-  }
-
-  .selector .opciones a:hover, .selector .opciones a:focus-visible {
-    background: var(--surface);
-    color: var(--accent);
-  }
-
-  .selector .cerrar {
-    display: block;
-    width: calc(100% - 20px);
-    margin: 0 10px 12px;
-    padding: 12px;
-    border: 0;
-    border-radius: 12px;
-    background: none;
-    font: inherit;
-    font-size: 14px;
-    color: var(--muted);
-    cursor: pointer;
-  }
-
-  .selector .cerrar:hover { color: var(--text); background: var(--surface); }
-
-  @media (max-width: 420px) {
-    .rejilla { grid-template-columns: repeat(auto-fit, minmax(108px, 1fr)); gap: 20px 12px; }
-    .app img { width: 68px; height: 68px; border-radius: 16px; }
-  }
 </style>
 </head>
 <body>
@@ -150,126 +84,46 @@
   </footer>
 </article>
 
-<dialog class="selector" id="selector" aria-labelledby="sel-titulo">
-  <div class="cabecera">
-    <img id="sel-icono" src="" alt="" />
-    <h2 id="sel-titulo"></h2>
-  </div>
-  <div class="opciones" id="sel-opciones"></div>
-  <button class="cerrar" id="sel-cerrar" type="button">Cerrar</button>
-</dialog>
 
 <script>
 (function () {
+  // Cada icono lleva a la página de su app; la privacidad, los términos y el
+  // borrado de datos están enlazados al pie de esa página.
   var APPS = [
-    { slug: 'estela', nombre: 'ESTELA', icono: 'estela.png', docs: [
-      { texto: 'Página de la app', href: 'estela/index.html' },
-      { texto: 'Política de privacidad', href: 'estela/privacidad.html' }
-    ] },
-    { slug: 'oremus', nombre: 'Oremus', icono: 'oremus.png', docs: [
-      { texto: 'Página de la app', href: 'oremus/index.html' },
-      { texto: 'Política de privacidad', href: 'oremus/privacidad.html' }
-    ] },
-    { slug: 'brotito', nombre: 'Brotito', icono: 'brotito.png', docs: [
-      { texto: 'Página de la app', href: 'brotito/index.html' },
-      { texto: 'Política de privacidad', href: 'brotito/privacidad.html' },
-      { texto: 'Condiciones de uso', href: 'brotito/terminos.html' }
-    ] },
-    { slug: 'mente-despierta', nombre: 'Mente Despierta', icono: 'mente-despierta.png', docs: [
-      { texto: 'Página de la app', href: 'mente-despierta/index.html' },
-      { texto: 'Política de privacidad', href: 'mente-despierta/privacidad.html' },
-      { texto: 'Condiciones de uso', href: 'mente-despierta/terminos.html' }
-    ] },
-    { slug: 'merito', nombre: 'Mérito', icono: 'merito.png', docs: [
-      { texto: 'Página de la app', href: 'merito/index.html' },
-      { texto: 'Política de privacidad', href: 'merito/privacidad.html' },
-      { texto: 'Eliminar tu cuenta', href: 'merito/eliminar-cuenta.html' }
-    ] }
+    { slug: 'merito', nombre: 'Mérito', icono: 'merito.png' },
+    { slug: 'oremus', nombre: 'Oremus', icono: 'oremus.png' },
+    { slug: 'mente-despierta', nombre: 'Mente Despierta', icono: 'mente-despierta.png' },
+    { slug: 'estela', nombre: 'ESTELA', icono: 'estela.png' },
+    { slug: 'brotito', nombre: 'Brotito', icono: 'brotito.png' }
   ];
 
-  var ICONOS = '../assets/apps/';
   var rejilla = document.getElementById('rejilla');
-  var dialogo = document.getElementById('selector');
-  var ultimoFoco = null;
-
-  function pintarIcono(app) {
-    var img = document.createElement('img');
-    img.src = ICONOS + app.icono;
-    img.alt = '';
-    return img;
-  }
 
   APPS.forEach(function (app) {
     var li = document.createElement('li');
-    var unico = app.docs.length === 1;
+    var a = document.createElement('a');
+    a.className = 'app';
+    a.href = app.slug + '/';
+    // El icono es decorativo: el nombre accesible va en aria-label.
+    a.setAttribute('aria-label', app.nombre + ': página de la app');
 
-    // Con un solo documento el icono es un enlace normal y va directo; con
-    // varios hace falta preguntar, asi que es un boton que abre el modal.
-    var nodo = document.createElement(unico ? 'a' : 'button');
-    nodo.className = 'app';
-    // El icono es decorativo y el nombre va en <span>, asi que sin esto el
-    // control se anuncia sin nombre en un lector de pantalla.
-    nodo.setAttribute('aria-label', unico
-      ? app.nombre + ': política de privacidad'
-      : app.nombre + ': ver documentos legales');
-    if (unico) {
-      nodo.href = app.docs[0].href;
-    } else {
-      nodo.type = 'button';
-      nodo.setAttribute('aria-haspopup', 'dialog');
-      nodo.addEventListener('click', function () { abrir(app, nodo); });
-    }
-
-    nodo.appendChild(pintarIcono(app));
+    var img = document.createElement('img');
+    img.src = '../assets/apps/' + app.icono;
+    img.alt = '';
+    a.appendChild(img);
 
     var nombre = document.createElement('span');
     nombre.className = 'nombre';
     nombre.textContent = app.nombre;
-    nodo.appendChild(nombre);
+    a.appendChild(nombre);
 
-    var cuantas = document.createElement('span');
-    cuantas.className = 'cuantas';
-    cuantas.textContent = unico ? 'Privacidad' : app.docs.length + ' documentos';
-    nodo.appendChild(cuantas);
+    var pie = document.createElement('span');
+    pie.className = 'cuantas';
+    pie.textContent = 'Ver la app';
+    a.appendChild(pie);
 
-    li.appendChild(nodo);
+    li.appendChild(a);
     rejilla.appendChild(li);
-  });
-
-  function abrir(app, origen) {
-    ultimoFoco = origen;
-    document.getElementById('sel-icono').src = ICONOS + app.icono;
-    document.getElementById('sel-titulo').textContent = app.nombre;
-
-    var caja = document.getElementById('sel-opciones');
-    caja.textContent = '';
-    app.docs.forEach(function (doc) {
-      var a = document.createElement('a');
-      a.href = doc.href;
-      a.textContent = doc.texto;
-      caja.appendChild(a);
-    });
-
-    dialogo.showModal();
-    caja.querySelector('a').focus();
-  }
-
-  document.getElementById('sel-cerrar').addEventListener('click', function () {
-    dialogo.close();
-  });
-
-  // Clic en el fondo: el propio <dialog> ocupa todo, asi que hay que mirar si
-  // el punto pulsado cae fuera de su caja.
-  dialogo.addEventListener('click', function (e) {
-    var r = dialogo.getBoundingClientRect();
-    var dentro = e.clientX >= r.left && e.clientX <= r.right &&
-                 e.clientY >= r.top && e.clientY <= r.bottom;
-    if (!dentro) dialogo.close();
-  });
-
-  // Escape ya lo gestiona <dialog>; solo hay que devolver el foco.
-  dialogo.addEventListener('close', function () {
-    if (ultimoFoco) ultimoFoco.focus();
   });
 })();
 </script>
