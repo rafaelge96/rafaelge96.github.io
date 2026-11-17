@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "temporadas": [],
+  "aviso": {
+    "es": "Esta semana es el máximo de las Gemínidas: mira al cielo la noche del 13 al 14 de diciembre.",
+    "en": "The Geminids peak this week: look up on the night of 13 to 14 December.",
+    "desde": "2026-12-10",
+    "hasta": "2026-12-14",
+    "pack": "geminidas"
+  },
+  "versionMinima": "1.2.0"
+}
