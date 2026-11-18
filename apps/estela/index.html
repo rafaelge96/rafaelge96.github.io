@@ -3,109 +3,513 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>ESTELA — Tu estela entre las estrellas</title>
-<meta name="description" content="ESTELA es un juego de un solo dedo: gira con tu estela entre planetas y cometas reales sin chocar con ella. Reto diario, modo zen y clasificación en Game Center. Sin anuncios." />
-<meta property="og:title" content="ESTELA — Tu estela entre las estrellas" />
-<meta property="og:description" content="ESTELA es un juego de un solo dedo: gira con tu estela entre planetas y cometas reales sin chocar con ella. Reto diario, modo zen y clasificación en Game Center. Sin anuncios." />
-<meta property="og:image" content="https://rafaelge96.github.io/assets/apps/estela/01-vuelo.jpg" />
+<title>ESTELA — Arcade espacial de un dedo, sin Internet</title>
+<meta name="description" content="ESTELA es un juego sin Internet que se juega con un solo dedo: pilotas un cometa que pinta una estela de luz, y esa estela es lo único que te puede matar. Reto del día, modo zen, cometas reales y packs de las lluvias de estrellas del año. Sin anuncios." />
+<meta name="theme-color" content="#050b1c" />
+<meta name="color-scheme" content="light dark" />
+<link rel="canonical" href="https://rafaelge96.github.io/apps/estela/" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="es_ES" />
+<meta property="og:site_name" content="RGE Studios" />
+<meta property="og:url" content="https://rafaelge96.github.io/apps/estela/" />
+<meta property="og:title" content="ESTELA — Arcade espacial de un dedo, sin Internet" />
+<meta property="og:description" content="Pilota un cometa que pinta una estela de luz: esa estela es lo único que te puede matar. Reto del día, cometas reales y las lluvias de estrellas del año. Sin anuncios." />
+<meta property="og:image" content="https://rafaelge96.github.io/apps/estela/img/og.jpg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta name="twitter:card" content="summary_large_image" />
 <link rel="icon" type="image/png" href="../../assets/apps/estela.png" />
 <link rel="apple-touch-icon" href="../../assets/apps/estela.png" />
 <style>
+  :root {
+    /* El cielo del juego: no cambia con el tema */
+    --noche: #050b1c;
+    --noche-2: #0a1630;
+    --ambar: #ffb224;
+    --cian: #38d6ee;
+    --rosa: #e9a6cf;
+    --cielo-texto: #e9eefb;
+    --cielo-suave: #a9b8d6;
+    --cielo-linea: #20355c;
+    /* El resto de la página: tema oscuro por defecto */
+    --fondo: #070e22;
+    --fondo-2: #0b1530;
+    --tarjeta: #0f1c3c;
+    --linea: #20355c;
+    --texto: #e9eefb;
+    --suave: #a9b8d6;
+    --titulo: #ffffff;
+    --enlace: #5fdcf0;
+    --acento: #ffb224;
+    --max: 1120px;
+  }
+  @media (prefers-color-scheme: light) {
+    :root {
+      --fondo: #f5f7fc;
+      --fondo-2: #ffffff;
+      --tarjeta: #ffffff;
+      --linea: #d9e0ee;
+      --texto: #1a2440;
+      --suave: #51607f;
+      --titulo: #0b1530;
+      --enlace: #0b6f86;
+      --acento: #a86200;
+    }
+  }
   * { box-sizing: border-box; }
-  html { -webkit-text-size-adjust: 100%; }
-  body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 18px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
-  img { max-width: 100%; }
+  html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  body {
+    margin: 0;
+    background: var(--fondo);
+    color: var(--texto);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-size: 18px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  img { max-width: 100%; height: auto; display: block; }
+  a { color: var(--enlace); }
+  a:focus-visible, button:focus-visible { outline: 3px solid var(--cian); outline-offset: 3px; border-radius: 6px; }
+  h1, h2, h3, p { margin: 0; }
+  .ancho { max-width: var(--max); margin: 0 auto; padding-left: 24px; padding-right: 24px; }
+
+  /* Rótulos como los del juego: versales anchas */
+  .rotulo {
+    font-size: 13px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase;
+    color: var(--acento); margin-bottom: 10px;
+  }
+  h2 { font-size: 34px; line-height: 1.15; font-weight: 800; letter-spacing: -.01em; color: var(--titulo); margin-bottom: 16px; }
+  .entrada { font-size: 20px; color: var(--suave); max-width: 62ch; }
+
+  /* ───────── Cabecera: el cielo ───────── */
+  .cielo {
+    position: relative; overflow: hidden; color: var(--cielo-texto);
+    background:
+      radial-gradient(900px 520px at 82% -10%, #17406f 0%, transparent 62%),
+      radial-gradient(700px 420px at 0% 100%, #2a1846 0%, transparent 60%),
+      var(--noche);
+  }
+  .cielo a { color: var(--cian); }
+  .orbita { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; opacity: .5; }
+  .portada {
+    position: relative;
+    padding-top: 56px; padding-bottom: 72px;
+    display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: 48px; align-items: center;
+  }
+  .marca { display: flex; align-items: center; gap: 16px; margin-bottom: 26px; }
+  .marca img { width: 72px; height: 72px; border-radius: 18px; box-shadow: 0 0 0 1px rgba(56,214,238,.45), 0 0 34px rgba(56,214,238,.3); }
+  .marca span {
+    font-weight: 800; font-size: 26px; letter-spacing: .22em; color: var(--ambar);
+    text-shadow: 0 0 22px rgba(255,178,36,.55);
+  }
+  h1 { font-size: 50px; line-height: 1.06; font-weight: 800; letter-spacing: -.015em; color: #fff; margin-bottom: 18px; }
+  h1 em { font-style: normal; color: var(--rosa); text-shadow: 0 0 26px rgba(233,166,207,.45); }
+  .filete { width: 72px; height: 5px; border-radius: 3px; background: linear-gradient(90deg, var(--cian), var(--rosa), var(--ambar)); margin-bottom: 20px; }
+  .lema { font-size: 20px; color: var(--cielo-suave); max-width: 40ch; margin-bottom: 26px; }
   .tiendas { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; }
-  .tiendas img { height: 54px; display: block; }
-  .marca { display: flex; align-items: center; gap: 16px; margin-bottom: 22px; }
-  .marca img { width: 72px; height: 72px; border-radius: 18px; }
-  .marca span { font-weight: 700; font-size: 22px; }
-  .filete { width: 64px; height: 6px; border-radius: 3px; margin: 0 0 22px; }
-  h1 { line-height: 1.1; margin: 0 0 16px; }
-  h2 { font-size: 32px; line-height: 1.2; margin: 0 0 28px; }
-  .bloque { max-width: 1040px; margin: 0 auto; padding: 64px 24px; }
-  .ventajas { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-  .ventaja { border-radius: 20px; padding: 22px; }
-  .ventaja b { display: block; font-size: 19px; margin-bottom: 6px; }
-  .ventaja p { margin: 0; font-size: 16px; }
-  .etiquetas { display: flex; flex-wrap: wrap; gap: 10px; margin: 0 0 28px; padding: 0; list-style: none; }
-  .etiquetas li { padding: 8px 16px; border-radius: 999px; font-weight: 600; font-size: 16px; }
-  .aviso { font-size: 15px; padding-top: 22px; margin-top: 28px; }
-  footer div { max-width: 1040px; margin: 0 auto; padding: 28px 24px 40px; display: flex; flex-wrap: wrap; gap: 10px 28px; font-size: 15px; }
+  .tiendas a { display: block; border-radius: 10px; }
+  .tiendas img { height: 54px; width: auto; }
+  .nota { font-size: 15px; color: var(--cielo-suave); margin-top: 16px; max-width: 46ch; }
 
-  :root { --noche:#050b1c; --azul:#0d2a4a; --cian:#4fd4e8; --oro:#ffd25e; --texto:#e8eefc; --suave:#a9b8d6; --linea:#1e3358; }
-  body { background:var(--noche); color:var(--texto); }
-  a { color:var(--cian); }
-  .cabecera { background: radial-gradient(ellipse at 70% 0%, #14487a 0%, var(--noche) 65%); }
-  .portada { max-width:1040px; margin:0 auto; padding:56px 24px 40px; }
-  .marca img { box-shadow:0 0 0 2px rgba(79,212,232,.5), 0 0 30px rgba(79,212,232,.35); }
-  h1 { font-size:54px; font-weight:800; letter-spacing:.01em; max-width:18ch; }
-  .filete { background:linear-gradient(90deg,var(--cian),var(--oro)); }
-  .lema { font-size:21px; color:var(--suave); max-width:46ch; margin:0 0 24px; }
-  .nota { font-size:15px; color:var(--suave); margin-top:14px; }
-  .capturas { display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-top:44px; }
-  .capturas img { width:100%; border-radius:16px; border:1px solid var(--linea); box-shadow:0 0 40px rgba(79,212,232,.12); }
-  .capturas img:first-child { grid-column:1 / -1; }
-  .ventaja { background:rgba(255,255,255,.04); border:1px solid var(--linea); }
-  .ventaja p { color:var(--suave); }
-  .ventaja b { color:var(--oro); }
-  .etiquetas li { background:transparent; border:1px solid var(--cian); color:var(--cian); }
-  .aviso { border-top:1px solid var(--linea); color:var(--suave); }
-  footer { border-top:1px solid var(--linea); color:var(--suave); background:#030814; }
-  @media (max-width:820px) { h1 { font-size:38px; } .ventajas { grid-template-columns:1fr; } .capturas { grid-template-columns:1fr; } }
+  /* Marcos de aparato, siempre en horizontal */
+  .movil, .tableta {
+    background: #02050d; border: 1px solid #2b3d63;
+    box-shadow: 0 0 0 1px #000, 0 24px 60px rgba(0,0,0,.45), 0 0 60px rgba(56,214,238,.12);
+  }
+  .movil { border-radius: 26px; padding: 7px; }
+  .movil img { border-radius: 20px; width: 100%; aspect-ratio: 1600 / 736; object-fit: cover; }
+  .tableta { border-radius: 22px; padding: 10px; }
+  .tableta img { border-radius: 13px; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
 
+  /* ───────── Bloques ───────── */
+  .bloque { padding-top: 72px; padding-bottom: 72px; }
+  .banda { background: var(--fondo-2); border-top: 1px solid var(--linea); border-bottom: 1px solid var(--linea); }
+
+  .etiquetas { display: flex; flex-wrap: wrap; gap: 10px; margin: 26px 0 0; padding: 0; list-style: none; }
+  .etiquetas li {
+    padding: 7px 15px; border-radius: 999px; font-weight: 600; font-size: 15px;
+    border: 1px solid var(--linea); background: var(--tarjeta); color: var(--texto);
+  }
+
+  .dos { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 48px; align-items: center; }
+  .dos.vuelta > :first-child { order: 2; }
+
+  /* Vídeo: solo carga el reproductor al pulsar */
+  .video {
+    position: relative; display: block; width: 100%; aspect-ratio: 16 / 9; padding: 0; border: 1px solid #2b3d63;
+    border-radius: 20px; overflow: hidden; background: #02050d; cursor: pointer;
+    box-shadow: 0 24px 60px rgba(0,0,0,.35);
+  }
+  .video img { width: 100%; height: 100%; object-fit: cover; opacity: .82; }
+  .video iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+  .video .play {
+    position: absolute; left: 50%; top: 50%; width: 84px; height: 84px; margin: -42px 0 0 -42px; border-radius: 50%;
+    background: var(--cian); box-shadow: 0 0 0 10px rgba(56,214,238,.2), 0 0 50px rgba(56,214,238,.6);
+  }
+  .video .play::after {
+    content: ""; position: absolute; left: 34px; top: 26px;
+    border-style: solid; border-width: 16px 0 16px 26px; border-color: transparent transparent transparent #04121c;
+  }
+  .video .pie {
+    position: absolute; left: 0; right: 0; bottom: 0; padding: 30px 18px 14px; text-align: left;
+    color: #fff; font-size: 15px; font-weight: 600; background: linear-gradient(transparent, rgba(2,5,13,.85));
+  }
+
+  /* Cómo se juega */
+  .pasos { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; margin-top: 32px; padding: 0; list-style: none; counter-reset: paso; }
+  .pasos li {
+    counter-increment: paso; background: var(--tarjeta); border: 1px solid var(--linea); border-radius: 20px; padding: 22px;
+  }
+  .pasos li::before {
+    content: counter(paso); display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%;
+    font-weight: 800; font-size: 16px; color: #04121c; background: var(--cian); margin-bottom: 14px;
+  }
+  .pasos li:nth-child(2)::before { background: var(--rosa); }
+  .pasos li:nth-child(3)::before { background: var(--ambar); }
+  .pasos li:nth-child(4)::before { background: #9db4ff; }
+  .pasos b, .ventaja b { display: block; font-size: 19px; color: var(--titulo); margin-bottom: 6px; }
+  .pasos p, .ventaja p { color: var(--suave); font-size: 16px; }
+
+  .lista { margin: 20px 0 0; padding: 0; list-style: none; }
+  .lista li { position: relative; padding-left: 26px; margin-bottom: 10px; color: var(--texto); }
+  .lista li::before { content: ""; position: absolute; left: 4px; top: .62em; width: 9px; height: 9px; border-radius: 50%; background: var(--cian); box-shadow: 0 0 10px var(--cian); }
+
+  /* Capturas */
+  .galeria { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; margin-top: 32px; }
+  .galeria.tabletas { grid-template-columns: repeat(2, 1fr); gap: 28px; }
+  figure { margin: 0; }
+  figcaption { font-size: 15px; color: var(--suave); margin-top: 10px; text-align: center; }
+  h3.sub { font-size: 20px; color: var(--titulo); margin-top: 48px; }
+
+  /* Estela+ y packs */
+  .plus {
+    display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 44px; align-items: center;
+    border: 1px solid var(--linea); border-radius: 26px; padding: 34px; background: var(--tarjeta);
+  }
+  .precio { display: inline-block; font-weight: 800; font-size: 15px; padding: 5px 13px; border-radius: 999px; background: var(--ambar); color: #2a1700; margin-bottom: 14px; }
+  .packs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 28px; padding: 0; list-style: none; }
+  .pack {
+    position: relative; background: var(--tarjeta); border: 1px solid var(--linea); border-radius: 20px; padding: 22px 22px 20px;
+    overflow: hidden;
+  }
+  .pack::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 5px; background: var(--c); }
+  .pack .mes { font-size: 13px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--suave); }
+  .pack b { display: block; font-size: 21px; color: var(--titulo); margin: 2px 0 8px; }
+  .pack p { font-size: 16px; color: var(--suave); }
+  .pack dl { margin: 14px 0 0; font-size: 15px; display: grid; grid-template-columns: auto 1fr; gap: 4px 12px; }
+  .pack dt { color: var(--suave); }
+  .pack dd { margin: 0; font-weight: 600; color: var(--texto); }
+  .pack.ahora { border-color: var(--c); box-shadow: 0 0 0 1px var(--c); }
+  .insignia { display: inline-block; margin-left: 8px; padding: 2px 9px; border-radius: 999px; font-size: 12px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: #04121c; background: var(--c); vertical-align: middle; }
+  .letra { font-size: 15px; color: var(--suave); margin-top: 22px; max-width: 80ch; }
+
+  /* Evento de las Gemínidas */
+  .evento {
+    position: relative; color: #fff; overflow: hidden;
+    background: #0a2a3c url("img/evento-geminidas.jpg") center / cover no-repeat;
+  }
+  .evento::before { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(4,14,28,.9) 0%, rgba(4,14,28,.62) 55%, rgba(4,14,28,.25) 100%); }
+  .evento .ancho { position: relative; }
+  .evento .rotulo { color: #a9d4ff; }
+  .evento h2 { color: #fff; }
+  .evento p { max-width: 58ch; color: #e3edf9; }
+  .fechas { display: flex; flex-wrap: wrap; gap: 14px; margin: 26px 0 0; padding: 0; list-style: none; }
+  .fechas li { background: rgba(4,14,28,.66); border: 1px solid rgba(169,212,255,.4); border-radius: 16px; padding: 12px 18px; min-width: 190px; }
+  .fechas span { display: block; font-size: 13px; letter-spacing: .12em; text-transform: uppercase; color: #a9d4ff; }
+  .fechas b { font-size: 20px; }
+  .evento .letra { color: #c9d9ee; }
+  .evento .letra a { color: #a9d4ff; }
+
+  /* Ventajas */
+  .ventajas { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 28px; }
+  .ventaja { background: var(--tarjeta); border: 1px solid var(--linea); border-radius: 20px; padding: 22px; }
+
+  /* Cierre */
+  .cierre { text-align: center; }
+  .cierre .tiendas { justify-content: center; margin-top: 26px; }
+  .cierre .entrada { margin: 0 auto; }
+
+  footer { background: var(--noche); color: var(--cielo-suave); border-top: 1px solid var(--cielo-linea); }
+  footer a { color: var(--cian); }
+  footer div { padding-top: 28px; padding-bottom: 40px; display: flex; flex-wrap: wrap; gap: 10px 28px; font-size: 15px; }
+
+  @media (max-width: 980px) {
+    .portada { grid-template-columns: 1fr; gap: 40px; padding-top: 40px; padding-bottom: 56px; }
+    h1 { font-size: 44px; }
+    .lema { max-width: 52ch; }
+    .pasos { grid-template-columns: repeat(2, 1fr); }
+    .galeria { grid-template-columns: repeat(2, 1fr); }
+    .packs, .ventajas { grid-template-columns: repeat(2, 1fr); }
+    .dos, .plus { grid-template-columns: 1fr; gap: 32px; }
+    .dos.vuelta > :first-child { order: 0; }
+  }
+  @media (max-width: 600px) {
+    body { font-size: 17px; }
+    .ancho { padding-left: 20px; padding-right: 20px; }
+    .bloque { padding-top: 52px; padding-bottom: 52px; }
+    h1 { font-size: 35px; }
+    h2 { font-size: 28px; }
+    .entrada, .lema { font-size: 18px; }
+    .marca img { width: 60px; height: 60px; border-radius: 15px; }
+    .marca span { font-size: 22px; }
+    .tiendas img { height: 48px; }
+    .pasos, .galeria, .galeria.tabletas, .packs, .ventajas { grid-template-columns: 1fr; }
+    .plus { padding: 22px; }
+    .movil { border-radius: 18px; padding: 5px; }
+    .movil img { border-radius: 14px; }
+    .tableta { border-radius: 16px; padding: 7px; }
+    .tableta img { border-radius: 10px; }
+    .fechas li { min-width: 0; flex: 1 1 100%; }
+    .evento::before { background: rgba(4,14,28,.78); }
+  }
 </style>
 </head>
-<body class="estela">
-<header class="cabecera">
-  <div class="portada">
-    <div class="texto">
+<body>
+<header class="cielo">
+  <svg class="orbita" viewBox="0 0 1200 600" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <ellipse cx="930" cy="250" rx="520" ry="210" fill="none" stroke="#38d6ee" stroke-opacity=".28" stroke-width="1.5" transform="rotate(-14 930 250)" />
+    <ellipse cx="930" cy="250" rx="700" ry="300" fill="none" stroke="#e9a6cf" stroke-opacity=".2" stroke-width="1.5" stroke-dasharray="3 10" transform="rotate(-14 930 250)" />
+    <g fill="#fff">
+      <circle cx="90" cy="70" r="1.4" /><circle cx="250" cy="150" r="1" /><circle cx="420" cy="50" r="1.2" /><circle cx="600" cy="110" r="1" />
+      <circle cx="760" cy="40" r="1.5" /><circle cx="1090" cy="90" r="1.2" /><circle cx="1150" cy="330" r="1" /><circle cx="60" cy="380" r="1" />
+      <circle cx="330" cy="520" r="1.3" /><circle cx="540" cy="460" r="1" /><circle cx="840" cy="560" r="1.2" /><circle cx="1020" cy="500" r="1" />
+    </g>
+  </svg>
+  <div class="portada ancho">
+    <div>
       <div class="marca">
-        <img src="../../assets/apps/estela.png" alt="Icono de ESTELA" />
+        <img src="../../assets/apps/estela.png" alt="Icono de ESTELA" width="72" height="72" />
         <span>ESTELA</span>
       </div>
-      <h1>Tu propia estela te mata</h1>
+      <h1>Tu estela es lo único que <em>te puede matar</em></h1>
       <div class="filete"></div>
-      <p class="lema">Mantén pulsado para girar, suelta para ir al otro lado y vuela entre planetas y cometas reales sin tocar tu rastro.</p>
+      <p class="lema">Un arcade espacial que se juega con un solo dedo y sin Internet. Pilotas un cometa que pinta el cielo de luz: cuanto mejor esquivas, más bello y más peligroso se vuelve.</p>
       <div class="tiendas">
         <a href="https://play.google.com/store/apps/details?id=com.rafaelge.estela"><img src="../../assets/badges/google-play.png" alt="Disponible en Google Play" /></a>
         <a href="https://apps.apple.com/es/app/id6796614408"><img src="../../assets/badges/app-store.svg" alt="Descárgalo en el App Store" /></a>
       </div>
-      <p class="nota">Para móvil y tablet, en Android, iPhone y iPad. Sin anuncios.</p>
+      <p class="nota">Gratis y sin anuncios. Se juega en horizontal en móvil, tableta y plegable, en Android, iPhone y iPad.</p>
     </div>
-    <div class="capturas">
-      <img src="../../assets/apps/estela/01-vuelo.jpg" alt="Vuelo de la estela junto a Venus" />
-      <img src="../../assets/apps/estela/02-reto.jpg" alt="Pantalla del reto del día" />
-      <img src="../../assets/apps/estela/03-cometas.jpg" alt="Aspecto de los cometas reales" />
+    <div class="movil">
+      <img src="img/movil-02-vuelo.jpg" alt="Un vuelo por el cinturón de asteroides: el cometa y la estela rosa que va dejando" width="1600" height="736" />
     </div>
   </div>
 </header>
 
 <main>
-  <section class="bloque">
-    <h2>Un solo dedo, todo el cosmos</h2>
-    <ul class="etiquetas">
-      <li>Reto del día</li><li>Clasificación en Game Center</li><li>Modo zen</li><li>13 regiones reales</li><li>Sin anuncios</li>
-    </ul>
-    <div class="ventajas">
-      <div class="ventaja"><b>Tu propia estela te mata</b><p>Mantén pulsado para girar, suelta para ir hacia el otro lado. Sencillo de aprender, difícil de dominar.</p></div>
-      <div class="ventaja"><b>Reto del día</b><p>El mismo cielo para todo el mundo, cada día, para ver quién llega más lejos.</p></div>
-      <div class="ventaja"><b>Supera tu récord</b><p>Compártelo y escala en la clasificación de Game Center.</p></div>
-      <div class="ventaja"><b>Modo zen</b><p>Pinta cuadros de luz con tu estela sin que nada te mate.</p></div>
-      <div class="ventaja"><b>13 regiones del cosmos</b><p>Del Sol al espacio interestelar, cada una con su dato real en la bitácora.</p></div>
-      <div class="ventaja"><b>Cometas reales</b><p>Halley, NEOWISE, ’Oumuamua… cada uno con su historia y su aspecto.</p></div>
+  <section class="bloque ancho" id="que-es">
+    <div class="dos">
+      <div>
+        <p class="rotulo">Qué es</p>
+        <h2>Tu único rival eres tú</h2>
+        <p class="entrada">No hay niveles diseñados por nadie. El cielo lo pintas tú con tu cometa, y al chocar la pantalla queda convertida en un cuadro de luz que puedes compartir como postal.</p>
+        <ul class="etiquetas">
+          <li>Un solo dedo</li><li>Sin Internet</li><li>Sin anuncios</li><li>Reto del día</li><li>13 regiones reales</li><li>Cometas reales</li><li>Modo zen</li>
+        </ul>
+      </div>
+      <a class="video" id="video" href="https://youtu.be/KsAbEUYOMmM" aria-label="Ver el vídeo de ESTELA">
+        <img src="img/movil-05-zen.jpg" alt="" width="1600" height="736" loading="lazy" />
+        <span class="play" aria-hidden="true"></span>
+        <span class="pie">Vídeo: una partida de ESTELA en 30 segundos</span>
+      </a>
     </div>
-    <p class="aviso">Sin anuncios, para siempre. ESTELA+ es una compra única opcional para llevarte el cielo entero. Para móvil y tablet, en Android, iPhone y iPad.</p>
+  </section>
+
+  <section class="banda" id="como-se-juega">
+    <div class="bloque ancho">
+      <p class="rotulo">Cómo se juega</p>
+      <h2>Se aprende en tres segundos y no se domina nunca</h2>
+      <ol class="pasos">
+        <li><b>Un solo dedo</b><p>Mantén pulsado y giras hacia un lado; suelta y giras hacia el otro. No hay más controles.</p></li>
+        <li><b>Tu estela te mata</b><p>La parte reciente es segura, pero al alejarse se vuelve mortal. El nivel lo dibujas tú al volar.</p></li>
+        <li><b>Recoge chispas</b><p>Cada siete desatan el viento solar, que barre tus estelas viejas. Cada diez, sobrecarga: tus metros cuentan doble.</p></li>
+        <li><b>Viaja por el cosmos</b><p>Cuanto más lejos llegas, más regiones reales descubres, de la corona del Sol al espacio interestelar.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="bloque ancho" id="reto">
+    <div class="dos vuelta">
+      <div>
+        <p class="rotulo">Reto del día</p>
+        <h2>El mismo cielo para todo el mundo, solo hoy</h2>
+        <p class="entrada">Cada día hay un reto nuevo, igual para todos los jugadores. Vuélalo, mantén tu racha de días seguidos y compara tu distancia en la clasificación diaria.</p>
+        <ul class="lista">
+          <li>Gratis, como el juego completo y la bitácora.</li>
+          <li>Clasificaciones del reto del día y de la mejor estela en Game Center y en Google Play Juegos.</li>
+          <li>Ocho logros, del primer vuelo al espacio interestelar. Iniciar sesión es opcional: sin ella, el juego funciona igual.</li>
+        </ul>
+      </div>
+      <div class="movil">
+        <img src="img/movil-03-reto-del-dia.jpg" alt="Portada con el reto del día número 21 y una racha de seis días" width="1600" height="736" loading="lazy" />
+      </div>
+    </div>
+  </section>
+
+  <section class="banda" id="capturas">
+    <div class="bloque ancho">
+      <p class="rotulo">Capturas</p>
+      <h2>Órbita y neón, siempre en horizontal</h2>
+      <p class="entrada">Trece regiones reales de astronomía, cada una con su color y un dato científico que se guarda en tu bitácora.</p>
+      <h3 class="sub">En el móvil</h3>
+      <div class="galeria">
+        <figure><div class="movil"><img src="img/movil-01-portada.jpg" alt="Portada de ESTELA con los modos clásico, reto del día y zen" width="1600" height="736" loading="lazy" /></div><figcaption>Portada: clásico, reto del día y zen</figcaption></figure>
+        <figure><div class="movil"><img src="img/movil-04-fin-record.jpg" alt="Fin de vuelo con nuevo récord de 440 metros" width="1600" height="736" loading="lazy" /></div><figcaption>Nuevo récord y postal para compartir</figcaption></figure>
+        <figure><div class="movil"><img src="img/movil-05-zen.jpg" alt="Modo zen con estelas de colores" width="1600" height="736" loading="lazy" /></div><figcaption>Modo zen: pinta con luz sin chocar</figcaption></figure>
+        <figure><div class="movil"><img src="img/movil-06-cometas.jpg" alt="Panel de cometas con NEOWISE elegido y su dato" width="1600" height="736" loading="lazy" /></div><figcaption>Cometas reales, cada uno con su dato</figcaption></figure>
+        <figure><div class="movil"><img src="img/movil-07-bitacora.jpg" alt="Bitácora con once de trece regiones descubiertas" width="1600" height="736" loading="lazy" /></div><figcaption>Bitácora: del Sol al espacio interestelar</figcaption></figure>
+        <figure><div class="movil"><img src="img/movil-10-como-se-juega.jpg" alt="Panel «Cómo se juega» con los cuatro pasos" width="1600" height="736" loading="lazy" /></div><figcaption>Cómo se juega, en cuatro líneas</figcaption></figure>
+      </div>
+      <h3 class="sub">En la tableta</h3>
+      <div class="galeria tabletas">
+        <figure><div class="tableta"><img src="img/tableta-01-vuelo.jpg" alt="Vuelo por el cinturón de asteroides en una tableta en horizontal" width="1600" height="1200" loading="lazy" /></div><figcaption>Más cielo para pintar</figcaption></figure>
+        <figure><div class="tableta"><img src="img/tableta-03-bitacora.jpg" alt="Bitácora en la tableta, con la ruta de regiones y el cinturón de Kuiper" width="1600" height="1200" loading="lazy" /></div><figcaption>La bitácora, como una ruta</figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="bloque ancho" id="estela-plus">
+    <p class="rotulo">Estela+ y packs de temporada</p>
+    <h2>El juego es gratis. Lo demás, compras únicas</h2>
+    <p class="entrada">Sin suscripciones y sin anuncios. El conocimiento nunca está detrás de un pago: el dato de cada cometa se lee antes de comprar.</p>
+
+    <div class="plus" style="margin-top:32px">
+      <div>
+        <span class="precio">2,99 € · pago único</span>
+        <h3 class="sub" style="margin-top:0;font-size:26px">Estela+</h3>
+        <ul class="lista">
+          <li>Modo zen: vuela sin chocar y pinta con luz a tu ritmo.</li>
+          <li>Seis cometas exclusivos, como Shoemaker-Levy 9, 67P o Borisov.</li>
+          <li>Los colores de estela Aurora, Supernova y Espectro.</li>
+          <li>Dos marcos de postal.</li>
+          <li>Todos los cometas de base, al instante.</li>
+        </ul>
+      </div>
+      <div class="movil">
+        <img src="img/movil-08-estela-plus.jpg" alt="Panel de Estela+ con sus seis cometas reales" width="1600" height="736" loading="lazy" />
+      </div>
+    </div>
+
+    <h3 class="sub">Seis packs, uno por cada gran lluvia de estrellas del año</h3>
+    <p class="letra" style="margin-top:8px;font-size:17px">Cada pack cuesta 0,99 € y trae los dos cuerpos reales de cuyo polvo nace la lluvia, para volar con ellos, un color de estela y un marco de postal. En su temporada sale en la portada del juego, y se puede comprar todo el año. Son compras únicas, aparte de Estela+.</p>
+    <ul class="packs">
+      <li class="pack" style="--c:#57c79a" data-desde="11-01" data-hasta="11-30">
+        <span class="mes">Noviembre</span>
+        <b>Leónidas</b>
+        <p>Los cometas Tempel-Tuttle y Biela.</p>
+        <dl><dt>En portada</dt><dd>1 al 30 de noviembre</dd><dt>Máximo</dt><dd>17 de noviembre</dd></dl>
+      </li>
+      <li class="pack" style="--c:#8fc2ff" data-desde="12-01" data-hasta="12-20">
+        <span class="mes">Diciembre</span>
+        <b>Gemínidas</b>
+        <p>El asteroide Faetón y el cometa 8P/Tuttle.</p>
+        <dl><dt>En portada</dt><dd>1 al 20 de diciembre</dd><dt>Máximo</dt><dd>14 de diciembre</dd></dl>
+      </li>
+      <li class="pack" style="--c:#b9e4ff" data-desde="12-21" data-hasta="01-12">
+        <span class="mes">Enero</span>
+        <b>Cuadrántidas</b>
+        <p>El asteroide 2003 EH1 y el cometa C/1490 Y1.</p>
+        <dl><dt>En portada</dt><dd>21 de diciembre al 12 de enero</dd><dt>Máximo</dt><dd>3 de enero</dd></dl>
+      </li>
+      <li class="pack" style="--c:#c3a4ff" data-desde="04-10" data-hasta="04-30">
+        <span class="mes">Abril</span>
+        <b>Líridas</b>
+        <p>Los cometas Thatcher y Grigg-Skjellerup.</p>
+        <dl><dt>En portada</dt><dd>10 al 30 de abril</dd><dt>Máximo</dt><dd>22 de abril</dd></dl>
+      </li>
+      <li class="pack" style="--c:#ffb36b" data-desde="07-13" data-hasta="08-24">
+        <span class="mes">Agosto</span>
+        <b>Perseidas</b>
+        <p>Los cometas Swift-Tuttle y Kiess.</p>
+        <dl><dt>En portada</dt><dd>13 de julio al 24 de agosto</dd><dt>Máximo</dt><dd>13 de agosto</dd></dl>
+      </li>
+      <li class="pack" style="--c:#ff8f7a" data-desde="10-01" data-hasta="10-27">
+        <span class="mes">Octubre</span>
+        <b>Dracónidas</b>
+        <p>Los cometas Giacobini-Zinner y Zanotti.</p>
+        <dl><dt>En portada</dt><dd>1 al 27 de octubre</dd><dt>Máximo</dt><dd>9 de octubre</dd></dl>
+      </li>
+    </ul>
+    <p class="letra">Precios en España; en otros países, el equivalente que marque cada tienda. Las fechas de las lluvias salen del <a href="https://www.imo.net/files/meteor-shower/cal2026.pdf" rel="noopener">calendario 2026 de la Organización Internacional de Meteoros (IMO)</a> y apenas cambian de un año a otro.</p>
+  </section>
+
+  <section class="evento" id="geminidas">
+    <div class="bloque ancho">
+      <p class="rotulo">Evento · del 9 al 16 de diciembre</p>
+      <h2>Llegan las Gemínidas</h2>
+      <p>Cada diciembre, la Tierra cruza el polvo del asteroide Faetón y el cielo se llena de estrellas fugaces: son las Gemínidas, una de las lluvias más fiables del año, con unos 150 meteoros por hora en cielo ideal. ESTELA lo celebra con su pack de temporada: Faetón y el cometa 8P/Tuttle para volar, el color de estela de las Gemínidas y su marco de postal.</p>
+      <ul class="fechas">
+        <li><span>Evento</span><b>9 al 16 de diciembre</b></li>
+        <li><span>Máximo de la lluvia</span><b>Noche del 13 al 14</b></li>
+        <li><span>Pack en portada</span><b>1 al 20 de diciembre</b></li>
+      </ul>
+      <p class="letra">Fuentes: <a href="https://science.nasa.gov/solar-system/meteors-meteorites/geminids/" rel="noopener">NASA</a> y <a href="https://www.imo.net/files/meteor-shower/cal2026.pdf" rel="noopener">calendario 2026 de la IMO</a>.</p>
+    </div>
+  </section>
+
+  <section class="bloque ancho" id="detalles">
+    <p class="rotulo">Pensado con cuidado</p>
+    <h2>Sin conexión, sin cuentas y a tu medida</h2>
+    <div class="ventajas">
+      <div class="ventaja"><b>Funciona sin Internet</b><p>También en modo avión. Sin anuncios, sin registros y sin cuentas: tu progreso se queda en tu dispositivo.</p></div>
+      <div class="ventaja"><b>Pausa de verdad</b><p>Con un botón o sola al salir de la app, y al volver te da una cuenta atrás de tres segundos.</p></div>
+      <div class="ventaja"><b>Ajustes a tu medida</b><p>Sonido, efectos, música, vibración y movimiento reducido, para jugar sin sacudidas ni destellos.</p></div>
+      <div class="ventaja"><b>Para cada pantalla</b><p>En horizontal en móvil, tableta y plegable. En pantalla ancha, el menú pasa a un riel lateral.</p></div>
+      <div class="ventaja"><b>Cometas reales</b><p>Halley, Encke, NEOWISE, Lovejoy, Hale-Bopp y ‘Oumuamua, el primer visitante interestelar detectado. Se desbloquean con tus chispas.</p></div>
+      <div class="ventaja"><b>Datos con su fuente</b><p>El juego cita la fuente junto a cada dato y las reúne en Ajustes › Fuentes de los datos.</p></div>
+    </div>
+    <p class="letra">Los datos de los cometas y de las lluvias de estrellas salen de la NASA, NASA/JPL, la ESA, la British Astronomical Association, The Astronomical Journal y el calendario de la Organización Internacional de Meteoros (IMO). ESTELA no está vinculada a ninguna de ellas.</p>
+  </section>
+
+  <section class="banda">
+    <div class="bloque ancho cierre">
+      <h2>Toca para volar</h2>
+      <p class="entrada">Gratis en Google Play y en el App Store.</p>
+      <div class="tiendas">
+        <a href="https://play.google.com/store/apps/details?id=com.rafaelge.estela"><img src="../../assets/badges/google-play.png" alt="Disponible en Google Play" loading="lazy" /></a>
+        <a href="https://apps.apple.com/es/app/id6796614408"><img src="../../assets/badges/app-store.svg" alt="Descárgalo en el App Store" loading="lazy" /></a>
+      </div>
+    </div>
   </section>
 </main>
 
 <footer>
-  <div>
-    <span>© Rafael González Escobar</span>
+  <div class="ancho">
+    <span>© Rafael González Escobar · RGE Studios</span>
     <a href="privacidad.html">Política de privacidad</a>
     <a href="eliminar-datos.html">Eliminar tus datos</a>
     <a href="mailto:rgescobar.studios@gmail.com">Contacto</a>
   </div>
 </footer>
+
+<script>
+  // El reproductor solo se carga al pulsar; sin JavaScript, el enlace abre el vídeo.
+  (function () {
+    var v = document.getElementById('video');
+    if (v) v.addEventListener('click', function (e) {
+      e.preventDefault();
+      var f = document.createElement('iframe');
+      f.src = 'https://www.youtube-nocookie.com/embed/KsAbEUYOMmM?autoplay=1&rel=0&playsinline=1';
+      f.title = 'Vídeo de ESTELA';
+      f.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
+      f.allowFullscreen = true;
+      v.replaceChildren(f);
+      v.style.cursor = 'default';
+    });
+    // Marca el pack que está en portada hoy.
+    var hoy = new Date(), md = ('0' + (hoy.getMonth() + 1)).slice(-2) + '-' + ('0' + hoy.getDate()).slice(-2);
+    document.querySelectorAll('.pack').forEach(function (p) {
+      var d = p.dataset.desde, h = p.dataset.hasta;
+      var dentro = d <= h ? (md >= d && md <= h) : (md >= d || md <= h);
+      if (dentro) {
+        p.classList.add('ahora');
+        var s = document.createElement('span');
+        s.className = 'insignia'; s.textContent = 'Ahora';
+        p.querySelector('b').appendChild(s);
+      }
+    });
+  })();
+</script>
 </body>
 </html>
