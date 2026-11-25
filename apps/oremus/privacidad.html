@@ -11,16 +11,16 @@
 </head>
 <body>
 <header class="site-header">
-  <a class="back" href="../../index.html">← rafaelge.es</a>
+  <a class="back" href="index.html">← Oremus</a>
 </header>
 
 <article class="doc">
   <h1>Política de privacidad — Oremus</h1>
-  <p class="updated">Última actualización: <span id="updated">04/11/2026</span></p>
+  <p class="updated">Última actualización: <span id="updated">26/11/2026</span></p>
 
   <p class="note">
     Oremus respeta plenamente tu privacidad. Funciona <strong>sin conexión</strong> salvo el mapa de lugares sagrados,
-    el Muro de bienhechores y la cuenta, y <strong>sin cuenta no recopila datos personales</strong>: todo lo que guardas
+    el Muro de bienhechores, la cuenta y la descarga de caminos nuevos, y <strong>sin cuenta no recopila datos personales</strong>: todo lo que guardas
     vive únicamente en tu dispositivo. Solo hay dos excepciones, las dos <strong>voluntarias</strong>: la
     <strong>cuenta</strong>, si decides entrar con Google o con Apple para guardar tu copia en la nube (apartado 6), y el
     nombre o apodo que decidas mostrar en el Muro de bienhechores tras hacer una aportación (apartado 7).
@@ -41,9 +41,23 @@
     «Háblale a Dios» nunca sale del teléfono, tampoco con cuenta.
   </p>
 
-  <h2>3. Sin terceros, sin analítica, sin publicidad</h2>
+  <h2>3. Sin publicidad ni seguimiento, y solo contadores anónimos</h2>
   <ul>
-    <li>No usamos servicios de analítica ni de registro de errores.</li>
+    <li>No usamos servicios de analítica de terceros ni de registro de errores, ni ninguna herramienta que te identifique.</li>
+    <li id="contadores"><strong>Contadores anónimos de uso (desde la versión 2.2.0):</strong> para saber qué partes de
+      la app ayudan a sostenerla, la app suma uno a un contador del mes la primera vez que, ese mes, llegas a
+      alguno de estos pasos: ver la propuesta de Oremus+ (en la bienvenida, las novedades, al terminar el
+      Rosario, en una racha, en Hoy o en el catálogo de caminos), abrir la pantalla de Oremus+ y desde dónde,
+      empezar la prueba gratuita o suscribirte. Cada contador guarda <strong>solo un número</strong>, junto con
+      el mes, el paso y si usas Android o iOS. <strong>No lleva tu nombre, tu cuenta, tu correo, ningún
+      identificador del dispositivo ni nada de lo que escribes</strong>, y no permite saber quién ha sumado.
+      Se guarda en Google Cloud Firestore (Unión Europea, Madrid), con Google como encargado del tratamiento;
+      como en cualquier conexión, la petición llega a Google con la dirección IP, que no guardamos ni
+      unimos al contador. Lo usamos solo como estadística agregada y no lo cedemos a nadie. Como no
+      identifica a nadie, no hay datos tuyos que consultar ni borrar.</li>
+    <li><strong>Caminos y ajustes de la app:</strong> con conexión, la app descarga de Cloud Firestore el catálogo
+      de caminos y unos ajustes generales (por ejemplo, qué camino es el de temporada). Son iguales para todos y
+      la petición no lleva ningún dato tuyo. Sin conexión, la app usa lo último que descargó o lo que trae dentro.</li>
     <li><strong>Ubicación:</strong> si pulsas «Cerca de mí» en Lugares sagrados, la app
       pide tu <strong>ubicación aproximada</strong> (no la precisa) para ordenar los templos
       por cercanía. Se usa <strong>solo en tu teléfono</strong>: no se guarda, no se envía a
@@ -61,13 +75,15 @@
     <li>No mostramos publicidad.</li>
     <li>Las funciones de la app se ejecutan en el propio dispositivo; no enviamos tu contenido a ningún servidor ni a terceros.</li>
     <li>No vendemos ni cedemos datos a nadie. Los únicos proveedores que intervienen son Google (Firebase
-      Authentication y Cloud Firestore), como encargado del tratamiento de la cuenta y del Muro de bienhechores, y Apple
+      Authentication y Cloud Firestore), como encargado del tratamiento de la cuenta, del Muro de bienhechores
+      y de los contadores anónimos, y Apple
       o Google como medio para iniciar sesión si tú lo eliges (apartados 6 y 7).</li>
   </ul>
 
   <h2>4. Permisos que puede pedir la app</h2>
   <ul>
-    <li><strong>Notificaciones:</strong> para recordarte el Ángelus al mediodía y al atardecer. Puedes desactivarlas cuando quieras.</li>
+    <li><strong>Notificaciones:</strong> para el aviso diario a la hora que elijas, el recordatorio de tu camino y el
+      Ángelus al mediodía y al atardecer. Se programan en tu teléfono y puedes desactivarlas cuando quieras.</li>
     <li><strong>Vibración:</strong> para marcar el avance de las cuentas del Rosario.</li>
   </ul>
 
@@ -86,20 +102,22 @@
     <li><strong>Qué se guarda:</strong> el identificador de la cuenta, tu correo electrónico y tu nombre si Google o Apple lo
       facilitan (con Apple puedes ocultar tu correo), y la copia de tu diario espiritual, intenciones, oraciones
       favoritas, velas, racha, días rezados de los caminos y nivel de bienhechor.</li>
-    <li><strong>Para qué:</strong> para que puedas recuperar todo eso en otro dispositivo y, si tu correo está en nuestra
-      lista de cortesía, para darte Oremus+ sin coste. No lo usamos para nada más: ni publicidad, ni perfiles, ni envíos.</li>
+    <li><strong>Para qué:</strong> para que puedas recuperar todo eso en otro dispositivo y, si tu cuenta está en nuestra
+      lista de cortesía (por su correo o por su identificador), para darte Oremus+ sin coste. No lo usamos para nada más: ni publicidad, ni perfiles, ni envíos.</li>
     <li><strong>Dónde:</strong> en Firebase Authentication y Cloud Firestore (Google), con la base de datos en la Unión
       Europea (Madrid). Cada cuenta solo puede leer y escribir su propia copia.</li>
     <li><strong>Base legal y plazo:</strong> el contrato del servicio que pides al entrar (artículo 6.1.b del RGPD). Se
       conserva mientras mantengas la cuenta.</li>
     <li><strong>Eliminar la cuenta:</strong> desde la app, en Tu cuenta › Eliminar la cuenta, se borran al momento la cuenta
-      y su copia en la nube (lo que hay en el teléfono se queda). Con Apple, además se revoca el acceso de Oremus a tu ID de Apple.</li>
+      y su copia en la nube (lo que hay en el teléfono se queda). Con Apple, además se revoca el acceso de Oremus a tu ID de Apple.
+      Los pasos, también sin la app, están en <a href="eliminar-cuenta.html">Eliminar tu cuenta</a>.</li>
   </ul>
 
   <h2>7. Compras, Oremus+ y Muro de bienhechores</h2>
   <p>
-    Lo esencial de Oremus es gratuito. <strong>Oremus+</strong> es una suscripción opcional que abre los caminos guiados
-    (Adviento, Navidad…), y las velas de la Capilla y las aportaciones de «Apoya Oremus» son compras voluntarias. Todo lo
+    Lo esencial de Oremus es gratuito. <strong>Oremus+</strong> es una suscripción opcional que abre la biblioteca de
+    caminos guiados (Adviento, Novena de Navidad, Cuaresma, Novena por los difuntos, Rosario meditado y los que se
+    vayan publicando); sus condiciones están en las <a href="terminos.html">condiciones de uso</a>. Las velas de la Capilla y las aportaciones de «Apoya Oremus» son compras voluntarias. Todo lo
     cobran Google Play o la App Store: <strong>nosotros no recibimos tus datos de pago</strong>. En tu teléfono solo se
     guarda si tienes Oremus+, cuántas veces has apoyado y tu nivel de bienhechor (vela, cirio o lámpara).
   </p>
@@ -138,7 +156,7 @@
   <h2 id="eliminar-datos">10. Cómo eliminar tus datos de Oremus</h2>
   <p>
     <strong>La cuenta y su copia en la nube</strong> se eliminan desde la propia app: Más › Tu cuenta › Eliminar la
-    cuenta. Si ya no tienes la app, escríbenos a
+    cuenta (paso a paso en <a href="eliminar-cuenta.html">Eliminar tu cuenta</a>). Si ya no tienes la app, escríbenos a
     <a href="mailto:rgescobar.studios@gmail.com?subject=Eliminar%20mi%20cuenta%20de%20Oremus">rgescobar.studios@gmail.com</a>
     desde el correo de la cuenta y la borramos en un plazo máximo de 30 días.
   </p>
@@ -152,7 +170,8 @@
   </ol>
   <p>
     Se borra todo lo que se guardó con tu nombre: el nombre o apodo, el nivel, la fecha, el idioma y la plataforma. No
-    conservamos ninguna copia. El contador del mes es anónimo (solo un número), así que no contiene datos tuyos. Sin
+    conservamos ninguna copia. El contador del mes y los contadores de uso son anónimos (solo un número), así que no
+    contienen datos tuyos. Sin
     cuenta, lo demás (tu diario, tus favoritos, tus notas y tu nivel de bienhechor) está solo en tu teléfono y se borra
     al desinstalar la app.
   </p>
